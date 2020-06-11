@@ -94,6 +94,18 @@
 				$(function() {
 							$("#login-submit-btn").click(function() {
 								console.log("进来了");
+								var strName = $("#loginname").val();
+								var strPass = $("#password").val();
+								var strRem = $("#rememberPwd").is(":checked");
+								if($("#rememberPwd").is(":checked")){
+									localStorage.setItem("username",strName);
+									localStorage.setItem("password",strPass);
+									localStorage.setItem("ischecked",strRem);
+								}
+								else{
+									localStorage.removeItem("password");
+									localStorage.removeItem("ischecked");
+								}
 								var username = $("#loginname").val();
 								var password = $("#password").val();
 								var dataSend = {
@@ -132,23 +144,29 @@
 								}
 							})
 								})
-								var user = {
-									username:"",
-									password:""
-								};
-							$("#rememberPwd").click(function(){
-								user = JSON.stringify(user);
-								console.log("这是输入的" + user);
-								if($("#rememberPwd").checked){
-									sessionStorage.setItem("user",user);
-								}
-								else{
-									   localStorage.removeItem("user",user);
-								}
-							})
+							// $("#rememberPwd").click(function(){
+							// 	user = JSON.stringify(user);
+							// 	console.log("这是输入的" + user);
+							// 	if($("#rememberPwd").checked){
+							// 		sessionStorage.setItem("user",user);
+							// 	}
+							// 	else{
+							// 		   localStorage.removeItem("user",user);
+							// 	}
+							// })
 							window.onload = function(){
-								 loginname.value = window.sessionStorage.getItem('username');
-								 password.value = window.sessionStorage.getItem("password");
+								 var username = localStorage.getItem('username');
+								 var password = localStorage.getItem("password");
+								 var checked = localStorage.getItem("ischecked");
+								 if(username){
+								 	$("#loginname").val(username);
+								 }
+								 if(password){
+								 	$("#password").val(password);
+								 }
+								 if(checked){
+								 	$("#rememberPwd").attr("checked",true);
+								 }
 							}
 			</script>
 		</body>
