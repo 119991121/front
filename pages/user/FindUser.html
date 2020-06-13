@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Purple Admin</title>
+		<!-- plugins:css -->
+		<link rel="stylesheet" href="../../vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+		<link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+		<!-- endinject -->
+		<!-- inject:css -->
+		<link rel="stylesheet" href="../../css/style.css">
+		<!-- endinject -->
+		<link rel="shortcut icon" href="../../images/favicon.png">
+		<style type="text/css">
+			/* Chart.js */
+			
+			@-webkit-keyframes chartjs-render-animation {
+				from {
+					opacity: 0.99
+				}
+				to {
+					opacity: 1
+				}
+			}
+			
+			@keyframes chartjs-render-animation {
+				from {
+					opacity: 0.99
+				}
+				to {
+					opacity: 1
+				}
+			}
+			
+			.chartjs-render-monitor {
+				-webkit-animation: chartjs-render-animation 0.001s;
+				animation: chartjs-render-animation 0.001s;
+			}
+		</style>
+		<!--  <script src="chrome-extension://ndkcpnnnlmhaccdogpecoblhkldojceg/assets/prompt.js"></script>   -->
+
+	</head>
+
+	<body>
+		<div class="container-scroller">
+			<!-- partial:../../partials/_navbar.html -->
+			<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+				<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+					<a class="navbar-brand brand-logo" href="index.html"><img src="../../images/logo.svg" alt="logo"></a>
+					<a class="navbar-brand brand-logo-mini" href="index.html"><img src="../../images/logo-mini.svg" alt="logo"></a>
+				</div>
+				<div class="navbar-menu-wrapper d-flex align-items-stretch">
+					<!-- <div class="search-field d-none d-md-block">
+          <form class="d-flex align-items-center h-100" action="#">
+            <div class="input-group">
+              <div class="input-group-prepend bg-transparent">
+                  <i class="input-group-text border-0 mdi mdi-magnify"></i>                
+              </div>
+              <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
+            </div>
+          </form>
+        </div> -->
+					<ul class="navbar-nav navbar-nav-right">
+						<li class="nav-item nav-profile dropdown">
+							<a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+								<div class="nav-profile-img">
+									<img src="../../images/faces/face1.jpg" alt="image">
+									<span class="availability-status online"></span>
+								</div>
+								<div class="nav-profile-text">
+									<p class="mb-1 text-black">David Greymaax</p>
+								</div>
+							</a>
+							<div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+								<a class="dropdown-item" href="#">
+									<i class="mdi mdi-lock-outline mr-2 text-primary"></i> 修改密码
+								</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">
+									<i class=" mdi mdi-image-filter-center-focus mr-2 text-primary"></i> 人脸注册
+								</a>
+							</div>
+						</li>
+						<li class="nav-item d-none d-lg-block full-screen-link">
+							<a class="nav-link">
+								<i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+							</a>
+						</li>
+						<li class="nav-item nav-logout d-none d-lg-block">
+							<a class="nav-link" href="#">
+								<i class="mdi mdi-power"></i>
+							</a>
+						</li>
+					</ul>
+					<!-- <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="mdi mdi-menu"></span>
+        </button> -->
+				</div>
+			</nav>
+			<!-- partial -->
+			<div class="container-fluid page-body-wrapper">
+				<!-- partial:../partials/_sidebar.html -->
+				<nav class="sidebar sidebar-offcanvas" id="sidebar">
+					<ul class="nav">
+						<li class="nav-item nav-profile">
+							<a href="#" class="nav-link">
+								<div class="nav-profile-image">
+									<img src="../../images/faces/face1.jpg" alt="profile">
+									<span class="login-status online"></span>
+									<!--change to offline or busy as needed-->
+								</div>
+								<div class="nav-profile-text d-flex flex-column">
+									<span class="font-weight-bold mb-2">David Grey. H</span>
+									<span class="text-secondary text-small">Project Manager</span>
+								</div>
+								<!--              <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i> -->
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
+								<span class="menu-title">用户管理</span>
+								<i class="menu-arrow"></i>
+								<i class="mdi mdi-crosshairs-gps menu-icon"></i>
+							</a>
+							<div class="collapse" id="ui-basic1" style="">
+								<ul class="nav flex-column sub-menu">
+									<li class="nav-item">
+										<a class="nav-link" href="pages/ui-features/buttons.html">用户查询</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="pages/ui-features/typography.html">添加用户</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
+								<span class="menu-title">部门管理</span>
+								<i class="menu-arrow"></i>
+								<i class="mdi mdi-crosshairs-gps menu-icon"></i>
+							</a>
+							<div class="collapse" id="ui-basic2" style="">
+								<ul class="nav flex-column sub-menu">
+									<li class="nav-item">
+										<a class="nav-link" href="pages/ui-features/buttons.html">部门查询</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="pages/ui-features/typography.html">添加部门</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic3" aria-expanded="false" aria-controls="ui-basic3">
+								<span class="menu-title">职位管理</span>
+								<i class="menu-arrow"></i>
+								<i class="mdi mdi-crosshairs-gps menu-icon"></i>
+							</a>
+							<div class="collapse" id="ui-basic3" style="">
+								<ul class="nav flex-column sub-menu">
+									<li class="nav-item">
+										<a class="nav-link" href="pages/ui-features/buttons.html">职位查询</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="pages/ui-features/typography.html">添加职位</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic4" aria-expanded="false" aria-controls="ui-basic4">
+								<span class="menu-title">公告管理</span>
+								<i class="menu-arrow"></i>
+								<i class="mdi mdi-crosshairs-gps menu-icon"></i>
+							</a>
+							<div class="collapse" id="ui-basic4" style="">
+								<ul class="nav flex-column sub-menu">
+									<li class="nav-item">
+										<a class="nav-link" href="pages/ui-features/buttons.html">公告查询</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="pages/ui-features/typography.html">添加公告</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic5" aria-expanded="false" aria-controls="ui-basic5">
+								<span class="menu-title">下载中心</span>
+								<i class="menu-arrow"></i>
+								<i class="mdi mdi-crosshairs-gps menu-icon"></i>
+							</a>
+							<div class="collapse" id="ui-basic5" style="">
+								<ul class="nav flex-column sub-menu">
+									<li class="nav-item">
+										<a class="nav-link" href="pages/ui-features/buttons.html">文档查询</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="pages/ui-features/typography.html">上传文档</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</nav>
+
+				<!-- partial -->
+				<div class="main-panel">
+					<!--描述：查询框-->
+					<div class="content-wrapper">
+						<div class="page-header">
+							<h3 class="page-title">用户查询</h3>
+						</div>
+						<form action="selectUser" id="form" method="post">
+							<div class="col-12 grid-margin stretch-card">
+								<tr>
+									<td class="fftd">
+
+										<table width="100%" border="0" cellpadding="0" cellspacing="0">
+											<tr>
+												<td class="form-control bg-transparent border-0">
+													职位：
+													<select name="InputPosition" id="InputPosition" style="width:143px;">
+														<option value="0">--请选择职位--</option>
+														<!--<c:forEach items="${requestScope.positions }" var="position">
+															<option value="${position.id }">${position.name }</option>
+														</c:forEach>-->
+													</select>
+													姓名：
+													<input type="text" id="InputName" name="name"> 用户名：
+													<input type="text" id="InputUsername" name="username">
+												</td>
+											</tr>
+											<tr>
+												<td class="form-control bg-transparent border-0">
+													部门：
+													<select name="InputDepartment" id="InputDepartment" style="width:100px;">
+														<option value="0">--部门选择--</option>
+														<!--<c:forEach items="${requestScope.departments }" var="department">
+															<option value="${department.id }">${department.name }</option>
+														</c:forEach>-->
+													</select>&nbsp; 身份证号：
+													<input type="text" id="InputIdCardNo" name="idcardNo">
+													<input id="delete" type="button" id="user_delete_all_btn" value="删除" />
+													<input type="button" name='submit' id="select" value="搜索" />
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</div>
+						</form>
+
+						<!--信息显示-->
+						<div class="col-lg-12 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">用户信息表</h4>
+									<table class="table table-striped" id="users_table" style="word-break:break-all; word-wrap:break-all;">
+										<thead>
+											<tr>
+												<th>
+													<input type="checkbox" name="checkAll" id="checkAll">
+												</th>
+												<th>
+													用户名
+												</th>
+												<th>
+													姓名
+												</th>
+												<th>
+													用户身份权限
+												</th>
+												<th>
+													邮箱
+												</th>
+												<th>
+													职位
+												</th>
+												<th>
+													部门
+												</th>
+												<th align="center">操作</th>
+											</tr>
+										</thead>
+										<tbody id="con">
+											<tr>
+												<td></td>
+											</tr>
+											<!--<c:forEach items="${User}" var="user">
+												<tr>
+													<td><input type="checkbox" id="box_0" value="1"></td>
+													<td>${user.username}</td>
+													<td>${user.name}</td>
+													<td>${user.groupId}</td>
+													<td>${user.email}</td>
+													<td>${user.position}</td>
+													<td>${user.department}</td>
+													<td align="center" width="60px;">
+														<a href="showAllInfo.html">
+															<input type="button" value="查看" /></a>
+														<a href="showUpdateEmployee.html">
+															<input type="button" value="修改" /></a>
+													</td>
+												</tr>
+											</c:forEach>-->
+										</tbody>
+									</table>
+								</div>
+								<div class="row">
+									<!-- 分页文字信息 ：拿到控制器处理请求时封装在pageInfo里面的分页信息-->
+									<div class="col-sm-5" id="page_info_area">
+										<div class="dataTables_info" id="dataTableExample_info" style="margin-left: 20px"> </div>
+									</div>
+									<div class="col-sm-7">
+										<!-- 分页码 -->
+										<div class="dataTables_paginate paging_simple_numbers" id="dataTableExample_paginate" style="line-height: 32.4px">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- content-wrapper ends -->
+					<!-- partial:../../partials/_footer.html -->
+					<!-- partial -->
+				</div>
+				<!-- main-panel ends -->
+			</div>
+			<!-- page-body-wrapper ends -->
+		</div>
+		<!-- container-scroller -->
+		<!-- plugins:js -->
+		<script src="../../vendors/js/vendor.bundle.base.js"></script>
+		<script src="../../vendors/js/vendor.bundle.addons.js"></script>
+		<!-- endinject -->
+		<!-- inject:js -->
+		<script src="../../js/off-canvas.js"></script>
+		<script src="../../js/misc.js"></script>
+		<!-- endinject -->
+		<!-- Custom js for this page-->
+		<script src="../../js/file-upload.js"></script>
+		<!-- End custom js for this page-->
+		<script src="../../layer/layer.js"></script>
+		<script>
+			$(function() {
+				if(!window.localStorage) {
+					alert("浏览器支持localstorage");
+				} else {
+					var storage = window.localStorage;
+					storage.setItem('localData', storageData);
+					var username = JSON.parse(storage.getItem('localData')).localData.username;
+				}
+			});
+		</script>
+		<script type="text/javascript">
+			$(function() {
+				//function to_page() {
+				$.ajax({
+					//url: 'user/showall',
+					url: 'http://localhost:8080/new_ssm/user/showall',
+					datatype: 'json',
+					type: "POST",
+					contentType: "application/json; charset=utf-8",
+					async: false,
+					success: function(data) {
+						console.log(data);
+						if(data.error_code == 0) {
+							var $tbody = $("#con");
+							$("#users_table tbody").empty();
+							var user = data.data;
+							$.each(user, function(i, e) {
+								var checkBoxId = $("<td><input type='checkbox' class='check_item'/></td>");
+								var $tr = $("<tr>").append($("<td>").html(e["checkBoxId"]))
+									.append($("<td>").html(e["username"]))
+									.append($("<td>").html(e["name"])).append($("<td>").html(e["groupId"])).append($("<td>").html(e["email"])).append($("<td>").html(e["positon"])).append($("<td>").html(e["department"]));
+								var viewBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn").append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("查看");
+								viewBtn.attr("view_name", item.username);
+								var editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn").append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("修改");
+								editBtn.attr("edit_name", item.username);
+								var btn = $("<td></td>").append(viewBtn).append(" ").append(editBtn);
+								var $td = $("<td>").append(btn);
+								$tr.append($td);
+								$tbody.append($tr);
+							});
+						} else {
+							layer.alert("加载数据失败");
+						}
+					}
+				});
+			});
+		</script>
+		<script type="text/javascript">
+			$(function() {
+				$.ajax({
+					//url: 'position/getPosition',
+					url: 'http://localhost:8080/new_ssm/pos/showAllPos',
+					dataType: 'json',
+					type: "POST",
+					contentType: "application/json; charset=utf-8",
+					success: function(data) {
+						var ddl = $("#InputPosition");
+						var pos = data.data;
+						$.each(pos, function(i, e) {
+							var opt = $("<option></option>").text(e.pos_name);
+							ddl.append(opt);
+						});
+					}
+				});
+			});
+		</script>
+		<script type="text/javascript">
+			$(function() {
+				$.ajax({
+					//url: 'position/getPosition',
+					url: 'http://localhost:8080/new_ssm/dept/showAllDept',
+					dataType: 'json',
+					type: "POST",
+					contentType: "application/json; charset=utf-8",
+					success: function(data) {
+						var ddl = $("#InputDepartment");
+						var dept = data.data;
+						$.each(dept, function(i, e) {
+							var opt = $("<option></option>").text(e.dept_name);
+							ddl.append(opt);
+						});
+					}
+				});
+			});
+		</script>
+		<script type="text/javascript">
+			$(function() {
+				$("#select").click(function() {
+					var position = $("#InputPosition").val();
+					var name = $('InputName').val();
+					var username = $('InputUsername').val();
+					var department = $('InputDept').val();
+					var idCardNo = $("#InputIdCardNo").val();
+
+					var dataSend = {
+						position: position,
+						name: name,
+						username: username,
+						department: department,
+						idCardNo: idCardNo.toString()
+					};
+
+					console.log(dataSend);
+					if($.trim(position) == "" && $.trim(name) == "" && $.trim(username) == "" && $.trim(department) == "" && $.trim(idCardNo) == "") {
+						layer.msg('请输入查询条件', {
+							icon: 1,
+							time: 2000 //2秒关闭（如果不配置，默认是3秒）
+						});
+					} else {
+						$.ajax({
+							type: "POST",
+							//url: 'user/selectUser',
+							url: 'http://localhost:8080/new_ssm/user/selectUser',
+							data: JSON.stringify(dataSend),
+							contentType: "application/json; charset=utf-8",
+							dataType: "json",
+							async: false,
+							success: function(data) {
+								console.log(data);
+								if(data.error_code == 0) {
+									var $tbody = $("#con");
+									$("#users_table tbody").empty();
+									var user = data.data;
+									$.each(user, function(i, e) {
+										var checkBoxId = $("<td><input type='checkbox' class='check_item'/></td>");
+										var $tr = $("<tr>").append($("<td>").html(e["checkBoxId"]))
+											.append($("<td>").html(e["username"]))
+											.append($("<td>").html(e["name"])).append($("<td>").html(e["groupId"])).append($("<td>").html(e["email"])).append($("<td>").html(e["positon"])).append($("<td>").html(e["department"]));
+										var viewBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn").append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("查看");
+										viewBtn.attr("view_name", item.username);
+										var editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn").append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("修改");
+										editBtn.attr("edit_name", item.username);
+										var btn = $("<td></td>").append(viewBtn).append(" ").append(editBtn);
+										var $td = $("<td>").append(btn);
+										$tr.append($td);
+										$tbody.append($tr);
+									});
+
+								} else {
+									layer.alert(data.message, {
+										icon: 1,
+										closeBtn: 0
+									}, function(index) {
+										window.location.reload();
+									});
+								}
+							},
+							error: function(data) {
+								layer.alert(data.message, {
+									icon: 2,
+									closeBtn: 0
+								})
+							}
+						});
+					}
+				});
+			});
+		</script>
+		<script type="text/javascript">
+			$(function() {
+				$("#checkAll").click(function() {
+					$(".check_item").prop("checked", $(this).prop("checked"));
+				});
+				$(document).on("click", ".check_item", function() {
+					var flag = $(".check_item:checked").length == $(".check_item").length;
+					$("#checkAll").prop("checked", flag);
+				});
+				$("#user_delete_all_btnn").click(function() {
+					var del_unamestr = "";
+					$.each($(".check_item:checked"), function() {
+						del_unamestr += $(this).parents("tr").find("td:eq(1)").text() + "-";
+					});
+					del_unamestr = del_unamestr.substring(0, del_unamestr.length - 1);
+					if(confirm("确认删除【" + del_unamestr + "】吗？")) {
+						//发送ajax请求
+						$.ajax({
+							url: "http://localhost:8080/new_ssm/user/delete",
+							type: "DELETE",
+							data: JSON.stringify(del_unamestr),
+							contentType: "application/json; charset=utf-8",
+							dataType: "json",
+							async: false,
+							success: function(data) {
+								if(data.error_code == 0) {
+									alert(data.message);
+								} else {
+									alert("删除失败！");
+								}
+							}
+						});
+					}
+				});
+			});
+		</script>
+		</script>
+	</body>
+
+</html>
