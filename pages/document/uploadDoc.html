@@ -206,9 +206,9 @@
                       </div>
 					  </form>  
                     </div>
-                    
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button type="button" class="btn btn-gradient-primary mr-2" id="doc_upload">上传</button>
-                    <button class="btn btn-light">重置</button>
+                    <button class="btn btn-light" id="doc_reset">重置</button>
                   </form>
                 </div>
               </div>
@@ -247,10 +247,11 @@
 			if(!window.localStorage){
             alert("浏览器不支持localstorage");
 			}else{
+						localStorage.setItem("userID",1)
             var storageData=window.localStorage;
-            var userID=storageData.userid;
+            var userID=storageData.getItem("userID");
             console.log(userID);
-            
+            localStorage.removeItem("userID")
 			}
             
 			$("#doc_upload").click(function(){
@@ -291,11 +292,11 @@
 				 layer.confirm('确定上传文档'+'"'+doc_name+'"?', {icon: 3, title:'提示'}, function(index){
 					 $.ajax({
                    		type: "POST",
-                   		url: 'file/addFile',
-						cache:false,
+                   		url: 'http://localhost:8080/new_ssm/file/addFile',
+											cache:false,
                    		data: formData,
                    		processData : false, // 使数据不做处理
-						contentType:false,// 不要设置Content-Type请求头
+											contentType:" multipart/form-data",// 不要设置Content-Type请求头
                    		dataType: "json",
                    		async: false,
                    		success: function (data) {
@@ -323,6 +324,9 @@
             	});
 				}
            
+		});
+		$("#doc_reset").click(function(){
+		    window.location.reload();
 		});
     });
 </script>  

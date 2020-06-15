@@ -181,7 +181,7 @@
                 <div class="card-body">
                   <h4 class="card-title">发布公告</h4>
                   <p></p>
-                  <form class="forms-sample">
+                  <form class="col-md-8 forms-sample">
                     <div class="form-group">
                       <label for="exampleInputdeptname1">公告标题</label>
                       <input type="text" class="form-control" id="InputTitle" name="addTitle" placeholder="标题名称">
@@ -193,7 +193,7 @@
                     </div>
                     
                     <button type="button" class="btn btn-gradient-primary mr-2" id="announcement_add_sumbit">发布</button>
-                    <button class="btn btn-light">取消</button>
+                    <button class="btn btn-light">重置</button>
                   </form>
                 </div>
               </div>
@@ -235,11 +235,15 @@ $(function () {
 		alert("浏览器支持localstorage");
 	}else{
 		var storage = window.localStorage;
-    var json = storage.getItem("data");
-    var jsonObj = JSON.parse(json);
+		storage.setItem("user","Tom")
+		console.log(storage)
+		var username = storage.getItem("user")
+		console.log(username)
+    //ar json = storage.getItem("data");
+    //var jsonObj = JSON.parse(json);
+    //console.log(jsonObj)
     //console.log(typeof jsonObj);
-    var username = jsonObj.username;
-		console.log("用户名",username);
+    //var username = jsonObj.username;
   }
 	
 	$("#announcement_add_sumbit").click(function(){
@@ -247,9 +251,9 @@ $(function () {
     var announce_content= $("#InputContent").val();
     
     var dataSend = {
-    	announce_name:announce_name,
-      announce_content:announce_content,
-      publisher_name:username,
+    	name:announce_name,
+      content:announce_content,
+      username:username,
     };
     console.log(dataSend);
     if ($.trim(announce_name) == "") {
@@ -276,7 +280,7 @@ $(function () {
 		  layer.confirm('确定添加公告'+'"'+announce_name+'"?', {icon: 3, title:'提示'}, function(index){
 			  $.ajax({
 				  type: "POST",
-          url: 'announcement/addAnnouncement',
+          url: 'http://localhost:8080/new_ssm/announce/add',
           data: JSON.stringify(dataSend),
           contentType: "application/json; charset=utf-8",
           dataType: "json",

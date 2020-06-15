@@ -194,11 +194,11 @@
                       <input type="password" class="form-control" id="exampleInputPassword1" name="addUserpassword" placeholder="密码">
                     </div>
                     <div class="form-group row">
-                          <label class="col-sm-2 col-form-label">用户属性</label>
-                          <div class="col-sm-2">
+                          <label class="col-sm-3 col-form-label">用户属性</label>
+                          <div class="col-sm-3">
                             <div class="form-check">
                               <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios1" value="1" checked="checked">
+                                <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios1" value="2" checked="checked">
                                 管理员
                               <i class="input-helper"></i></label>
                             </div>
@@ -206,7 +206,7 @@
                           <div class="col-sm-3">
                             <div class="form-check">
                               <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios2" value="2">
+                                <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios2" value="1">
                                 普通用户
                               <i class="input-helper"></i></label>
                             </div>
@@ -215,7 +215,7 @@
                       </div>
                     
                     <button type="button" class="btn btn-gradient-primary mr-2" id="user_add_sumbit">添加</button>
-                    <button class="btn btn-light">取消</button>
+                    <button class="btn btn-light" id="user_add_reset">重置</button>
                   </form>
                 </div>
               </div>
@@ -259,7 +259,7 @@
 		
             var dataSend = {
                 username:username,
-                groupid:groupid,
+                groupid:parseInt(groupid),
                 password:password
 
             };
@@ -269,8 +269,8 @@
             		  icon: 2,
             		  time: 2000 //2秒关闭（如果不配置，默认是3秒）
             		}); 
-			} else if ($.trim(username).length < 6 || $.trim(username).length > 20) {
-				layer.msg('用户名需要大于6位小于20位！', {
+			} else if ($.trim(username).length  > 20) {
+				layer.msg('用户名需要小于20位！', {
           		  icon: 2,
           		  time: 2000 //2秒关闭（如果不配置，默认是3秒）
           		}); 
@@ -283,7 +283,7 @@
 				 layer.confirm('确定添加用户'+'"'+username+'"?', {icon: 3, title:'提示'}, function(index){
 					 $.ajax({
                    		type: "POST",
-                   		url: 'user/addUser',
+                   		url: 'http://localhost:8080/new_ssm/user/adduser',
                    		data: JSON.stringify(dataSend),
                    		contentType: "application/json; charset=utf-8",
                    		dataType: "json",
@@ -309,6 +309,9 @@
             	});
 				}
            
+		});
+		$("#user_add_reset").click(function(){
+		    window.location.reload();
 		});
     });
 </script>  

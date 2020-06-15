@@ -15,12 +15,12 @@
 		<!-- endinject -->
 		<!-- inject:css -->
 
-		<link rel="stylesheet" type="text/css" href="../../css/facestyle.css" />
+		<link rel="stylesheet" type="text/css" href="style.css" />
 		<!-- endinject -->
-		<script type="text/javascript" src="../../js/jquery-1.4.4.min.js"></script>
-		<script src="../../js/jquery.js"></script>
-		<script src="../../js/verificationNumbers.js"></script>
-		<script src="../../js/Particleground.js"></script>
+		<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
+		<script src="jquery.js"></script>
+		<script src="verificationNumbers.js"></script>
+		<script src="Particleground.js"></script>
 		<style>
 			body {
 				height: 100%;
@@ -33,11 +33,6 @@
 				position: absolute;
 			}
 		</style>
-
-
-		<script src="../../js/jquery.js"></script>
-		<script src="../../js/verificationNumbers.js"></script>
-		<script src="../../js/Particleground.js"></script>
 		<script>
 			$(document).ready(function() {
 		  //粒子背景特效
@@ -118,7 +113,6 @@
 			</dd>
 
 		</dl>
-		<script type="text/javascript" src="../../js/alert.js"></script>
 		<script type="text/javascript">
 			//var 是定义变量
 			var video = document.getElementById("video"); //获取video标签
@@ -155,13 +149,17 @@
 
 				//把流媒体数据画到convas画布上去
 				context.drawImage(video, 0, 0, 530, 300);
-				var file = getBase64();
-				console.log("这是拍照结果" + file)
+				var filebyte = getBase64();
+				var dataSend = {
+						file: filebyte
+					};
+				console.log("这是拍照结果" + filebyte)
 	  				$.ajax({
 	  					type:"post",
 	  					url:"http://localhost:8080/new_ssm/user/facelogin",
-	  					data:{"file":file},
+	  					data:JSON.stringify(dataSend),
 	  					dataType: "json",
+	  					contentType: "application/json; charset=utf-8",
 	  					success:function(json){
 	  						if(json.error_code== 1){
 	  							alert("图片上传失败");
@@ -169,12 +167,16 @@
 								alert("无法识别人脸");
 							}else if(json.error_code== 3){
 								alert("人脸信息未注册");
-							}
-							else if(json.error_code== 0){
+							}else if(json.error_code== 4){
+	  							alert("登录失败，请重新扫描");
+	  						}else if(json.error_code== 0){
 	  							window.location.replace("../index/index.html");
 	  						}
 	  						
 	
+						},
+	  					error: function(data){
+							alert("请稍后再试");
 						}
 					});
 			}

@@ -46,7 +46,7 @@
 
 	<body>
 		<div class="container-scroller">
-			<!-- partial:../../partials/_navbar.html -->
+			<!-- partial:../partials/_navbar.html -->
 			<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 				<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
 					<a class="navbar-brand brand-logo" href="index.html"><img src="../../images/logo.svg" alt="logo"></a>
@@ -206,19 +206,19 @@
 						</li>
 					</ul>
 				</nav>
-
 				<!-- partial -->
 				<div class="main-panel">
-					<!--描述：查询框-->
 					<div class="content-wrapper">
 						<div class="page-header">
-							<h3 class="page-title">用户管理</h3>
+							<h3 class="page-title">
+                            下载中心
+            </h3>
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="pages/showAllDept.html">用户管理</a>
+										<a href="#">下载中心</a>
 									</li>
-									<li class="breadcrumb-item active" aria-current="page">用户查询</li>
+									<li class="breadcrumb-item active" aria-current="page">文档查询</li>
 								</ol>
 							</nav>
 						</div>
@@ -226,97 +226,52 @@
 							<div class="col-md-12 grid-margin stretch-card">
 								<div class="card">
 									<div class="card-body">
-										<h4 class="card-title">用户信息</h4>
+										<h4 class="card-title">文档信息</h4>
 
 										<form action="" method="post">
-											<div class="row">
-												<div class="col-md-3">
-													<div class="form-group row">
-														<div class="input-group">
-															<input type="text" class="form-control" id="InputName" placeholder="姓名" aria-label="姓名" aria-describedby="basic-addon2">
-														</div>
-													</div>
-												</div>&nbsp;&nbsp;&nbsp;
-												<div class="col-md-3">
-													<div class="form-group row">
-														<div class="input-group">
-															<input type="text" class="form-control" id="InputUsername" placeholder="用户名" aria-label="用户名" aria-describedby="basic-addon2">
-														</div>
-													</div>
-												</div>&nbsp;&nbsp;&nbsp;
-												<div class="col-md-3">
-													<div class="form-group row">
-														<div class="input-group">
-															<input type="text" class="form-control" id="InputPosition" placeholder="职位" aria-label="职位" aria-describedby="basic-addon2">
+
+											<div class="col-md-4 ml-auto">
+												<div class="form-group">
+													<div class="input-group">
+														<input type="text" class="form-control" id="InputKeyword" placeholder="请输入关键字" aria-label="Recipient's username" aria-describedby="basic-addon2">
+														<div class="input-group-append">
+															<button type="button" class="btn btn-sm btn-outline-primary" id="select">搜索</button>&nbsp;&nbsp;&nbsp;
+															<button type="button" class="btn btn-sm btn-outline-danger" id="file_delete_all_btn">批量删除</button>
 														</div>
 													</div>
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-md-3">
-													<div class="form-group row">
-														<div class="input-group">
-															<input type="text" class="form-control" id="InputDepartment" placeholder="部门" aria-label="部门" aria-describedby="basic-addon2">
-														</div>
-													</div>
-												</div>&nbsp;&nbsp;&nbsp;
-												<div class="col-md-3">
-													<div class="form-group row">
-														<div class="input-group">
-															<input type="text" class="form-control" id="InputIdCardNo" placeholder="身份证号" aria-label="用户名" aria-describedby="basic-addon2">
-														</div>
-													</div>
-												</div>&nbsp;&nbsp;&nbsp;
-												<div class="col-md-3">
-													<div class="form-group row">
-														<div class="input-group-append">
-															<button type="button" class="btn btn-sm btn-outline-primary" id="select">搜索</button>&nbsp;&nbsp;&nbsp;
-															<button type="button" class="btn btn-sm btn-outline-danger" id="user_delete_all_btn">批量删除</button>
-														</div>
-													</div>
-												</div>&nbsp;&nbsp;&nbsp;
-											</div>
 										</form>
 
-										<table class="table table-striped" id="users_table" style="word-break:break-all; word-wrap:break-all;">
+										<table class="table" id="files_table">
 											<thead>
 												<tr>
-													<th>
-														<input type="checkbox" name="checkAll" id="checkAll">
-													</th>
-													<th>
-														用户名
-													</th>
-													<th>
-														姓名
-													</th>
-													<th>
-														用户身份权限
-													</th>
-													<th>
-														邮箱
-													</th>
-													<th>
-														职位
-													</th>
-													<th>
-														部门
-													</th>
-													<th align="center">操作</th>
+													<th><input type="checkbox" id="checkAll"></th>
+													<th>标题</th>
+													<th>创建时间</th>
+													<th>创建人</th>
+													<th>描述</th>
+													<th>内容</th>
+													<th>操作</th>
+													<th>下载</th>
 												</tr>
 											</thead>
 											<tbody id="con">
-
+												
 											</tbody>
 										</table>
 									</div>
 								</div>
 							</div>
 						</div>
-
 					</div>
 					<!-- content-wrapper ends -->
 					<!-- partial:../../partials/_footer.html -->
+					<footer class="footer">
+						<div class="d-sm-flex justify-content-center justify-content-sm-between">
+							<span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2017 <a href="#" target="_blank">Bootstrap Dash</a>. All rights reserved.</span>
+						</div>
+					</footer>
 					<!-- partial -->
 				</div>
 				<!-- main-panel ends -->
@@ -325,6 +280,72 @@
 		</div>
 		<!-- container-scroller -->
 		<!-- plugins:js -->
+		<!-- 修改文件信息表格 -->
+		<div class="box box-info" id="file_modify_table" style="display: none">
+			<div class="box-header with-border">
+				<h3 class="box-title">修改文件信息</h3>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12 grid-margin stretch-card">
+					<div class="card">
+						<div class="card-body">
+
+							<form class="forms-sample">
+								<div class="form-group">
+									<label for="new_doc_name">标题</label>
+									<input type="text" class="form-control" id="new_doc_name" name="newDocname" placeholder="文件名称">
+								</div>
+
+								<div class="form-group">
+									<label for="new_doc_de">描述</label>
+									<textarea class="form-control" id="new_doc_des" rows="10"></textarea>
+								</div>
+
+								<div class="form-group">
+									<label for="fileUpload"></label>
+									<input type="file" id="fileUpload" multiple="multiple">
+								</div>
+
+								<button type="button" class="btn btn-gradient-primary mr-2" id="doc_update_sumbit">提交</button>
+								<button type="button" class="btn btn-light" id="doc_update_cancel">取消</button>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- 下载文件表格 -->
+		<div class="box box-info" id="file_download_table" style="display: none">
+			<div class="box-header with-border">
+				<h3 class="box-title">下载文件</h3>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12 grid-margin stretch-card">
+					<div class="card">
+						<div class="card-body">
+
+							<form class="forms-sample">
+								<div class="form-group">
+									<label for="localpath">路径</label>
+									<td><input id="localpath" type="text" name="localpath" size="30"></td>
+									<!--	<td><input type=button value="选择" onclick="browseFolder('localpath')"></td>-->
+								</div>
+
+								<button type="button" class="btn btn-gradient-primary mr-2" id="file_download_sumbit">提交</button>
+								<button type="button" class="btn btn-light" id="file_download_cancel">取消</button>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
 		<script src="../../vendors/js/vendor.bundle.base.js"></script>
 		<script src="../../vendors/js/vendor.bundle.addons.js"></script>
 		<!-- endinject -->
@@ -336,85 +357,81 @@
 		<script src="../../js/file-upload.js"></script>
 		<!-- End custom js for this page-->
 		<script src="../../layer/layer.js"></script>
+		<script src="../../js/jquery-3.4.1.min.js"></script>
 		<script>
 			$(function() {
 				if(!window.localStorage) {
 					alert("浏览器支持localstorage");
 				} else {
 					var storage = window.localStorage;
-					var username = storage.getItem("username");
+					storage.setItem('localData', storageData);
+					var username = JSON.parse(storage.getItem('localData')).localData.username;
 				}
 			});
 		</script>
-		<script type="text/javascript">
+		<script>
 			$(function() {
-				//function to_page() {
 				$.ajax({
 					type: "POST",
-					url: 'http://localhost:8080/new_ssm/user/showall',
+					url: 'http://localhost:8080/new_ssm/file/selectFileAll',
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					async: false,
+					  
 					success: function(data) {
 						console.log(data);
 						if(data.error_code == 0) {
+							$("#files_table tbody").empty();
 							var $tbody = $("#con");
-							$("#users_table tbody").empty();
-							var user = data.data;
-							$.each(user, function(i, e) {
-								var checkBoxId = $("<td><input type='checkbox' class='check_item'/></td>");
+							var doc = data.data;
+							var checkBoxId = $("<td><input type='checkbox' class='check_item'/></td>");
+							$.each(doc, function(i, e) {
+								var $des = e.des;
+								var $descrpt = $des.substr(0, 5);
 								var $tr = $("<tr>").append(checkBoxId)
-									.append($("<td>").html(e["username"]))
-									.append($("<td>").html(e["name"])).append($("<td>").html(e["groupId"])).append($("<td>").html(e["email"])).append($("<td>").html(e["positon"])).append($("<td>").html(e["department"]));
+									.append($("<td>").html(e["name"]))
+									.append($("<td>").html(e["date"])).append($("<td>").html(e["user_name"])).append($("<td>").html($descrpt)).append($("<td>").html(e["herf"]));
 								var $button_1 = document.createElement("a");
 								$button_1.text = "修改";
 								$button_1.className = "btn btn-xs btn-inverse-primary";
 								var $button_2 = document.createElement("a");
 								$button_2.text = "删除";
 								$button_2.className = "btn btn-xs btn-inverse-danger";
+								var $td1 = $("<td>").append($button_1).append($button_2);
 								var $button_3 = document.createElement("a");
-								$button_3.text = "查看";
-								$button_3.className = "btn btn-xs btn-inverse-warning";
-								var $td = $("<td>").append($button_1).append($button_2).append($button_3);
-								$tr.append($td);
+								$button_3.text = "下载";
+								$button_3.className = "btn btn-sm btn-inverse-warning";
+								var $td2 = $("<td>").append($button_3);
+								$tr.append($td1).append($td2);
 								$tbody.append($tr);
 							});
 						} else {
-							layer.alert("加载数据失败");
+							layer.alert("数据请求失败！");
 						}
 					}
 				});
 			});
 		</script>
-		
 		<script type="text/javascript">
 			$(function() {
 				$("#select").click(function() {
-					var position = $("#InputPosition").val();
-					var name = $("#InputName").val();
-					var username = $("#InputUsername").val();
-					var department = $("#InputDepartment").val();
-					var idCardNo = $("#InputIdCardNo").val();
+					var keyword = $("#InputKeyword").val();
 
 					var dataSend = {
-						position: position,
-						name: name,
-						username: username,
-						department: department,
-						idCardNo: idCardNo.toString()
+						name: keyword,
+						des: keyword
 					};
 
 					console.log(dataSend);
-					if($.trim(position) == "" && $.trim(name) == "" && $.trim(username) == "" && $.trim(department) == "" && $.trim(idCardNo) == "") {
-						layer.msg('请输入查询条件', {
+					if($.trim(keyword) == "") {
+						layer.msg('请输入关键词', {
 							icon: 1,
 							time: 2000 //2秒关闭（如果不配置，默认是3秒）
 						});
 					} else {
 						$.ajax({
 							type: "POST",
-							//url: 'user/selectUser',
-							url: 'http://localhost:8080/new_ssm/user/selectUser',
+							url: 'http://localhost:8080/new_ssm/file/selectFileByName',
 							data: JSON.stringify(dataSend),
 							contentType: "application/json; charset=utf-8",
 							dataType: "json",
@@ -422,43 +439,42 @@
 							success: function(data) {
 								console.log(data);
 								if(data.error_code == 0) {
+									$("#files_table tbody").empty();
 									var $tbody = $("#con");
-									$("#users_table tbody").empty();
-									var user = data.data;
-									$.each(user, function(i, e) {
-										var checkBoxId = $("<td><input type='checkbox' class='check_item'/></td>");
+									var doc = data.data;
+									var checkBoxId = $("<td><input type='checkbox' class='check_item'/></td>");
+									$.each(doc, function(i, e) {
+										var $des = e.des;
+										var $descrpt = $des.substr(0, 5);
 										var $tr = $("<tr>").append(checkBoxId)
-											.append($("<td>").html(e["username"]))
-											.append($("<td>").html(e["name"])).append($("<td>").html(e["groupId"])).append($("<td>").html(e["email"])).append($("<td>").html(e["positon"])).append($("<td>").html(e["department"]));
+											.append($("<td>").html(e["name"]))
+											.append($("<td>").html(e["date"])).append($("<td>").html(e["user_name"])).append($("<td>").html($descrpt));
 										var $button_1 = document.createElement("a");
 										$button_1.text = "修改";
 										$button_1.className = "btn btn-xs btn-inverse-primary";
 										var $button_2 = document.createElement("a");
 										$button_2.text = "删除";
 										$button_2.className = "btn btn-xs btn-inverse-danger";
+										var $td1 = $("<td>").append($button_1).append($button_2);
 										var $button_3 = document.createElement("a");
-										$button_3.text = "查看";
-										$button_3.className = "btn btn-xs btn-inverse-warning";
-										var $td = $("<td>").append($button_1).append($button_2).append($button_3);
-										$tr.append($td);
+										$button_3.text = "下载";
+										$button_3.className = "btn btn-sm btn-inverse-warning";
+										var $td2 = $("<td>").append($button_3);
+										$tr.append($td1).append($td2);
 										$tbody.append($tr);
 									});
 								} else {
-									layer.alert(data.message, {
-										icon: 1,
-										closeBtn: 0
-									}, function(index) {
-										window.location.reload();
-									});
+									layer.alert("数据请求失败！");
 								}
 							},
 							error: function(data) {
 								layer.alert(data.message, {
 									icon: 2,
 									closeBtn: 0
-								})
+								});
 							}
 						});
+						layer.close(index);
 					}
 				});
 			});
@@ -472,24 +488,26 @@
 					var flag = $(".check_item:checked").length == $(".check_item").length;
 					$("#checkAll").prop("checked", flag);
 				});
+
 				//单个删除
 				$(".content-wrapper").on("click", ".btn-inverse-danger", function() {
 					var $tr = $(this).parents("tr");
-					var username = $tr.find("td:eq(1)").html();
-					var usernames = new Array();
-					usernames.push(username);
+					var filename = $tr.find("td:eq(1)").html();
+					var filenames = new Array();
+					filenames.push(filename);
 					var dataSend = {
-						username: usernames
+						filename: filenames
+
 					};
 					console.log(dataSend);
 
-					layer.confirm('确定删除这些用户吗?', {
+					layer.confirm('确定删除部门' + '"' + filename + '"?', {
 						icon: 3,
 						title: '提示'
 					}, function(index) {
 						$.ajax({
 							type: "POST",
-							url: 'http://localhost:8080/new_ssm/user/delete',
+							url: 'http://localhost:8080/new_ssm/file/deleteFile',
 							data: JSON.stringify(dataSend),
 							contentType: "application/json; charset=utf-8",
 							dataType: "json",
@@ -503,6 +521,7 @@
 										layer.closeAll();
 										window.location.reload();
 									});
+
 								} else {
 									layer.alert('删除失败', {
 										icon: 2,
@@ -521,19 +540,23 @@
 
 					});
 				});
+
 				//批量删除
-				$("#user_delete_all_btn").click(function() {
-					var del_unamestr = "";
+				$("#file_delete_all_btn").click(function() {
+					var del_fnamestr = "";
 					$.each($(".check_item:checked"), function() {
-						del_unamestr += $(this).parents("tr").find("td:eq(1)").text() + "-";
+						del_fnamestr += $(this).parents("tr").find("td:eq(1)").text() + "-";
 					});
-					del_unamestr = del_unamestr.substring(0, del_unamestr.length - 1);
-					if(confirm("确认删除【" + del_unamestr + "】吗？")) {
+					del_fnamestr = del_fnamestr.substring(0, del_fnamestr.length - 1);
+					var dataSend = {
+						filename: del_fnamestr
+					};
+					if(confirm("确认删除【" + del_fnamestr + "】吗？")) {
 						//发送ajax请求
 						$.ajax({
-							url: "http://localhost:8080/new_ssm/user/delete",
+							url: "http://localhost:8080/new_ssm/file/deleteFile",
 							type: "DELETE",
-							data: JSON.stringify(del_unamestr),
+							data: JSON.stringify(dataSend),
 							contentType: "application/json; charset=utf-8",
 							dataType: "json",
 							async: false,
@@ -547,9 +570,177 @@
 						});
 					}
 				});
+
+				//修改文件信息
+				$(".content-wrapper").on("click", ".btn-inverse-primary", function() {
+					var $tr = $(this).parents("tr");
+
+					var doc_name = $tr.find("td:eq(1)").html();
+					var doc_des = $tr.find("td:eq(4)").html();
+					$("#new_doc_des").val(doc_des);
+					layer.open({
+						type: 1,
+						title: '修改文件信息',
+						shadeClose: true,
+						shade: 0.5,
+						area: ['500px', '600px'],
+						content: $("#file_modify_table")
+					})
+
+					$("#new_doc_name").attr("value", $tr.find("td:eq(1)").html());
+					$("#new_doc_des").attr("value", $tr.find("td:eq(4)").html());
+					File fileUpload = $(#fileUpload);
+
+					$("#doc_update_sumbit").click(function() {
+						var dataSend = [{
+							name: doc_name,
+							new_doc_name: $("#new_doc_name").val(),
+							new_doc_des: $("#new_doc_des").val(),
+							fileUpload: $("#fileUpload").val()
+						}];
+
+						console.log(dataSend);
+						if($.trim($("#new_doc_name").val()) == "") {
+							layer.msg('文件名称不能为空！', {
+								icon: 2,
+								time: 2000 //2秒关闭（如果不配置，默认是3秒）
+							});
+						} else if($.trim($("#new_doc_des").val()) == "") {
+							layer.msg('文件描述不能为空！', {
+								icon: 2,
+								time: 2000 //2秒关闭（如果不配置，默认是3秒）
+							});
+						} else if($.trim($("#new_doc_des").val()).length > 255) {
+							layer.msg('详细描述限制输入255个字符！', {
+								icon: 2,
+								time: 2000 //2秒关闭（如果不配置，默认是3秒）
+							});
+						} else if($.trim($("#fileUpload").val()) == "") {
+							layer.msg('请选择文件！', {
+								icon: 2,
+								time: 2000 //2秒关闭（如果不配置，默认是3秒）
+							});
+						} else {
+							$.ajax({
+								type: "POST",
+								url: 'http://localhost:8080/new_ssm/file/updateFile',
+								data: JSON.stringify(dataSend),
+								contentType: "application/json; charset=utf-8",
+								dataType: "json",
+								async: false,
+								success: function(data) {
+									if(data.error_code == 0) {
+										layer.alert('修改成功！', {
+											icon: 1,
+											closeBtn: 0
+										}, function(index) {
+											layer.closeAll();
+											window.location.reload();
+										});
+
+									} else {
+										layer.alert('修改失败！', {
+											icon: 2,
+											closeBtn: 0
+										});
+									}
+								}
+							});
+						}
+
+					});
+
+				});
+				$("#doc_update_cancel").click(function() {
+					layer.closeAll();
+				});
 			});
 		</script>
+		<script>
+			$(function() {
+				/*function browseFolder(localpath) {
+					try {
+						var Message = "\u8bf7\u9009\u62e9\u6587\u4ef6\u5939"; //选择框提示信息
+						var Shell = new ActiveXObject("Shell.Application");
+						var Folder = Shell.BrowseForFolder(0, Message, 64, 17); //起始目录为：我的电脑
+						//var Folder = Shell.BrowseForFolder(0, Message, 0); //起始目录为：桌面
+						if(Folder != null) {
+							Folder = Folder.items(); // 返回 FolderItems 对象
+							Folder = Folder.item(); // 返回 Folderitem 对象
+							Folder = Folder.Path; // 返回路径
+							if(Folder.charAt(Folder.length - 1) != "\\") {
+								Folder = Folder + "\\";
+							}
+							document.getElementById(path).value = Folder;
+							return Folder;
+						}
+					} catch(e) {
+						alert(e.message);
+					}
+				}*/
+				$(".content-wrapper").on("click", ".btn-inverse-warning", function() {
+					var $tr = $(this).parents("tr");
+					var herf = $tr.find("td:eq(5)").html();
+					layer.open({
+						type: 1,
+						title: '下载文件',
+						shadeClose: true,
+						shade: 0.5,
+						area: ['500px', '300px'],
+						content: $("#file_download_table")
+					})
+					var localpath = $("#localpath");
+					$("#localpath").attr("value", $tr.find("td:eq(5)").html());
+					$("#file_download_sumbit").click(function() {
+						var dataSend = [{
+							localpath: localpath,
+							herf: herf
+						}];
+
+						console.log(dataSend);
+						if($.trim($("#localpath").val()) == "") {
+							layer.msg('请选择路径！', {
+								icon: 2,
+								time: 2000 //2秒关闭（如果不配置，默认是3秒）
+							});
+						} else {
+							$.ajax({
+								type: "POST",
+								url: 'http://localhost:8080/new_ssm/file/downLoad',
+								data: JSON.stringify(dataSend),
+								contentType: "application/json; charset=utf-8",
+								dataType: "json",
+								async: false,
+								success: function(data) {
+									if(data.error_code == 0) {
+										layer.alert('下载成功！', {
+											icon: 1,
+											closeBtn: 0
+										}, function(index) {
+											layer.closeAll();
+											window.location.reload();
+										});
+
+									} else {
+										layer.alert('下载失败！', {
+											icon: 2,
+											closeBtn: 0
+										});
+									}
+								}
+							});
+						}
+
+					});
+
+					$("#file_download_cancel").click(function() {
+						layer.closeAll();
+					});
+
+				});
+			});
 		</script>
+
 	</body>
 
 </html>

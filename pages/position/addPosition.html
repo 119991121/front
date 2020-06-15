@@ -203,7 +203,7 @@
                       
                     
                     <button type="button" class="btn btn-gradient-primary mr-2" id="pos_add_sumbit">添加</button>
-                    <button class="btn btn-light">取消</button>
+                    <button class="btn btn-light" id="pos_add_reset">重置</button>
                   </form>
                 </div>
               </div>
@@ -242,7 +242,7 @@
 
         $.ajax({
             type: "POST",
-            url: 'https://easy-mock.com/mock/5ee224cbb4699376606a52be/dept/showAllDept',//请求controller方法   
+            url: 'http://localhost:8080/new_ssm/dept/showAllDept',//请求controller方法   
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             async: false, //同步请求，注意此字段    
@@ -250,7 +250,7 @@
                 if(data.error_code == 0){
                     var dl = data.data;
                     $.each(dl,function (i,e) {
-						$("#subordinate_dept").append("<option value='"+e["dept_name"]+"'>"+e["dept_name"]+"</option>");
+						$("#subordinate_dept").append("<option value='"+e["departmentName"]+"'>"+e["departmentName"]+"</option>");
 
                     });
                 }else{
@@ -300,7 +300,7 @@
 				 layer.confirm('确定添加职位'+'"'+pos_name+'"?', {icon: 3, title:'提示'}, function(index){
 					 $.ajax({
                    		type: "POST",
-                   		url: 'https://easy-mock.com/mock/5ee456d573e7a51666ed2943/pos/addPos',
+                   		url: 'http://localhost:8080/new_ssm/pos/addPos',
                    		data: JSON.stringify(dataSend),
                    		contentType: "application/json; charset=utf-8",
                    		dataType: "json",
@@ -327,6 +327,12 @@
 				}
            
 		});
+		
+		
+		$("#pos_add_reset").click(function(){
+		    window.location.reload();
+		});
+		
     });
 </script>  
        

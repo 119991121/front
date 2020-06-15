@@ -195,7 +195,7 @@
                     </div>
                     
                     <button type="button" class="btn btn-gradient-primary mr-2" id="dept_add_sumbit">添加</button>
-                    <button class="btn btn-light">取消</button>
+                    <button class="btn btn-light" id="dept_add_reset">重置</button>
                   </form>
                 </div>
               </div>
@@ -261,7 +261,7 @@
 				 layer.confirm('确定添加部门'+'"'+dept_name+'"?', {icon: 3, title:'提示'}, function(index){
 					 $.ajax({
                    		type: "POST",
-                   		url: 'dept/addDept',
+                   		url: 'http://localhost:8080/new_ssm/dept/addDept',
                    		data: JSON.stringify(dataSend),
                    		contentType: "application/json; charset=utf-8",
                    		dataType: "json",
@@ -288,6 +288,9 @@
             	});
 				}
            
+		});
+		$("#dept_add_reset").click(function(){
+		    window.location.reload();
 		});
     });
 </script>  
