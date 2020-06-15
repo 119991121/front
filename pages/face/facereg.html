@@ -101,7 +101,10 @@
 				<canvas id="canvas" width="530" height="300"></canvas>
 			</div>
 			<dd>
-				<input type="button" onclick="query()" value="立即登录" class="submit_btn" />
+				<input type="button" onclick="query()" value="立即注册" class="submit_btn" />
+			</dd>
+			<dd>
+				<input type="button" onclick="retntoindex()" value="返回" class="submit_btn" />
 			</dd>
 		
 		</dl>
@@ -140,11 +143,8 @@
 				var filebyte = getBase64();
 				console.log("这是拍照结果" + filebyte);
 				
-				// 接收传递的参数username
-				var searchUrl = window.location.href;
-				console.log("这是searchUrl：" + searchUrl);
-				var strs = searchUrl.split("=");
-				var username = decodeURI(strs[1]);
+				
+				var username = localStorage.getItem("username");
 				var dataSend={
 						file:filebyte,
 						username:username
@@ -176,6 +176,10 @@
 						}
 					});
 			}
+			function retntoindex() {
+				window.location.replace("../index/index.html");
+			}
+					
 		
 			function getBase64() {
 				var imgSrc = document.getElementById("canvas").toDataURL(

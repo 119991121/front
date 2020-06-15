@@ -109,8 +109,8 @@
 							</a>
 							<div class="collapse" id="ui-basic1">
 								<ul class="nav flex-column sub-menu">
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">用户查询</a></li>
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">添加用户</a></li>
+									<li class="nav-item"> <a class="nav-link" href="../user/FindUser.html">用户查询</a></li>
+									<li class="nav-item"> <a class="nav-link" href="../user/addUser.html">添加用户</a></li>
 								</ul>
 							</div>
 						</li>
@@ -122,8 +122,8 @@
 							</a>
 							<div class="collapse" id="ui-basic2">
 								<ul class="nav flex-column sub-menu">
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">部门查询</a></li>
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">添加部门</a></li>
+									<li class="nav-item"> <a class="nav-link" href="../department/selectDeptResult.html">部门查询</a></li>
+									<li class="nav-item"> <a class="nav-link" href="../department/addDept.html">添加部门</a></li>
 								</ul>
 							</div>
 						</li>
@@ -135,8 +135,8 @@
 							</a>
 							<div class="collapse" id="ui-basic3">
 								<ul class="nav flex-column sub-menu">
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">职位查询</a></li>
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">添加职位</a></li>
+									<li class="nav-item"> <a class="nav-link" href="../position/selectPosResult.html">职位查询</a></li>
+									<li class="nav-item"> <a class="nav-link" href="../position/addPosition.html">添加职位</a></li>
 								</ul>
 							</div>
 						</li>
@@ -148,8 +148,8 @@
 							</a>
 							<div class="collapse" id="ui-basic4">
 								<ul class="nav flex-column sub-menu">
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">公告查询</a></li>
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">添加公告</a></li>
+									<li class="nav-item"> <a class="nav-link" href="../announcement/selectNotice.html">公告查询</a></li>
+									<li class="nav-item"> <a class="nav-link" href="../announcement/AddAnnouncement.html">添加公告</a></li>
 								</ul>
 							</div>
 						</li>
@@ -161,8 +161,8 @@
 							</a>
 							<div class="collapse" id="ui-basic5">
 								<ul class="nav flex-column sub-menu">
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">文档查询</a></li>
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">上传文档</a></li>
+									<li class="nav-item"> <a class="nav-link" href="../document/showAllFile.html">文档查询</a></li>
+									<li class="nav-item"> <a class="nav-link" href="../document/uploadDoc.html">上传文档</a></li>
 								</ul>
 							</div>
 						</li>
@@ -238,20 +238,12 @@
 		<!-- End custom js for this page-->
 		<script src="../../layer/layer.js"></script>
 		<script>
-			var searchUrl = window.location.href;
-			console.log("这是searchUrl：" + searchUrl);
-			var strs = searchUrl.split("=");
-			var str1 = decodeURI(strs[1]);
-			var str3 = decodeURI(strs[2]);
-			console.log("这是str1" + str1);
-			var str2 = str1.split("&");
-			console.log("这是str2" + str2[0]);
-			console.log("这是str3" + str3);
 			$(function() {
+			var username = localStorage.getItem("username")
+				console.log(localStorage.getItem("username"));
 				getData();
 				$("#facereg").click(function() {
-					var username = str2[0];
-					var searchUrl = encodeURI("../face/facereg.html?username=" + username); //使用encodeURI编码
+					var searchUrl = encodeURI("../face/facereg.html"); //使用encodeURI编码
 					location.href = searchUrl;
 				});
 				$("#subPassword").click(function() {
@@ -291,7 +283,7 @@
 					} else {
 
 						var dataSend = {
-							username: str2[0],
+							username: username,
 							//username:"Tom",
 							oldPassword: oldPassword,
 							newPassword: newPassword
@@ -320,6 +312,8 @@
 										});
 								} else if (data.error_code == 0) {
 									window.location.replace("index.html");
+									localStorage.setItem("remember_password", newPassword);
+									localStorage.setItem("password", newPassword);
 									//alert("密码修改成功！");
 									layer.msg('密码修改成功！', {
 										  icon: 1,
@@ -334,9 +328,13 @@
 			});
 
 			function getData() {
-				$('#name').text(str2[0]);
-				$('#name1').text(str2[0]);
-				$('#occupation').text(str3);
+				$('#name').text(localStorage.getItem("name"));
+				$('#name1').text(localStorage.getItem("name"));
+				if(localStorage.getItem("groupId")=="2"){
+				$('#occupation').text("管理员");
+				}else{
+				$('#occupation').text(localStorage.getItem("positionName"));
+				}
 			}
 		</script>
 	</body>

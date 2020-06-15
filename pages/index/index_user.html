@@ -238,19 +238,11 @@
 		<!-- End custom js for this page-->
 		<script src="../../layer/layer.js"></script>
 		<script>
-			var searchUrl = window.location.href;
-			console.log("这是searchUrl：" + searchUrl);
-			var strs = searchUrl.split("=");
-			var str1 = decodeURI(strs[1]);
-			var str3 = decodeURI(strs[2]);
-			console.log("这是str1" + str1);
-			var str2 = str1.split("&");
-			console.log("这是str2" + str2[0]);
-			console.log("这是str3" + str3);
 			$(function() {
+			console.log(localStorage.getItem("username"));
 				getData();
 				$("#facereg").click(function() {
-					var username = str2[0];
+					var username = localStorage.getItem("username");
 					var searchUrl = encodeURI("../face/facereg.html?username=" + username); //使用encodeURI编码
 					location.href = searchUrl;
 				});
@@ -320,6 +312,7 @@
 										});
 								} else if (data.error_code == 0) {
 									window.location.replace("index.html");
+									localStorage.setItem("password", newPassword);
 									//alert("密码修改成功！");
 									layer.msg('密码修改成功！', {
 										  icon: 1,
@@ -334,9 +327,13 @@
 			});
 
 			function getData() {
-				$('#name').text(str2[0]);
-				$('#name1').text(str2[0]);
-				$('#occupation').text(str3);
+				$('#name').text(localStorage.getItem("username"));
+				$('#name1').text(localStorage.getItem("username"));
+				if(localStorage.getItem("groupId")=="2"){
+				$('#occupation').text("管理员");
+				}else{
+				$('#occupation').text(localStorage.getItem("positionName"));
+				}
 			}
 		</script>
 	</body>

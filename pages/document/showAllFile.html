@@ -131,7 +131,7 @@
 										<a class="nav-link" href="pages/ui-features/buttons.html">用户查询</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="pages/ui-features/typography.html">添加用户</a>
+										<a class="nav-link" href="pages/addUser.html">添加用户</a>
 									</li>
 								</ul>
 							</div>
@@ -145,10 +145,10 @@
 							<div class="collapse" id="ui-basic2" style="">
 								<ul class="nav flex-column sub-menu">
 									<li class="nav-item">
-										<a class="nav-link" href="pages/ui-features/buttons.html">部门查询</a>
+										<a class="nav-link" href="pages/showAllDept.html">部门查询</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="pages/ui-features/typography.html">添加部门</a>
+										<a class="nav-link" href="pages/addDept.html">添加部门</a>
 									</li>
 								</ul>
 							</div>
@@ -216,9 +216,9 @@
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="#">下载中心</a>
+										<a href="pages/showAllDept.html">下载中心</a>
 									</li>
-									<li class="breadcrumb-item active" aria-current="page">文档查询</li>
+									<li class="breadcrumb-item active" aria-current="page">文件查询</li>
 								</ol>
 							</nav>
 						</div>
@@ -226,38 +226,51 @@
 							<div class="col-md-12 grid-margin stretch-card">
 								<div class="card">
 									<div class="card-body">
-										<h4 class="card-title">文档信息</h4>
+										<h4 class="card-title">文件信息</h4>
 
 										<form action="" method="post">
 
-											<div class="col-md-4 ml-auto">
+											<div class="col-md-5 ml-auto">
 												<div class="form-group">
 													<div class="input-group">
-														<input type="text" class="form-control" id="InputKeyword" placeholder="请输入关键字" aria-label="Recipient's username" aria-describedby="basic-addon2">
+
+														<input type="text" class="form-control" id="InputKeyword" placeholder="请输入关键字" aria-label="请输入关键字" aria-describedby="basic-addon2">
 														<div class="input-group-append">
 															<button type="button" class="btn btn-sm btn-outline-primary" id="select">搜索</button>&nbsp;&nbsp;&nbsp;
-															<button type="button" class="btn btn-sm btn-outline-danger" id="file_delete_all_btn">批量删除</button>
+															<button type="button" class="btn btn-sm btn-outline-danger" id="batchDelete_file">批量删除</button>
 														</div>
+
 													</div>
 												</div>
 											</div>
 										</form>
 
-										<table class="table" id="files_table">
-											<thead>
+										<table class="table table-striped" id="files_table">
+											<thead style='text-align: center;'>
 												<tr>
-													<th><input type="checkbox" id="checkAll"></th>
+													<th style="width: 10%;">
+														<label class="form-check-label">
+                              <input type="checkbox" id="checkAll" align="center" name="checkbox"/>
+                            <i class="input-helper"></i></label>
+													</th>
 													<th>标题</th>
 													<th>创建时间</th>
 													<th>创建人</th>
 													<th>描述</th>
-													<th>内容</th>
 													<th>操作</th>
 													<th>下载</th>
 												</tr>
 											</thead>
-											<tbody id="con">
-												
+											<tbody id="con" style='text-align: center;'>
+												<!--	<tr>
+													<td><input type="checkbox" class="_box" align="center" /></td>
+													<td>标题</td>
+													<td>创建时间</td>
+													<td>创建人</td>
+													<td>描述</td>
+													<td>操作</td>
+													<td>标题</td>
+											</tr>-->
 											</tbody>
 										</table>
 									</div>
@@ -279,7 +292,7 @@
 			<!-- page-body-wrapper ends -->
 		</div>
 		<!-- container-scroller -->
-		<!-- plugins:js -->
+
 		<!-- 修改文件信息表格 -->
 		<div class="box box-info" id="file_modify_table" style="display: none">
 			<div class="box-header with-border">
@@ -302,10 +315,10 @@
 									<textarea class="form-control" id="new_doc_des" rows="10"></textarea>
 								</div>
 
-								<div class="form-group">
+								<!--<div class="form-group">
 									<label for="fileUpload"></label>
 									<input type="file" id="fileUpload" multiple="multiple">
-								</div>
+								</div>-->
 
 								<button type="button" class="btn btn-gradient-primary mr-2" id="doc_update_sumbit">提交</button>
 								<button type="button" class="btn btn-light" id="doc_update_cancel">取消</button>
@@ -332,8 +345,7 @@
 							<form class="forms-sample">
 								<div class="form-group">
 									<label for="localpath">路径</label>
-									<td><input id="localpath" type="text" name="localpath" size="30"></td>
-									<!--	<td><input type=button value="选择" onclick="browseFolder('localpath')"></td>-->
+									<input type="text" class="form-control" id="localpath" name="localpath" placeholder="路径">
 								</div>
 
 								<button type="button" class="btn btn-gradient-primary mr-2" id="file_download_sumbit">提交</button>
@@ -346,6 +358,8 @@
 			</div>
 
 		</div>
+
+		<!-- plugins:js -->
 		<script src="../../vendors/js/vendor.bundle.base.js"></script>
 		<script src="../../vendors/js/vendor.bundle.addons.js"></script>
 		<!-- endinject -->
@@ -357,40 +371,36 @@
 		<script src="../../js/file-upload.js"></script>
 		<!-- End custom js for this page-->
 		<script src="../../layer/layer.js"></script>
-		<script src="../../js/jquery-3.4.1.min.js"></script>
-		<script>
+		<script type="text/javascript">
 			$(function() {
-				if(!window.localStorage) {
-					alert("浏览器支持localstorage");
-				} else {
-					var storage = window.localStorage;
-					storage.setItem('localData', storageData);
-					var username = JSON.parse(storage.getItem('localData')).localData.username;
-				}
-			});
-		</script>
-		<script>
-			$(function() {
+			var userID = localStorage.getItem("userid")
+				var globaldata;
 				$.ajax({
 					type: "POST",
 					url: 'http://localhost:8080/new_ssm/file/selectFileAll',
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					async: false,
-					  
 					success: function(data) {
 						console.log(data);
 						if(data.error_code == 0) {
+							globaldata = data.data;
 							$("#files_table tbody").empty();
 							var $tbody = $("#con");
 							var doc = data.data;
-							var checkBoxId = $("<td><input type='checkbox' class='check_item'/></td>");
 							$.each(doc, function(i, e) {
+								var $checkBox = document.createElement("input");
+								$checkBox.setAttribute("type", "checkbox");
+								$checkBox.setAttribute("class", "box_");
+
+								var $tdbox = $("<td>").append($checkBox);
+
 								var $des = e.des;
 								var $descrpt = $des.substr(0, 5);
-								var $tr = $("<tr>").append(checkBoxId)
+								var $tr = $("<tr>")
+									.append($tdbox)
 									.append($("<td>").html(e["name"]))
-									.append($("<td>").html(e["date"])).append($("<td>").html(e["user_name"])).append($("<td>").html($descrpt)).append($("<td>").html(e["herf"]));
+									.append($("<td>").html(e["date"])).append($("<td>").html(e["user_name"])).append($("<td>").html($descrpt));
 								var $button_1 = document.createElement("a");
 								$button_1.text = "修改";
 								$button_1.className = "btn btn-xs btn-inverse-primary";
@@ -410,28 +420,24 @@
 						}
 					}
 				});
-			});
-		</script>
-		<script type="text/javascript">
-			$(function() {
 				$("#select").click(function() {
-					var keyword = $("#InputKeyword").val();
+					var select_key = $("#InputKeyword").val();
 
 					var dataSend = {
-						name: keyword,
-						des: keyword
+						select_key: select_key
 					};
 
 					console.log(dataSend);
-					if($.trim(keyword) == "") {
+					if($.trim(select_key) == "") {
 						layer.msg('请输入关键词', {
-							icon: 1,
+							icon: 2,
 							time: 2000 //2秒关闭（如果不配置，默认是3秒）
 						});
 					} else {
 						$.ajax({
 							type: "POST",
-							url: 'http://localhost:8080/new_ssm/file/selectFileByName',
+							//url: 'test.json',
+							url: 'http://localhost:8080/new_ssm/file/selectFile',
 							data: JSON.stringify(dataSend),
 							contentType: "application/json; charset=utf-8",
 							dataType: "json",
@@ -439,14 +445,21 @@
 							success: function(data) {
 								console.log(data);
 								if(data.error_code == 0) {
+									globaldata = data.data;
 									$("#files_table tbody").empty();
 									var $tbody = $("#con");
 									var doc = data.data;
-									var checkBoxId = $("<td><input type='checkbox' class='check_item'/></td>");
 									$.each(doc, function(i, e) {
+										var $checkBox = document.createElement("input");
+										$checkBox.setAttribute("type", "checkbox");
+										$checkBox.setAttribute("class", "box_");
+
+										var $tdbox = $("<td>").append($checkBox);
+
 										var $des = e.des;
 										var $descrpt = $des.substr(0, 5);
-										var $tr = $("<tr>").append(checkBoxId)
+										var $tr = $("<tr>")
+											.append($tdbox)
 											.append($("<td>").html(e["name"]))
 											.append($("<td>").html(e["date"])).append($("<td>").html(e["user_name"])).append($("<td>").html($descrpt));
 										var $button_1 = document.createElement("a");
@@ -458,7 +471,7 @@
 										var $td1 = $("<td>").append($button_1).append($button_2);
 										var $button_3 = document.createElement("a");
 										$button_3.text = "下载";
-										$button_3.className = "btn btn-sm btn-inverse-warning";
+										$button_3.className = "btn btn-xs btn-inverse-warning";
 										var $td2 = $("<td>").append($button_3);
 										$tr.append($td1).append($td2);
 										$tbody.append($tr);
@@ -474,22 +487,108 @@
 								});
 							}
 						});
-						layer.close(index);
 					}
+				});
+
+				$(".content-wrapper").on("click", ".btn-inverse-warning", function() {
+					var $tr = $(this).parents("tr");
+					var name = $tr.find("td:eq(1)").html();
+					var herf;
+
+					for(i = 0; i < globaldata.length; i++) {
+						if(globaldata[i].name == name) {
+							herf = globaldata[i].herf
+						}
+					}
+
+					layer.open({
+						type: 1,
+						title: '下载文件',
+						shadeClose: true,
+						shade: 0.5,
+						area: ['500px', '300px'],
+						content: $("#file_download_table")
+					})
+
+					$("#file_download_sumbit").click(function() {
+						var dataSend = {
+							localpath: $("#localpath").val(),
+							herf: herf
+						};
+
+						console.log(dataSend);
+						if($.trim($("#localpath").val()) == "") {
+							layer.msg('请选择路径！', {
+								icon: 2,
+								time: 2000 //2秒关闭（如果不配置，默认是3秒）
+							});
+						} else {
+							$.ajax({
+								type: "POST",
+								url: 'http://localhost:8080/new_ssm/file/downLoad',
+								data: JSON.stringify(dataSend),
+								contentType: "application/json; charset=utf-8",
+								dataType: "json",
+								async: false,
+								success: function(data) {
+									if(data.error_code == 0) {
+										layer.alert('下载成功！', {
+											icon: 1,
+											closeBtn: 0
+										}, function(index) {
+											layer.closeAll();
+											window.location.reload();
+										});
+
+									} else {
+										layer.alert('下载失败！', {
+											icon: 2,
+											closeBtn: 0
+										});
+									}
+								}
+							});
+						}
+					});
+					$("#file_download_cancel").click(function() {
+						layer.closeAll();
+					});
 				});
 			});
 		</script>
+
 		<script type="text/javascript">
 			$(function() {
+				/**为全选绑定点击事件实现全选全不选*/
 				$("#checkAll").click(function() {
-					$(".check_item").prop("checked", $(this).prop("checked"));
+
+					var isChecked = this.checked;
+					$("input[class='box_']").each(function() {
+						this.checked = isChecked;
+					});
+
 				});
-				$(document).on("click", ".check_item", function() {
-					var flag = $(".check_item:checked").length == $(".check_item").length;
-					$("#checkAll").prop("checked", flag);
+				/**还需要为每一个子checkbox绑定事件，
+				当下面的子checkbox全部都选中的时候，上面的全选按扭也应该要选中
+				当下面的子checkbox出现未选中的时候，上面的全选按扭也应该取消选中*/
+				$("input[class='box_']").click(function() {
+					if(!$(".box_").checked) {
+						$("#checkAll").prop("checked", false); // 子复选框某个不选择，全选也被取消
+					}
+					var choicelength = $("input[class='box_']").length;
+					var choiceselect = $("input[class='box_']:checked").length;
+
+					if(choicelength == choiceselect) {
+						$("#checkAll").prop("checked", true); // 子复选框全部部被选择，全选也被选择；1.对于HTML元素我们自己自定义的DOM属性，在处理时，使用attr方法；2.对于HTML元素本身就带有的固有属性，在处理时，使用prop方法。
+					}
 				});
 
-				//单个删除
+			});
+		</script>
+
+		<script>
+			$(function() {
+
 				$(".content-wrapper").on("click", ".btn-inverse-danger", function() {
 					var $tr = $(this).parents("tr");
 					var filename = $tr.find("td:eq(1)").html();
@@ -501,7 +600,7 @@
 					};
 					console.log(dataSend);
 
-					layer.confirm('确定删除部门' + '"' + filename + '"?', {
+					layer.confirm('确定删除文件' + '"' + filename + '"?', {
 						icon: 3,
 						title: '提示'
 					}, function(index) {
@@ -522,6 +621,11 @@
 										window.location.reload();
 									});
 
+								} else if(data.error_code == 2) {
+									layer.alert('数据库中不存在该文件.', {
+										icon: 2,
+										closeBtn: 0
+									});
 								} else {
 									layer.alert('删除失败', {
 										icon: 2,
@@ -536,68 +640,111 @@
 								});
 							}
 						});
-						layer.close(index);
 
 					});
 				});
 
 				//批量删除
-				$("#file_delete_all_btn").click(function() {
-					var del_fnamestr = "";
-					$.each($(".check_item:checked"), function() {
-						del_fnamestr += $(this).parents("tr").find("td:eq(1)").text() + "-";
-					});
-					del_fnamestr = del_fnamestr.substring(0, del_fnamestr.length - 1);
-					var dataSend = {
-						filename: del_fnamestr
-					};
-					if(confirm("确认删除【" + del_fnamestr + "】吗？")) {
-						//发送ajax请求
-						$.ajax({
-							url: "http://localhost:8080/new_ssm/file/deleteFile",
-							type: "DELETE",
-							data: JSON.stringify(dataSend),
-							contentType: "application/json; charset=utf-8",
-							dataType: "json",
-							async: false,
-							success: function(data) {
-								if(data.error_code == 0) {
-									alert(data.message);
-								} else {
-									alert("删除失败！");
+				$(".content-wrapper").on("click", ".btn-outline-danger", function() {
+					var choiceselect = $("input[class='box_']:checked").length;
+					if(choiceselect == 0) {
+						layer.msg('请选择需要批量删除的文件！', {
+							icon: 2,
+							time: 2000 //2秒关闭（如果不配置，默认是3秒）
+						});
+
+					} else {
+						layer.confirm('确定删除吗?', {
+							icon: 3,
+							title: '提示'
+						}, function(index) {
+							var checkboxs = $("input[class='box_']");
+							var filenames = new Array();
+							checkboxs.each(function() {
+								if($(this).prop("checked")) {
+									var $tr = $(this).parents("tr");
+									var filename = $tr.find("td:eq(1)").html();
+									filenames.push(filename);
 								}
-							}
+							})
+							var dataSend = {
+								filename: filenames
+
+							};
+							console.log(dataSend);
+							$.ajax({
+								type: "POST",
+								url: 'http://localhost:8080/new_ssm/file/deleteFile',
+								data: JSON.stringify(dataSend),
+								contentType: "application/json; charset=utf-8",
+								dataType: "json",
+								async: false,
+								success: function(data) {
+									if(data.error_code == 0) {
+										layer.alert('删除成功', {
+											icon: 1,
+											closeBtn: 0
+										}, function(index) {
+											layer.closeAll();
+											window.location.reload();
+										});
+
+									} else if(data.error_code == 2) {
+										layer.alert('数据库中不存在该文件.', {
+											icon: 2,
+											closeBtn: 0
+										});
+									} else {
+										layer.alert('删除失败', {
+											icon: 2,
+											closeBtn: 0
+										});
+									}
+								},
+								error: function(data) {
+									layer.alert(data.message, {
+										icon: 2,
+										closeBtn: 0
+									});
+								}
+							});
+
 						});
 					}
 				});
-
-				//修改文件信息
+			});
+		</script>
+		<script>
+			$(function() {
+			
+			var userID = localStorage.getItem("userid")
+				// 修改文件信息
 				$(".content-wrapper").on("click", ".btn-inverse-primary", function() {
+				console.log(userID)
 					var $tr = $(this).parents("tr");
 
-					var doc_name = $tr.find("td:eq(1)").html();
-					var doc_des = $tr.find("td:eq(4)").html();
-					$("#new_doc_des").val(doc_des);
+					var name = $tr.find("td:eq(1)").html();
+					var filedesc = $tr.find("td:eq(4)").html();
+					$("#new_doc_des").val(filedesc);
+					$("#new_doc_name").val(name);
 					layer.open({
 						type: 1,
 						title: '修改文件信息',
 						shadeClose: true,
 						shade: 0.5,
-						area: ['500px', '600px'],
+						area: ['500px', '500px'],
 						content: $("#file_modify_table")
 					})
-
-					$("#new_doc_name").attr("value", $tr.find("td:eq(1)").html());
-					$("#new_doc_des").attr("value", $tr.find("td:eq(4)").html());
-					File fileUpload = $(#fileUpload);
+					//var fileUpload = $("#fileUpload");
 
 					$("#doc_update_sumbit").click(function() {
-						var dataSend = [{
-							name: doc_name,
+						var dataSend = {
+							name:name,
+							userID: userID,
 							new_doc_name: $("#new_doc_name").val(),
 							new_doc_des: $("#new_doc_des").val(),
-							fileUpload: $("#fileUpload").val()
-						}];
+							//fileUpload: $("#fileUpload").val()
+						};
 
 						console.log(dataSend);
 						if($.trim($("#new_doc_name").val()) == "") {
@@ -612,11 +759,6 @@
 							});
 						} else if($.trim($("#new_doc_des").val()).length > 255) {
 							layer.msg('详细描述限制输入255个字符！', {
-								icon: 2,
-								time: 2000 //2秒关闭（如果不配置，默认是3秒）
-							});
-						} else if($.trim($("#fileUpload").val()) == "") {
-							layer.msg('请选择文件！', {
 								icon: 2,
 								time: 2000 //2秒关闭（如果不配置，默认是3秒）
 							});
@@ -656,91 +798,6 @@
 				});
 			});
 		</script>
-		<script>
-			$(function() {
-				/*function browseFolder(localpath) {
-					try {
-						var Message = "\u8bf7\u9009\u62e9\u6587\u4ef6\u5939"; //选择框提示信息
-						var Shell = new ActiveXObject("Shell.Application");
-						var Folder = Shell.BrowseForFolder(0, Message, 64, 17); //起始目录为：我的电脑
-						//var Folder = Shell.BrowseForFolder(0, Message, 0); //起始目录为：桌面
-						if(Folder != null) {
-							Folder = Folder.items(); // 返回 FolderItems 对象
-							Folder = Folder.item(); // 返回 Folderitem 对象
-							Folder = Folder.Path; // 返回路径
-							if(Folder.charAt(Folder.length - 1) != "\\") {
-								Folder = Folder + "\\";
-							}
-							document.getElementById(path).value = Folder;
-							return Folder;
-						}
-					} catch(e) {
-						alert(e.message);
-					}
-				}*/
-				$(".content-wrapper").on("click", ".btn-inverse-warning", function() {
-					var $tr = $(this).parents("tr");
-					var herf = $tr.find("td:eq(5)").html();
-					layer.open({
-						type: 1,
-						title: '下载文件',
-						shadeClose: true,
-						shade: 0.5,
-						area: ['500px', '300px'],
-						content: $("#file_download_table")
-					})
-					var localpath = $("#localpath");
-					$("#localpath").attr("value", $tr.find("td:eq(5)").html());
-					$("#file_download_sumbit").click(function() {
-						var dataSend = [{
-							localpath: localpath,
-							herf: herf
-						}];
-
-						console.log(dataSend);
-						if($.trim($("#localpath").val()) == "") {
-							layer.msg('请选择路径！', {
-								icon: 2,
-								time: 2000 //2秒关闭（如果不配置，默认是3秒）
-							});
-						} else {
-							$.ajax({
-								type: "POST",
-								url: 'http://localhost:8080/new_ssm/file/downLoad',
-								data: JSON.stringify(dataSend),
-								contentType: "application/json; charset=utf-8",
-								dataType: "json",
-								async: false,
-								success: function(data) {
-									if(data.error_code == 0) {
-										layer.alert('下载成功！', {
-											icon: 1,
-											closeBtn: 0
-										}, function(index) {
-											layer.closeAll();
-											window.location.reload();
-										});
-
-									} else {
-										layer.alert('下载失败！', {
-											icon: 2,
-											closeBtn: 0
-										});
-									}
-								}
-							});
-						}
-
-					});
-
-					$("#file_download_cancel").click(function() {
-						layer.closeAll();
-					});
-
-				});
-			});
-		</script>
-
 	</body>
 
 </html>

@@ -231,20 +231,7 @@
 <script>
 $(function () {
 	//var user_id = getUrlParam.param("userid");
-	if(!window.localStorage){
-		alert("浏览器支持localstorage");
-	}else{
-		var storage = window.localStorage;
-		storage.setItem("user","Tom")
-		console.log(storage)
-		var username = storage.getItem("user")
-		console.log(username)
-    //ar json = storage.getItem("data");
-    //var jsonObj = JSON.parse(json);
-    //console.log(jsonObj)
-    //console.log(typeof jsonObj);
-    //var username = jsonObj.username;
-  }
+	var username = localStorage.getItem("username")
 	
 	$("#announcement_add_sumbit").click(function(){
 		var announce_name = $("#InputTitle").val();

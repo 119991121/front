@@ -244,15 +244,8 @@
 
 <script  type="text/javascript">
     $(function () {
-			if(!window.localStorage){
-            alert("浏览器不支持localstorage");
-			}else{
-						localStorage.setItem("userID",1)
-            var storageData=window.localStorage;
-            var userID=storageData.getItem("userID");
-            console.log(userID);
-            localStorage.removeItem("userID")
-			}
+			var userID = localStorage.getItem("userid")
+			console.log(userID)
             
 			$("#doc_upload").click(function(){
 			var doc_name = $.trim($("#doc_name").val());
@@ -293,10 +286,9 @@
 					 $.ajax({
                    		type: "POST",
                    		url: 'http://localhost:8080/new_ssm/file/addFile',
-											cache:false,
                    		data: formData,
                    		processData : false, // 使数据不做处理
-											contentType:" multipart/form-data",// 不要设置Content-Type请求头
+											contentType:false,// 不要设置Content-Type请求头
                    		dataType: "json",
                    		async: false,
                    		success: function (data) {

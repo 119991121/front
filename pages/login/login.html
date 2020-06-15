@@ -48,7 +48,7 @@
 									<div class="form-group">
 										<input type="text" class="form-control form-control-lg " id="loginname" placeholder="用户名" style=" opacity: 0.6; ">
 									</div>
-									<div class=" form-group">
+									<div class=" form-group" id="inputagain">
 										<input type="password" class="form-control form-control-lg" id="password" placeholder="密码" style=" opacity: 0.6;">
 									</div>
 									
@@ -104,11 +104,11 @@
 					var strPass = $("#password").val();
 					var strRem = $("#rememberPwd").is(":checked");
 					if ($("#rememberPwd").is(":checked")) {
-						localStorage.setItem("username", strName);
-						localStorage.setItem("password", strPass);
+						localStorage.setItem("remember_username", strName);
+						localStorage.setItem("remember_password", strPass);
 						localStorage.setItem("ischecked", strRem);
 					} else {
-						localStorage.removeItem("password");
+						localStorage.removeItem("remember_password");
 						localStorage.removeItem("ischecked");
 					}
 					var username = $("#loginname").val();
@@ -157,9 +157,14 @@
 										  icon: 1,
 										  time: 2000 //2秒关闭（如果不配置，默认是3秒）
 										});
-									var username = jQuery.trim($("#loginname").val());
-									var occupation = "经理";
-									var searchUrl = encodeURI("../index/index.html?username=" + username + "&occupation=" + occupation); //使用encodeURI编码
+									localStorage.setItem("username", data.data.username);
+									localStorage.setItem("name", data.data.name);
+									localStorage.setItem("userid", data.data.user_id);
+									localStorage.setItem("groupId", data.data.groupId);
+									localStorage.setItem("positionName", data.data.positionName);
+									localStorage.setItem("password", data.data.password);
+									console.log(localStorage)
+									var searchUrl = encodeURI("../index/index.html"); //使用encodeURI编码
 									location.href = searchUrl;
 									console.log(location.href);
 								}
@@ -170,22 +175,49 @@
 							},
 						});
 					}
+				});
+				//记住密码
+				$("#rememberPwd").click(function() {
+						var strName = $("#loginname").val();
+						var strPass = $("#password").val();
+						var strRem = $("#rememberPwd").is(":checked");
+						if ($("#rememberPwd").is(":checked")) {
+							localStorage.setItem("remember_username", strName);
+							localStorage.setItem("remember_password", strPass);
+							localStorage.setItem("ischecked", strRem);
+						} else {
+							localStorage.removeItem("remember_password");
+							localStorage.removeItem("ischecked");
+						}
+				
+				
+				});
+				//
+				$("#inputagain").click(function() {
+					if($("#rememberPwd").is(":checked")) {
+						var storageName =  localStorage.getItem('remember_username');
+						var storagePwd = localStorage.getItem("remember_password");
+						if($("#loginname").val() == storageName){
+							$("#password").val(storagePwd);
+						}
+					}
 				})
 
 			})
 
 			window.onload = function() {
-				var username = localStorage.getItem('username');
-				var password = localStorage.getItem("password");
+				var username = localStorage.getItem('remember_username');
+				var password = localStorage.getItem("remember_password");
 				var checked = localStorage.getItem("ischecked");
+				if (checked) {
+					$("#rememberPwd").attr("checked", true);
+				
 				if (username) {
 					$("#loginname").val(username);
 				}
 				if (password) {
 					$("#password").val(password);
 				}
-				if (checked) {
-					$("#rememberPwd").attr("checked", true);
 				}
 			}
 		</script>
