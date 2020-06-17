@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+[]<!DOCTYPE html>
 <html>
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Purple Admin</title>
+  <title>添加公告</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../../vendors/iconfonts/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
@@ -13,6 +13,12 @@
   <link rel="stylesheet" href="../../css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../../images/favicon.png">
+  <style>
+  	.home img{
+  		width:2.1875rem ;
+  		height: 2.1875rem;
+  	}
+  </style>
 <style type="text/css">/* Chart.js */
 @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style>
 <!--  <script src="chrome-extension://ndkcpnnnlmhaccdogpecoblhkldojceg/assets/prompt.js"></script>   -->
@@ -37,40 +43,45 @@
             </div>
           </form>
         </div> -->
-        <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-              <div class="nav-profile-img">
-                <img src="../../images/faces/face1.jpg" alt="image">
-                <span class="availability-status online"></span>             
-              </div>
-              <div class="nav-profile-text">
-                <p class="mb-1 text-black">David Greymaax</p>
-              </div>
-            </a>
-            <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="#">
-                <i class="mdi mdi-lock-outline mr-2 text-primary"></i>
-                修改密码
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                <i class=" mdi mdi-image-filter-center-focus mr-2 text-primary"></i>
-                人脸注册
-              </a>
-            </div>
-          </li>
-          <li class="nav-item d-none d-lg-block full-screen-link">
-            <a class="nav-link">
-              <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
-            </a>
-          </li>
-           <li class="nav-item nav-logout d-none d-lg-block">
-            <a class="nav-link" href="#">
-              <i class="mdi mdi-power"></i>
-            </a>
-          </li>
-        </ul>
+<ul class="navbar-nav navbar-nav-right">
+						<li class="nav-item nav-profile dropdown">
+							<a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+								<div class="nav-profile-img">
+									<img id="touxiang" alt="image">
+									<span class="availability-status online"></span>
+								</div>
+								<div class="nav-profile-text">
+									<p class="mb-1 text-black" id="name"></p>
+								</div>
+							</a>
+							<div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+								<button type="button" class="dropdown-item " data-toggle="modal" data-target="#modifypassword">
+									<i class="mdi mdi-lock-outline mr-2 text-primary"></i>
+									修改密码
+								</button>
+								<div class="dropdown-divider"></div>
+								<button class="dropdown-item" href="../face/facereg.html" id="facereg">
+									<i class=" mdi mdi-image-filter-center-focus mr-2 text-primary"></i>
+									人脸注册
+								</button>
+							</div>
+						</li>
+						<li class="nav-item d-none d-lg-block">
+							<a class="nav-link home" href="../index/index.html">
+								<img src="../../images/主页.png" />
+							</a>
+						</li>
+						<li class="nav-item d-none d-lg-block full-screen-link">
+							<a class="nav-link">
+								<i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+							</a>
+						</li>
+						<li class="nav-item nav-logout d-none d-lg-block">
+							<a class="nav-link" href="../login/login.html" id="logout">
+								<i class="mdi mdi-power"></i>
+							</a>
+						</li>
+					</ul>
         <!-- <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span class="mdi mdi-menu"></span>
         </button> --> 
@@ -84,78 +95,78 @@
           <li class="nav-item nav-profile">
             <a href="#" class="nav-link">
               <div class="nav-profile-image">
-                <img src="../../images/faces/face1.jpg" alt="profile">
+                <img id="touxiang1" alt="profile">
                 <span class="login-status online"></span> <!--change to offline or busy as needed-->              
               </div>
-              <div class="nav-profile-text d-flex flex-column">
-                <span class="font-weight-bold mb-2">David Grey. H</span>
-                <span class="text-secondary text-small">Project Manager</span>
-              </div>
+             <div class="nav-profile-text d-flex flex-column">
+               <span class="font-weight-bold mb-2" id="name1"></span>
+               <span class="text-secondary text-small" id="occupation"></span>
+             </div>
 <!--              <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i> -->
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
+            <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic1" aria-expanded="true" aria-controls="ui-basic1">
               <span class="menu-title">用户管理</span>
               <i class="menu-arrow"></i>
               <i class="mdi mdi-crosshairs-gps menu-icon"></i>
             </a>
             <div class="collapse" id="ui-basic1" style="">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">用户查询</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">添加用户</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../user/FindUser.html">用户查询</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../user/addUser.html">添加用户</a></li>
               </ul>
             </div>
           </li>
         <li class="nav-item">
-          <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
+          <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic2" aria-expanded="true" aria-controls="ui-basic2">
             <span class="menu-title">部门管理</span>
             <i class="menu-arrow"></i>
             <i class="mdi mdi-crosshairs-gps menu-icon"></i>
           </a>
           <div class="collapse" id="ui-basic2" style="">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">部门查询</a></li>
-              <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">添加部门</a></li>
+              <li class="nav-item"> <a class="nav-link" href="../department/showAllDept.html">部门查询</a></li>
+              <li class="nav-item"> <a class="nav-link" href="../department/addDept.html">添加部门</a></li>
             </ul>
           </div>
         </li>
 		<li class="nav-item">
-		  <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic3" aria-expanded="false" aria-controls="ui-basic3">
+		  <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic3" aria-expanded="true" aria-controls="ui-basic3">
 		    <span class="menu-title">职位管理</span>
 		    <i class="menu-arrow"></i>
 		    <i class="mdi mdi-crosshairs-gps menu-icon"></i>
 		  </a>
 		  <div class="collapse" id="ui-basic3" style="">
 		    <ul class="nav flex-column sub-menu">
-		      <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">职位查询</a></li>
-		      <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">添加职位</a></li>
+		      <li class="nav-item"> <a class="nav-link" href="../position/showAllPos.html">职位查询</a></li>
+		      <li class="nav-item"> <a class="nav-link" href="../position/addPosition.html">添加职位</a></li>
 		    </ul>
 		  </div>
 		</li>
 		<li class="nav-item">
-		  <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic4" aria-expanded="false" aria-controls="ui-basic4">
+		  <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic4" aria-expanded="true" aria-controls="ui-basic4">
 		    <span class="menu-title">公告管理</span>
 		    <i class="menu-arrow"></i>
 		    <i class="mdi mdi-crosshairs-gps menu-icon"></i>
 		  </a>
 		  <div class="collapse" id="ui-basic4" style="">
 		    <ul class="nav flex-column sub-menu">
-		      <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">公告查询</a></li>
-		      <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">添加公告</a></li>
+		      <li class="nav-item"> <a class="nav-link" href="selectNotice.html">公告查询</a></li>
+		      <li class="nav-item"> <a class="nav-link" href="AddAnnouncement.html">添加公告</a></li>
 		    </ul>
 		  </div>
 		</li>
        <li class="nav-item">
-         <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic5" aria-expanded="false" aria-controls="ui-basic5">
+         <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic5" aria-expanded="true" aria-controls="ui-basic5">
            <span class="menu-title">下载中心</span>
            <i class="menu-arrow"></i>
            <i class="mdi mdi-crosshairs-gps menu-icon"></i>
          </a>
          <div class="collapse" id="ui-basic5" style="">
            <ul class="nav flex-column sub-menu">
-             <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">文档查询</a></li>
-             <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">上传文档</a></li>
+             <li class="nav-item"> <a class="nav-link" href="../document/showAllFile.html">文档查询</a></li>
+             <li class="nav-item"> <a class="nav-link" href="../document/uploadDoc.html">上传文档</a></li>
            </ul>
          </div>
        </li>
@@ -165,13 +176,13 @@
       <div class="main-panel">        
         <div class="content-wrapper">
           <div class="page-header">
-            <h3 class="page-title">公告管理
+            <h3 class="page-title">发布公告
               
             </h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">公告管理</a></li>
-                <li class="breadcrumb-item active" aria-current="page">添加公告</li>
+                <li class="breadcrumb-item active" aria-current="page">发布公告</li>
               </ol>
             </nav>
           </div>
@@ -179,7 +190,6 @@
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">发布公告</h4>
                   <p></p>
                   <form class="col-md-8 forms-sample">
                     <div class="form-group">
@@ -230,8 +240,18 @@
 
 <script>
 $(function () {
+	var sex = localStorage.getItem("sex");
+	if(sex==1){
+		touxiang = "../../images/faces/face2.jpg";
+	}
+	else{
+		touxiang = "../../images/faces/face3.jpg"
+	}
+	$("#touxiang").attr("src",touxiang);
+	$("#touxiang1").attr("src",touxiang);
 	//var user_id = getUrlParam.param("userid");
-	var username = localStorage.getItem("username")
+	var username = localStorage.getItem("username");
+	getData();
 	
 	$("#announcement_add_sumbit").click(function(){
 		var announce_name = $("#InputTitle").val();
@@ -289,14 +309,34 @@ $(function () {
             }
           },
           error:function(data){
-        	  layer.alert('添加失败，请重试！', { icon: 2, closeBtn: 0 });
+        	  layer.alert('请稍后再试！', { icon: 2, closeBtn: 0 });
           }
         });
         layer.close(index);
 		  });
 		}
   });
+  function getData() {
+  	$('#name').text(localStorage.getItem("name"));
+  	$('#name1').text(localStorage.getItem("name"));
+  	if(localStorage.getItem("groupId")=="1"){
+  	$('#occupation').text("管理员");
+  	}else{
+  	$('#occupation').text(localStorage.getItem("positionName"));
+  	}
+  }
+  $("#logout").click(function() {
+  	localStorage.removeItem("username");
+  	localStorage.removeItem("name");
+  	localStorage.removeItem("userid");
+  	localStorage.removeItem("groupId");
+  	localStorage.removeItem("positionName");
+  	localStorage.removeItem("password");
+  	localStorage.removeItem("sex");
+  	
+  })
 });
 </script>  
+<
 </body>
 </html>

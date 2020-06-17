@@ -5,7 +5,7 @@
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>Purple Admin</title>
+		<title>查询用户</title>
 		<!-- plugins:css -->
 		<link rel="stylesheet" href="../../vendors/iconfonts/mdi/css/materialdesignicons.min.css">
 		<link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
@@ -14,6 +14,15 @@
 		<link rel="stylesheet" href="../../css/style.css">
 		<!-- endinject -->
 		<link rel="shortcut icon" href="../../images/favicon.png">
+		<style>
+			.modifypassword{
+				width: 100%;
+			}
+				.home img{
+					width:2.1875rem ;
+					height: 2.1875rem;
+				}
+		</style>
 		<style type="text/css">
 			/* Chart.js */
 			
@@ -40,7 +49,6 @@
 				animation: chartjs-render-animation 0.001s;
 			}
 		</style>
-		<!--  <script src="chrome-extension://ndkcpnnnlmhaccdogpecoblhkldojceg/assets/prompt.js"></script>   -->
 
 	</head>
 
@@ -67,7 +75,7 @@
 			   	<li class="nav-item nav-profile dropdown">
 			   		<a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
 			   			<div class="nav-profile-img">
-			   				<img src="../../images/faces/face1.jpg" alt="image">
+			   				<img id="touxiang" alt="image">
 			   				<span class="availability-status online"></span>
 			   			</div>
 			   			<div class="nav-profile-text">
@@ -86,13 +94,18 @@
 			   			</button>
 			   		</div>
 			   	</li>
+				<li class="nav-item d-none d-lg-block">
+					<a class="nav-link home" href="../index/index.html">
+						<img src="../../images/主页.png" />
+					</a>
+				</li>
 			   	<li class="nav-item d-none d-lg-block full-screen-link">
 			   		<a class="nav-link">
 			   			<i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
 			   		</a>
 			   	</li>
 			   	<li class="nav-item nav-logout d-none d-lg-block">
-			   		<a class="nav-link" href="../login/login.html">
+			   		<a class="nav-link" href="../login/login.html" id="logout">
 			   			<i class="mdi mdi-power"></i>
 			   		</a>
 			   	</li>
@@ -110,12 +123,12 @@
 				          <li class="nav-item nav-profile">
 				            <a href="#" class="nav-link">
 				              <div class="nav-profile-image">
-				                <img src="../../images/faces/face1.jpg" alt="profile">
+				                <img id="touxiang1" alt="profile">
 				                <span class="login-status online"></span> <!--change to offline or busy as needed-->              
 				              </div>
 				              <div class="nav-profile-text d-flex flex-column">
 				                <span class="font-weight-bold mb-2" id="name1"></span>
-				                <span class="text-secondary text-small" id="occupation">Project Manager</span>
+				                <span class="text-secondary text-small" id="occupation"></span>
 				              </div>
 				<!--              <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i> -->
 				            </a>
@@ -128,8 +141,8 @@
 				            </a>
 				            <div class="collapse" id="ui-basic1" style="">
 				              <ul class="nav flex-column sub-menu">
-				                <li class="nav-item"> <a class="nav-link" href="../user/FindUser.html">用户查询</a></li>
-				                <li class="nav-item"> <a class="nav-link" href="../user/addUser.html">添加用户</a></li>
+				                <li class="nav-item"> <a class="nav-link" href="FindUser.html">用户查询</a></li>
+				                <li class="nav-item"> <a class="nav-link" href="addUser.html">添加用户</a></li>
 				              </ul>
 				            </div>
 				          </li>
@@ -141,7 +154,7 @@
 				          </a>
 				          <div class="collapse" id="ui-basic2" style="">
 				            <ul class="nav flex-column sub-menu">
-				              <li class="nav-item"> <a class="nav-link" href="../department/selectDeptResult.html">部门查询</a></li>
+				              <li class="nav-item"> <a class="nav-link" href="../department/showAllDept.html">部门查询</a></li>
 				              <li class="nav-item"> <a class="nav-link" href="../department/addDept.html">添加部门</a></li>
 				            </ul>
 				          </div>
@@ -154,8 +167,8 @@
 						  </a>
 						  <div class="collapse" id="ui-basic3" style="">
 						    <ul class="nav flex-column sub-menu">
-						      <li class="nav-item"> <a class="nav-link" href="../selectPosResult.html">职位查询</a></li>
-						      <li class="nav-item"> <a class="nav-link" href="../selectPosResult/addPosition.html">添加职位</a></li>
+						      <li class="nav-item"> <a class="nav-link" href="../position/showAllPos.html">职位查询</a></li>
+						      <li class="nav-item"> <a class="nav-link" href="../position/addPosition.html">添加职位</a></li>
 						    </ul>
 						  </div>
 						</li>
@@ -207,7 +220,6 @@
 							<div class="col-md-12 grid-margin stretch-card">
 								<div class="card">
 									<div class="card-body">
-										<h4 class="card-title">用户信息</h4>
 
 										<form action="" method="post">
 											<div class="row">
@@ -227,20 +239,35 @@
 												</div>&nbsp;&nbsp;&nbsp;
 												<div class="col-md-3">
 													<div class="form-group row">
-														<div class="input-group">
-															<input type="text" class="form-control" id="InputPosition" placeholder="职位" aria-label="职位" aria-describedby="basic-addon2">
-														</div>
+														
+														<select class="form-control" id="InputPosition" οnchange="getvalue(this)">
+															<option value ="">--请选择职位名称--</option>
+														
+														</select>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-md-3">
-													<div class="form-group row">
+												<!-- 	<div class="form-group row">
 														<div class="input-group">
 															<input type="text" class="form-control" id="InputDepartment" placeholder="部门" aria-label="部门" aria-describedby="basic-addon2">
 														</div>
 													</div>
+												 -->
+													<div class="form-group row">
+														
+														<select class="form-control" id="InputDepartment" οnchange="getvalue(this)">
+															<option value ="">--请选择部门名称--</option>
+														
+														</select>
+													</div>
+												 
+												 
 												</div>&nbsp;&nbsp;&nbsp;
+												
+												
+												
 												<div class="col-md-3">
 													<div class="form-group row">
 														<div class="input-group">
@@ -261,33 +288,33 @@
 										</form>
 
 										<table class="table table-striped" id="users_table" style="word-break:break-all; word-wrap:break-all;">
-											<thead>
+											<thead style='text-align: center;'>
 												<tr>
-													<th>
+													<th style="width: 5%;">
 														<input type="checkbox" name="checkAll" id="checkAll">
 													</th>
-													<th>
+													<th style="width: 10%;">
 														用户名
 													</th>
-													<th>
+													<th style="width: 10%;">
 														姓名
 													</th>
-													<th>
-														用户身份权限
+													<th style="width: 10%;">
+														身份权限
 													</th>
-													<th>
+													<th style="width: 15%;">
 														邮箱
 													</th>
-													<th>
+													<th style="width: 15%;">
 														职位
 													</th>
-													<th>
+													<th style="width: 15%;">
 														部门
 													</th>
-													<th align="center">操作</th>
+													<th align="center" style="width: 20%;">操作</th>
 												</tr>
 											</thead>
-											<tbody id="con">
+											<tbody id="con" style='text-align: center;'>
 
 											</tbody>
 										</table>
@@ -321,7 +348,7 @@
 										<div class="form-group row">
 											<label class="col-form-label">用户名</label>
 											<div class="col-sm-9">
-												<input type="text" readonly="readonly" class="form-control" id="username" name="username" style="width:210px;height:38px;">
+												<input type="text" readonly="readonly" class="form-control" id="new_username" name="new_username" style="width:210px;height:38px;">
 											</div>
 										</div>
 									</div>
@@ -360,7 +387,7 @@
 										<div class="form-group row">
 											<label class="col-form-label">密码</label>
 											<div class="col-sm-9">
-												<input type="password" readonly="readonly" class="form-control" id="password" name="password" style="width:225px;height:38px;">
+												<input type="password" readonly="readonly" class="form-control" id="new_password" name="new_password" style="width:225px;height:38px;">
 											</div>
 										</div>
 									</div>
@@ -430,7 +457,7 @@
 											<div class="col-sm-3">
 												<div class="form-check">
 													<label class="form-check-label">
-					             <input type="radio" class="form-check-input" name="groupId" id="groupId1" value="1">
+					             <input type="radio" class="form-check-input" name="new_groupId" id="new_groupId1" value="1">
 					             管理员
 					           <i class="input-helper"></i></label>
 												</div>
@@ -438,7 +465,7 @@
 											<div class="col-sm-4">
 												<div class="form-check">
 													<label class="form-check-label">
-					             <input type="radio" class="form-check-input" name="groupId" id="groupId2" value="2">
+					             <input type="radio" class="form-check-input" name="new_groupId" id="new_groupId2" value="2">
 					             普通用户
 					           <i class="input-helper"></i></label>
 												</div>
@@ -482,7 +509,7 @@
 										<div class="form-group row">
 											<label class="col-form-label">姓名</label>
 											<div class="col-sm-9">
-												<input type="text" class="form-control" id="name" name="name" style="width:100px;height:38px;">
+												<input type="text" class="form-control" id="Xname" name="Xname" style="width:100px;height:38px;">
 											</div>
 										</div>
 									</div>
@@ -490,7 +517,7 @@
 										<div class="form-group row">
 											<label class="col-form-label">性别</label>
 											<div class="col-sm-9">
-												<select class="form-control" id="sex" οnchange="getvalue(this)" style="width:80px;height:38px;">
+												<select class="form-control" id="sex" name="sex" οnchange="getvalue(this)" style="width:80px;height:38px;">
 													<option value="1">女</option>
 													<option value="2">男</option>
 												</select>
@@ -548,7 +575,7 @@
 										<div class="form-group row">
 											<label class="col-form-label">部门</label>
 											<div class="col-sm-9">
-												<select class="form-control" id="subordinate_dept" οnchange="getvalue(this)" style="width:225px;height:38px;">
+												<select class="form-control" id="subordinate_dept" name="subordinate_dept" οnchange="getvalue(this)" style="width:225px;height:38px;">
 
 												</select>
 											</div>
@@ -558,7 +585,7 @@
 										<div class="form-group row">
 											<label class="col-form-label">职位</label>
 											<div class="col-sm-9">
-												<select class="form-control" id="subordinate_pos" οnchange="getvalue(this)" style="width:225px;height:38px;">
+												<select class="form-control" id="subordinate_pos" name="subordinate_pos" οnchange="getvalue(this)" style="width:225px;height:38px;">
 
 												</select>
 											</div>
@@ -638,6 +665,57 @@
 
 		<script type="text/javascript">
 			$(function() {
+				$.ajax({
+					type: "POST",
+					url: 'http://localhost:8080/new_ssm/dept/showAllDept', //请求controller方法   
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					async: false, //同步请求，注意此字段    
+					success: function(data) {
+						if(data.error_code == 0) {
+							var dl = data.data;
+							$.each(dl, function(i, e) {
+								$("#InputDepartment").append("<option value='" + e["departmentName"] + "'>" + e["departmentName"] + "</option>");
+				
+							});
+						} else {
+				
+							layer.alert("数据请求失败！");
+						}
+					}
+				});
+				$.ajax({
+					type: "POST",
+					url: 'http://localhost:8080/new_ssm/pos/showAllPos', //请求controller方法   
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					async: false, //同步请求，注意此字段    
+					success: function(data) {
+						if(data.error_code == 0) {
+							var dl = data.data;
+							$.each(dl, function(i, e) {
+								$("#InputPosition").append("<option value='" + e["positionName"] + "'>" + e["positionName"] + "</option>");
+				
+							});
+						} else {
+				
+							layer.alert("数据请求失败！");
+						}
+					}
+				});
+				
+				
+				
+				var sex = localStorage.getItem("sex");
+				if(sex==1){
+					touxiang = "../../images/faces/face2.jpg";
+				}
+				else{
+					touxiang = "../../images/faces/face3.jpg"
+				}
+				$("#touxiang").attr("src",touxiang);
+				$("#touxiang1").attr("src",touxiang);
+				getData();
 				if(!window.localStorage) {
 					alert("浏览器支持localstorage");
 				} else {
@@ -664,7 +742,19 @@
 								var checkBoxId = $("<td><input type='checkbox' class='check_item'/></td>");
 								var $tr = $("<tr>").append(checkBoxId)
 									.append($("<td>").html(e["username"]))
-									.append($("<td>").html(e["name"])).append($("<td>").html(e["groupId"])).append($("<td>").html(e["email"])).append($("<td>").html(e["positon"])).append($("<td>").html(e["department"]));
+									.append($("<td>").html(e["name"]))
+								
+								if (e["groupId"]==1) {
+									
+									$tr.append($("<td>管理员</td>"))
+								} else{
+									
+									$tr.append($("<td>普通用户</td>"))
+								}	
+								
+									$tr.append($("<td>").html(e["email"]))
+									$tr.append($("<td>").html(e["positionName"]))
+									$tr.append($("<td>").html(e["departmentName"]));
 								var $button_1 = document.createElement("a");
 								$button_1.text = "修改";
 								$button_1.className = "btn btn-xs btn-inverse-primary";
@@ -683,6 +773,26 @@
 						}
 					}
 				});
+				function getData() {
+					$('#name').text(localStorage.getItem("name"));
+					$('#name1').text(localStorage.getItem("name"));
+					if(localStorage.getItem("groupId")=="1"){
+					$('#occupation').text("管理员");
+					}else{
+					$('#occupation').text(localStorage.getItem("positionName"));
+					}
+				}
+				
+				$("#logout").click(function() {
+					localStorage.removeItem("username");
+					localStorage.removeItem("name");
+					localStorage.removeItem("userid");
+					localStorage.removeItem("groupId");
+					localStorage.removeItem("positionName");
+					localStorage.removeItem("password");
+					localStorage.removeItem("sex");
+					
+				})
 
 				$("#select").click(function() {
 					var position = $("#InputPosition").val();
@@ -692,10 +802,10 @@
 					var idCardNo = $("#InputIdCardNo").val();
 
 					var dataSend = {
-						position: position,
+						positionName: position,
 						name: name,
 						username: username,
-						department: department,
+						departmentName: department,
 						idCardNo: idCardNo.toString()
 					};
 
@@ -725,7 +835,19 @@
 										var checkBoxId = $("<td><input type='checkbox' class='check_item'/></td>");
 										var $tr = $("<tr>").append(checkBoxId)
 											.append($("<td>").html(e["username"]))
-											.append($("<td>").html(e["name"])).append($("<td>").html(e["groupId"])).append($("<td>").html(e["email"])).append($("<td>").html(e["positon"])).append($("<td>").html(e["department"]));
+											.append($("<td>").html(e["name"]))
+											
+											if (e["groupId"]==1) {
+												
+												$tr.append($("<td>管理员</td>"))
+											} else{
+												
+												$tr.append($("<td>普通用户</td>"))
+											}	
+											
+											$tr.append($("<td>").html(e["email"]))
+											$tr.append($("<td>").html(e["positionName"]))
+											$tr.append($("<td>").html(e["departmentName"]));
 										var $button_1 = document.createElement("a");
 										$button_1.text = "修改";
 										$button_1.className = "btn btn-xs btn-inverse-primary";
@@ -773,12 +895,11 @@
 							if(data.error_code == 0) {
 								var dl = data.data;
 								$.each(dl, function(i, e) {
-									$("#subordinate_dept").append("<option value='" + e["dept_name"] + "'>" + e["dept_name"] + "</option>");
-
+									$("#subordinate_dept").append("<option value='" + e["departmentName"] + "'>" + e["departmentName"] + "</option>");
+									console.log(e["departmentName"])
 								});
-
 							} else {
-
+					
 								layer.alert("数据请求失败！");
 							}
 						}
@@ -793,15 +914,18 @@
 							if(data.error_code == 0) {
 								var dl = data.data;
 								$.each(dl, function(i, e) {
-									$("#subordinate_pos").append("<option value='" + e["pos_name"] + "'>" + e["pos_name"] + "</option>");
-
+									$("#subordinate_pos").append("<option value='" + e["positionName"] + "'>" + e["positionName"] + "</option>");
+					
 								});
 							} else {
-
+					
 								layer.alert("数据请求失败！");
 							}
 						}
 					});
+					
+					
+				
 					var $tr = $(this).parents("tr");
 
 					var username = $tr.find("td:eq(1)").html();
@@ -814,8 +938,8 @@
 					}
 					$("#username").val(user.username);
 					$("#username").attr("readonly","readonly"); 
-					$("#name").val(user.name);
-					$("#name").attr("readonly","readonly"); 
+					$("#Xname").val(user.name);
+					$("#Xname").attr("readonly","readonly"); 
 					$("#sex").val(user.sex);
 					$('#sex').attr("disabled", "disabled");
 					$("#password").val(user.password);
@@ -843,7 +967,7 @@
 					$("#address").attr("readonly","readonly"); 
 					$("#createdDate").val(user.createdDate);
 					$("#createdDate").attr("readonly","readonly"); 
-					console.log($("#username").val());
+					
 					layer.open({
 						type: 1,
 						title: "<i class='mdi mdi-account'></i>查看用户详细信息",
@@ -859,6 +983,154 @@
 
 				});
 
+
+
+				// 修改用户信息
+				$(".content-wrapper").on("click", ".btn-inverse-primary", function() {
+						
+					$("#new_subordinate_dept").empty();
+					$("#new_subordinate_pos").empty();
+					$.ajax({
+						type: "POST",
+						url: 'http://localhost:8080/new_ssm/dept/showAllDept', //请求controller方法   
+						contentType: "application/json; charset=utf-8",
+						dataType: "json",
+						async: false, //同步请求，注意此字段    
+						success: function(data) {
+							if(data.error_code == 0) {
+								var dl = data.data;
+								$.each(dl, function(i, e) {
+									$("#new_subordinate_dept").append("<option value='" + e["departmentName"] + "'>" + e["departmentName"] + "</option>");
+						
+								});
+						
+							} else {
+						
+								layer.alert("数据请求失败！");
+							}
+						}
+					});
+					$.ajax({
+						type: "POST",
+						url: 'http://localhost:8080/new_ssm/pos/showAllPos', //请求controller方法   
+						contentType: "application/json; charset=utf-8",
+						dataType: "json",
+						async: false, //同步请求，注意此字段    
+						success: function(data) {
+							if(data.error_code == 0) {
+								var dl = data.data;
+								$.each(dl, function(i, e) {
+									$("#new_subordinate_pos").append("<option value='" + e["positionName"] + "'>" + e["positionName"] + "</option>");
+						
+								});
+							} else {
+						
+								layer.alert("数据请求失败！");
+							}
+						}
+					});
+					var $tr = $(this).parents("tr");
+					
+					var username = $tr.find("td:eq(1)").html();
+					
+					var user;
+					
+					for(i = 0; i < globaldata.length; i++) {
+						if(globaldata[i].username == username) {
+							user = globaldata[i]
+						}
+					}
+					$("#new_username").val(user.username);
+					 
+					$("#new_name").val(user.name);
+					 
+					$("#new_sex").val(user.sex);
+					
+					$("#new_password").val(user.password);
+					 
+					$("#new_idCardNo").val(user.idCardNo);
+					 
+					if(user.groupId == 1) {
+						$("#new_groupId1").prop("checked", true);
+						
+					} else {
+						$("#new_groupId2").prop("checked", true);
+						
+					}
+					$("#new_phone").val(user.phone);
+					 
+					$("#new_email").val(user.email);
+					
+					$("#new_subordinate_dept").val(user.departmentName);
+					
+					$("#new_subordinate_pos").val(user.positionName);
+					
+					$("#new_education").val(user.education);
+					
+					$("#new_address").val(user.address);
+				
+					
+					layer.open({
+						type: 1,
+						title: "<i class='mdi mdi-account-settings-variant'></i>修改用户信息",
+						shadeClose: true,
+						shade: 0.5,
+						area: ['1000px', '500px'],
+						content: $("#user_modify_table")
+					})
+						
+					$("#user_update_sumbit").click(function() {
+						var dataSend = {
+							username: username,
+							name: $("#new_name").val(),
+							sex: $("#new_sex").val(),
+							password: $("#new_password").val(),
+							idCardNo: $("#new_idCardNo").val(),
+							groupid: $('input[name="new_groupId"]:checked').val(),
+							phone: $("#new_phone").val(),
+							email: $("#new_email").val(),
+							departmentName: $("#new_subordinate_dept").val(),
+							positionName: $("#new_subordinate_pos").val(),
+							education: $("#new_education").val(),
+							address: $("#new_address").val()
+						
+						};
+						
+						console.log(dataSend);
+							$.ajax({
+								type: "POST",
+								url: 'http://localhost:8080/new_ssm/user/update',
+								data: JSON.stringify(dataSend),
+								contentType: "application/json; charset=utf-8",
+								dataType: "json",
+								async: false,
+								success: function(data) {
+									if(data.error_code == 0) {
+										layer.alert('修改成功！', {
+											icon: 1,
+											closeBtn: 0
+										}, function(index) {
+											layer.closeAll();
+											window.location.reload();
+										});
+						
+									} else {
+										layer.alert('修改失败！', {
+											icon: 2,
+											closeBtn: 0
+										});
+									}
+								}
+							});
+						
+					
+					});
+					$("#user_update_cancel").click(function() {
+						layer.closeAll();
+					});
+						
+				});
+						
 			});
 		</script>
 		<!-- 删除 -->
@@ -922,18 +1194,22 @@
 				});
 				//批量删除
 				$("#user_delete_all_btn").click(function() {
-					var del_unamestr = "";
+					var del_unames = new Array();
 					$.each($(".check_item:checked"), function() {
-						del_unamestr += $(this).parents("tr").find("td:eq(1)").text() + "-";
+						del_unames.push($(this).parents("tr").find("td:eq(1)").text());
+						
 					});
-					del_unamestr = del_unamestr.substring(0, del_unamestr.length - 1);
-					if(del_unamestr == "") {
+					if(del_unames.length==0) {
 						layer.msg('请选择需要批量删除的用户！', {
 							icon: 2,
 							time: 2000 //2秒关闭（如果不配置，默认是3秒）
 						});
 
 					} else {
+						var dataSend={
+							username:del_unames
+						}
+						console.log(dataSend)
 
 						layer.confirm('确定删除这些用户吗?', {
 							icon: 3,
@@ -942,8 +1218,8 @@
 							//发送ajax请求
 							$.ajax({
 								url: "http://localhost:8080/new_ssm/user/delete",
-								type: "DELETE",
-								data: JSON.stringify(del_unamestr),
+								type: "POST",
+								data: JSON.stringify(dataSend),
 								contentType: "application/json; charset=utf-8",
 								dataType: "json",
 								async: false,
@@ -971,176 +1247,8 @@
 
 			});
 		</script>
-		<!-- 修改 查看 -->
-		<script>
-			$(function() {
-
-				// 修改用户信息
-				$(".content-wrapper").on("click", ".btn-inverse-primary", function() {
-
-					$("#new_subordinate_dept").empty();
-					$("#new_subordinate_pos").empty();
-					$.ajax({
-						type: "POST",
-						url: 'http://localhost:8080/new_ssm/dept/showAllDept', //请求controller方法   
-						contentType: "application/json; charset=utf-8",
-						dataType: "json",
-						async: false, //同步请求，注意此字段    
-						success: function(data) {
-							if(data.error_code == 0) {
-								var dl = data.data;
-								$.each(dl, function(i, e) {
-									$("#new_subordinate_dept").append("<option value='" + e["dept_name"] + "'>" + e["dept_name"] + "</option>");
-
-								});
-
-							} else {
-
-								layer.alert("数据请求失败！");
-							}
-						}
-					});
-					$.ajax({
-						type: "POST",
-						url: 'http://localhost:8080/new_ssm/pos/showAllPos', //请求controller方法   
-						contentType: "application/json; charset=utf-8",
-						dataType: "json",
-						async: false, //同步请求，注意此字段    
-						success: function(data) {
-							if(data.error_code == 0) {
-								var dl = data.data;
-								$.each(dl, function(i, e) {
-									$("#new_subordinate_pos").append("<option value='" + e["pos_name"] + "'>" + e["pos_name"] + "</option>");
-
-								});
-							} else {
-
-								layer.alert("数据请求失败！");
-							}
-						}
-					});
-					var $tr = $(this).parents("tr");
-
-					var username = $tr.find("td:eq(1)").html();
-					if(username != "") {
-						var dataSend = {
-							username: username
-
-						};
-						console.log(dataSend);
-						$.ajax({
-							type: "POST",
-							url: 'http://localhost:8080/new_ssm/user/selectUser', //请求controller方法   
-							data: JSON.stringify(dataSend),
-							contentType: "application/json; charset=utf-8",
-							dataType: "json",
-							async: false, //同步请求，注意此字段    
-							success: function(data) {
-								if(data.error_code == 0) {
-									var user = data.data;
-									$("#username").val(user["username"]);
-									$("#new_name").val(user["name"]);
-									$("#new_sex").val(user["sex"]);
-									$("#password").val(user["password"]);
-									$("#new_idCardNo").val(user["idCardNo"]);
-									if(user["groupId"] == 1) {
-										$("#groupId1").prop("checked", true);
-									} else {
-										$("#groupId2").prop("checked", true);
-									}
-									$("#new_phone").val(user["phone"]);
-									$("#new_email").val(user["email"]);
-									$("#new_subordinate_dept").val(user["department"]);
-									$("#new_subordinate_pos").val(user["position"]);
-									$("#new_education").val(user["education"]);
-									$("#new_address").val(user["address"]);
-
-								} else {
-
-									layer.alert("数据请求失败！");
-								}
-							}
-						});
-
-					} else {
-						layer.alert("数据请求失败！");
-					}
-
-					layer.open({
-						type: 1,
-						title: "<i class='mdi mdi-account-settings-variant'></i>修改用户信息",
-						shadeClose: true,
-						shade: 0.5,
-						area: ['1000px', '500px'],
-						content: $("#user_modify_table")
-					})
-
-					$("#user_update_sumbit").click(function() {
-						var dataSend = [{
-							username: username,
-							name: $("#new_name").val(),
-							sex: $("#new_sex").val(),
-							password: $("#password").val(),
-							idCardNo: $("#new_idCardNo").val(),
-							groupid: $('input[name="groupId"]:checked').val(),
-							phone: $("#new_phone").val(),
-							email: $("#new_email").val(),
-							department: $("#new_subordinate_dept").val(),
-							position: $("#new_subordinate_pos").val(),
-							education: $("#new_education").val(),
-							address: $("#new_address").val()
-
-						}];
-
-						console.log(dataSend);
-						if($.trim(username) == "") {
-							layer.msg('数据请求失败,请稍后重试！', {
-								icon: 2,
-								time: 2000 //2秒关闭（如果不配置，默认是3秒）
-							});
-						} else if($.trim($("#password").val()) == "") {
-							layer.msg('数据请求失败,请稍后重试！', {
-								icon: 2,
-								time: 2000 //2秒关闭（如果不配置，默认是3秒）
-							});
-						} else {
-							$.ajax({
-								type: "POST",
-								url: 'http://localhost:8080/new_ssm/user/update',
-								data: JSON.stringify(dataSend),
-								contentType: "application/json; charset=utf-8",
-								dataType: "json",
-								async: false,
-								success: function(data) {
-									if(data.error_code == 0) {
-										layer.alert('修改成功！', {
-											icon: 1,
-											closeBtn: 0
-										}, function(index) {
-											layer.closeAll();
-											window.location.reload();
-										});
-
-									} else {
-										layer.alert('修改失败！', {
-											icon: 2,
-											closeBtn: 0
-										});
-									}
-								}
-							});
-						}
-
-					});
-					$("#user_update_cancel").click(function() {
-						layer.closeAll();
-					});
-
-				});
-
-			})
-		</script>
-
+		
+		
 		</script>
 	</body>
 

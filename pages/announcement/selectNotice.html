@@ -5,7 +5,7 @@
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>CSI 员工之家</title>
+		<title>公告查询</title>
 		<!-- plugins:css -->
 		<link rel="stylesheet" href="../../vendors/iconfonts/mdi/css/materialdesignicons.min.css">
 		<link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
@@ -27,6 +27,12 @@
 			background:  #FFE1F9;
 			}
 		</style> -->
+		<style>
+			.home img{
+				width:2.1875rem ;
+				height: 2.1875rem;
+			}
+		</style>
 
 	</head>
 	<body>
@@ -42,7 +48,7 @@
 						<li class="nav-item nav-profile dropdown">
 							<a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
 								<div class="nav-profile-img">
-									<img src="../../images/faces/face1.jpg" alt="image">
+									<img id="touxiang" alt="image">
 									<span class="availability-status online"></span>
 								</div>
 								<div class="nav-profile-text">
@@ -61,13 +67,18 @@
 								</button>
 							</div>
 						</li>
+						<li class="nav-item d-none d-lg-block">
+							<a class="nav-link home" href="../index/index.html">
+								<img src="../../images/主页.png" />
+							</a>
+						</li>
 						<li class="nav-item d-none d-lg-block full-screen-link">
 							<a class="nav-link">
 								<i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
 							</a>
 						</li>
 						<li class="nav-item nav-logout d-none d-lg-block">
-							<a class="nav-link" href="../login/login.html">
+							<a class="nav-link" href="../login/login.html" id="logout">
 								<i class="mdi mdi-power"></i>
 							</a>
 						</li>
@@ -82,7 +93,7 @@
 						<li class="nav-item nav-profile">
 							<a href="#" class="nav-link">
 								<div class="nav-profile-image">
-									<img src="../../images/faces/face1.jpg" alt="profile">
+									<img id="touxiang1" alt="profile">
 									<span class="login-status online"></span>
 									<!--change to offline or busy as needed-->
 								</div>
@@ -94,67 +105,67 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
+							<a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="true" aria-controls="ui-basic1">
 								<span class="menu-title">用户管理</span>
 								<i class="menu-arrow"></i>
 								<i class="mdi mdi-crosshairs-gps menu-icon"></i>
 							</a>
 							<div class="collapse" id="ui-basic1">
 								<ul class="nav flex-column sub-menu">
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">用户查询</a></li>
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">添加用户</a></li>
+									<li class="nav-item"> <a class="nav-link" href="../user/FindUser.html">用户查询</a></li>
+									<li class="nav-item"> <a class="nav-link" href="../user/AddUser.html">添加用户</a></li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
+							<a class="nav-link" data-toggle="collapse" href="#ui-basic2" aria-expanded="true" aria-controls="ui-basic2">
 								<span class="menu-title">部门管理</span>
 								<i class="menu-arrow"></i>
 								<i class="mdi mdi-crosshairs-gps menu-icon"></i>
 							</a>
 							<div class="collapse" id="ui-basic2">
 								<ul class="nav flex-column sub-menu">
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">部门查询</a></li>
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">添加部门</a></li>
+									<li class="nav-item"> <a class="nav-link" href="../department/showAllDept.html">部门查询</a></li>
+									<li class="nav-item"> <a class="nav-link" href="../department/addDept.html">添加部门</a></li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="collapse" href="#ui-basic3" aria-expanded="false" aria-controls="ui-basic3">
+							<a class="nav-link" data-toggle="collapse" href="#ui-basic3" aria-expanded="true" aria-controls="ui-basic3">
 								<span class="menu-title">职位管理</span>
 								<i class="menu-arrow"></i>
 								<i class="mdi mdi-crosshairs-gps menu-icon"></i>
 							</a>
 							<div class="collapse" id="ui-basic3">
 								<ul class="nav flex-column sub-menu">
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">职位查询</a></li>
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">添加职位</a></li>
+									<li class="nav-item"> <a class="nav-link" href="../position/showAllPos.html">职位查询</a></li>
+									<li class="nav-item"> <a class="nav-link" href="../position/addPosition.html">添加职位</a></li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="collapse" href="#ui-basic4" aria-expanded="false" aria-controls="ui-basic4">
+							<a class="nav-link" data-toggle="collapse" href="#ui-basic4" aria-expanded="true" aria-controls="ui-basic4">
 								<span class="menu-title">公告管理</span>
 								<i class="menu-arrow"></i>
 								<i class="mdi mdi-crosshairs-gps menu-icon"></i>
 							</a>
 							<div class="collapse" id="ui-basic4">
 								<ul class="nav flex-column sub-menu">
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">公告查询</a></li>
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">添加公告</a></li>
+									<li class="nav-item"> <a class="nav-link" href="selectNotice.html">公告查询</a></li>
+									<li class="nav-item"> <a class="nav-link" href="AddAnnouncement.html">添加公告</a></li>
 								</ul>
 							</div>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" data-toggle="collapse" href="#ui-basic5" aria-expanded="false" aria-controls="ui-basic5">
+							<a class="nav-link" data-toggle="collapse" href="#ui-basic5" aria-expanded="true" aria-controls="ui-basic5">
 								<span class="menu-title">下载中心</span>
 								<i class="menu-arrow"></i>
 								<i class="mdi mdi-crosshairs-gps menu-icon"></i>
 							</a>
 							<div class="collapse" id="ui-basic5">
 								<ul class="nav flex-column sub-menu">
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">文档查询</a></li>
-									<li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">上传文档</a></li>
+									<li class="nav-item"> <a class="nav-link" href="../document/showAllFile.html">文档查询</a></li>
+									<li class="nav-item"> <a class="nav-link" href="../document/uploadDoc.html">上传文档</a></li>
 								</ul>
 							</div>
 						</li>
@@ -178,7 +189,6 @@
 							<div class="col-md-12 grid-margin stretch-card">
 								<div class="card">
 									<div class="card-body">
-										<h4 class="card-title">公告信息</h4>
 
 										<form action="" method="post">
 
@@ -196,7 +206,7 @@
 											</div>
 										</form>
 
-										<table class="table table-striped" id="table_notice">
+										<table class="table table-striped" id="table_notice" style="table-layout: fixed;">
 											<thead style='text-align: center; '>
 												<tr>
 													<th style="width: 10%;">
@@ -204,10 +214,10 @@
 															<input type="checkbox" class="form-check-input" id="checkAll" name="checkbox">
 															<i class="input-helper"></i></label>
 													</th>
-													<th style="width: 30%;" data-field="name">标题</th>
-													<th style="width: 17%;" data-field="username">发布者</th>
-													<th style="width: 15%;" data-field="creatTime">创建时间</th>
-													<th style="width: 28%;" data-field="option">操作</th>
+													<th style="width: 20%;" data-field="name">标题</th>
+													<th style="width: 20%;" data-field="username">发布者</th>
+													<th style="width: 20%;" data-field="creatTime">创建时间</th>
+													<th style="width: 30%;" data-field="option">操作</th>
 												</tr>
 											</thead>
 											<tbody id="tbodyId" style='text-align: center;'>
@@ -392,8 +402,17 @@
 		<!-- 全选 -->
 		<script type="text/javascript">
 			$(function() {
+				var sex = localStorage.getItem("sex");
+				if(sex==1){
+					touxiang = "../../images/faces/face2.jpg";
+				}
+				else{
+					touxiang = "../../images/faces/face3.jpg"
+				}
+				$("#touxiang").attr("src",touxiang);
+				$("#touxiang1").attr("src",touxiang);
 				
-				
+				getData();
 				$("#checkAll").click(function() {
 
 					var isChecked = this.checked;
@@ -414,12 +433,32 @@
 						$("#checkAll").prop("checked", true);
 					}
 				});
+				function getData() {
+					$('#name').text(localStorage.getItem("name"));
+					$('#name1').text(localStorage.getItem("name"));
+					if(localStorage.getItem("groupId")=="1"){
+					$('#occupation').text("管理员");
+					}else{
+					$('#occupation').text(localStorage.getItem("positionName"));
+					}
+				}
+				$("#logout").click(function() {
+					localStorage.removeItem("username");
+					localStorage.removeItem("name");
+					localStorage.removeItem("userid");
+					localStorage.removeItem("groupId");
+					localStorage.removeItem("positionName");
+					localStorage.removeItem("password");
+					localStorage.removeItem("sex");
+					
+				})
 
 			});
 		</script>
 		<script type="text/javascript">
 			$(function() {
 				var globaldata;
+				
 				
 				$.ajax({
 					type: "POST",
@@ -432,6 +471,7 @@
 						console.log(data);
 						if (data.error_code == 0) {
 							globaldata = data.data;
+							console.log(data.data)
 							$("#table_notice tbody").empty();
 							var $tbody = $("#tbodyId");
 							var doc = data.data;
@@ -441,8 +481,8 @@
 								$checkBox.setAttribute("class", "box_");
 								var $tdbox = $("<td>").append($checkBox);
 								var $tr = $("<tr>").append($tdbox)
-									.append($("<td>").html(e["name"]))
-									.append($("<td>").html(e["username"]))
+									.append($("<td style='text-align: center;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;'>").html(e["name"]))
+									.append($("<td style='text-align: center;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;'>").html(e["username"]))
 									.append($("<td>").html(e["creatTime"]));
 								var $button_1 = document.createElement("a");
 								$button_1.text = "修改";
@@ -499,8 +539,8 @@
 										$checkBox.setAttribute("class", "box_");
 										var $tdbox = $("<td>").append($checkBox);
 										var $tr = $("<tr>").append($tdbox)
-											.append($("<td>").html(e["name"]))
-											.append($("<td>").html(e["username"]))
+											.append($("<td style='text-align: center;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;'>").html(e["name"]))
+											.append($("<td style='text-align: center;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;'>").html(e["username"]))
 											.append($("<td>").html(e["creatTime"]));
 										var $button_1 = document.createElement("a");
 										$button_1.text = "修改";
@@ -697,6 +737,7 @@
 				        content: $("#Notice_modify_table")
 				    })
 					var userID = localStorage.getItem("userID")
+					
 					$("#notice_modify_submit").click(function(){
 						var dataSend = {
 						            name: name,

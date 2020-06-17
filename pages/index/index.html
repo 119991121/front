@@ -21,6 +21,10 @@
 			.modifypassword{
 				width: 100%;
 			}
+				.home img{
+					width:2.1875rem ;
+					height: 2.1875rem;
+				}
 		</style>
 
 	</head>
@@ -47,7 +51,7 @@
 						<li class="nav-item nav-profile dropdown">
 							<a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
 								<div class="nav-profile-img">
-									<img src="../../images/faces/face1.jpg" alt="image">
+									<img  id="touxiang"/>
 									<span class="availability-status online"></span>
 								</div>
 								<div class="nav-profile-text">
@@ -66,13 +70,18 @@
 								</button>
 							</div>
 						</li>
+						<li class="nav-item d-none d-lg-block">
+							<a class="nav-link home" href="index.html">
+								<img src="../../images/主页.png" />
+							</a>
+						</li>
 						<li class="nav-item d-none d-lg-block full-screen-link">
 							<a class="nav-link">
 								<i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
 							</a>
 						</li>
 						<li class="nav-item nav-logout d-none d-lg-block">
-							<a class="nav-link" href="../login/login.html">
+							<a class="nav-link" href="../login/login.html" id="logout">
 								<i class="mdi mdi-power"></i>
 							</a>
 						</li>
@@ -90,7 +99,7 @@
 						<li class="nav-item nav-profile">
 							<a href="#" class="nav-link">
 								<div class="nav-profile-image">
-									<img src="../../images/faces/face1.jpg" alt="profile">
+									<img id="touxiang1" alt="profile">
 									<span class="login-status online"></span>
 									<!--change to offline or busy as needed-->
 								</div>
@@ -239,6 +248,15 @@
 		<script src="../../layer/layer.js"></script>
 		<script>
 			$(function() {
+				var sex = localStorage.getItem("sex");
+				if(sex==1){
+					touxiang = "../../images/faces/face2.jpg";
+				}
+				else{
+					touxiang = "../../images/faces/face3.jpg"
+				}
+				$("#touxiang").attr("src",touxiang);
+				$("#touxiang1").attr("src",touxiang);
 			var username = localStorage.getItem("username")
 				console.log(localStorage.getItem("username"));
 				getData();
@@ -330,12 +348,23 @@
 			function getData() {
 				$('#name').text(localStorage.getItem("name"));
 				$('#name1').text(localStorage.getItem("name"));
-				if(localStorage.getItem("groupId")=="2"){
+				if(localStorage.getItem("groupId")=="1"){
 				$('#occupation').text("管理员");
 				}else{
 				$('#occupation').text(localStorage.getItem("positionName"));
 				}
 			}
+			//退出登录
+			$("#logout").click(function() {
+				localStorage.removeItem("username");
+				localStorage.removeItem("name");
+				localStorage.removeItem("userid");
+				localStorage.removeItem("groupId");
+				localStorage.removeItem("positionName");
+				localStorage.removeItem("password");
+				localStorage.removeItem("sex");
+				
+			})
 		</script>
 	</body>
 

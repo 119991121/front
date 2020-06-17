@@ -175,7 +175,11 @@
 							localStorage.setItem("groupId", json.data.groupId);
 							localStorage.setItem("positionName", json.data.positionName);
 							localStorage.setItem("password", json.data.password);
-							window.location.replace("../index/index.html");
+							var searchUrl1 = encodeURI("../index/index.html"); //使用encodeURI编码
+							var searchUrl2 = encodeURI("../index/index_user.html"); //使用encodeURI编码
+							if(localStorage.getItem("groupId") == "1")
+								location.href = searchUrl1
+							else location.href = searchUrl2
 						}
 
 					},

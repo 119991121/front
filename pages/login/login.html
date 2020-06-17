@@ -97,6 +97,7 @@
 		<script src="../../layer/layer.js"></script>
 		<script>
 			$(function() {
+		
 				
 				$("#login-submit-btn").click(function() {
 					console.log("进来了");
@@ -163,10 +164,13 @@
 									localStorage.setItem("groupId", data.data.groupId);
 									localStorage.setItem("positionName", data.data.positionName);
 									localStorage.setItem("password", data.data.password);
+									localStorage.setItem("sex", data.data.sex);
 									console.log(localStorage)
-									var searchUrl = encodeURI("../index/index.html"); //使用encodeURI编码
-									location.href = searchUrl;
-									console.log(location.href);
+									var searchUrl1 = encodeURI("../index/index.html"); //使用encodeURI编码
+									var searchUrl2 = encodeURI("../index/index_user.html"); //使用encodeURI编码
+									if(localStorage.getItem("groupId")=="1")
+										location.href = searchUrl1
+									else location.href = searchUrl2
 								}
 							},
 							error: function(data) {

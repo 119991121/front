@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>公告查询</title>
+		<!-- plugins:css -->
+		<link rel="stylesheet" href="../../vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+		<link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+		<!-- endinject -->
+		<!-- inject:css -->
+		<link rel="stylesheet" href="../../css/style.css">
+		<!-- endinject -->
+		<link rel="shortcut icon" href="../../images/favicon.png" />
+		<script src="../../jquery-3.4.1.js"></script>
+		<script src="../../jquery-3.4.1.min.js"></sc
+		<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/2.2.2/jquery.slim.js"></script>
+		<style>
+			.modifypassword{
+				width: 100%;
+			}
+				.home img{
+					width:2.1875rem ;
+					height: 2.1875rem;
+				}
+		</style>
+		<!-- <style>
+			#table_notice tr:nth-child(even){
+			/* background: #FFDAE2; */
+			background: #FFE1F9;
+			}
+			#table_notice th{
+			background:  #FFE1F9;
+			}
+		</style> -->
+		<style>
+			.home{
+				width:2.1875rem ;
+				height: 2.1875rem;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div class="container-scroller">
+			<!-- partial:partials/_navbar.html -->
+			<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+					<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+						<a class="navbar-brand brand-logo" href="index.html"><img src="../../images/logo.svg" alt="logo" /></a>
+						<a class="navbar-brand brand-logo-mini" href="index.html"><img src="../../images/logo-mini.svg" alt="logo" /></a>
+					</div>
+					<div class="navbar-menu-wrapper d-flex align-items-stretch">
+						<!-- <div class="search-field d-none d-md-block">
+			  <form class="d-flex align-items-center h-100" action="#">
+			    <div class="input-group">
+			      <div class="input-group-prepend bg-transparent">
+			          <i class="input-group-text border-0 mdi mdi-magnify"></i>                
+			      </div>
+			      <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
+			    </div>
+			  </form>
+			</div> -->
+						<ul class="navbar-nav navbar-nav-right">
+							<li class="nav-item nav-profile dropdown">
+								<a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+									<div class="nav-profile-img">
+										<img id="touxiang" alt="image">
+										<span class="availability-status online"></span>
+									</div>
+									<div class="nav-profile-text">
+										<p class="mb-1 text-black" id="name"></p>
+									</div>
+								</a>
+								<div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+									<button type="button" class="dropdown-item " data-toggle="modal" data-target="#modifypassword">
+										<i class="mdi mdi-lock-outline mr-2 text-primary"></i>
+										修改信息
+									</button>
+									<div class="dropdown-divider"></div>
+									<button class="dropdown-item" href="../face/facereg.html" id="facereg">
+										<i class=" mdi mdi-image-filter-center-focus mr-2 text-primary"></i>
+										人脸注册
+									</button>
+								</div>
+							</li>
+							<li class="nav-item d-none d-lg-block">
+								<a class="nav-link home" href="../index/index_user.html">
+									<img src="../../images/主页.png" />
+								</a>
+							</li>
+							<li class="nav-item d-none d-lg-block full-screen-link">
+								<a class="nav-link">
+									<i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+								</a>
+							</li>
+							<li class="nav-item nav-logout d-none d-lg-block">
+								<a class="nav-link" href="../login/login.html" id="logout">
+									<i class="mdi mdi-power"></i>
+								</a>
+							</li>
+						</ul>
+						<!-- <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+			  <span class="mdi mdi-menu"></span>
+			</button> -->
+					</div>
+				</nav>
+			<!-- partial -->
+			<div class="container-fluid page-body-wrapper">
+				<!-- partial:partials/_sidebar.html -->
+				<nav class="sidebar sidebar-offcanvas" id="sidebar">
+				        <ul class="nav">
+				          <li class="nav-item nav-profile">
+				            <a href="#" class="nav-link">
+				              <div class="nav-profile-image">
+				                <img id="touxiang1" alt="profile">
+				                <span class="login-status online"></span> <!--change to offline or busy as needed-->              
+				              </div>
+				             <div class="nav-profile-text d-flex flex-column">
+				             	<span class="font-weight-bold mb-2" id="name1"></span>
+				             	<span class="text-secondary text-small" id="occupation"></span>
+				             </div>
+				<!--              <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i> -->
+				            </a>
+				          </li>
+				        <li class="nav-item">
+				          <a class="nav-link" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
+				            <span class="menu-title">信息查询</span>
+				            <i class="menu-arrow"></i>
+				            <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+				          </a>
+				          <div class="collapse" id="ui-basic2">
+				            <ul class="nav flex-column sub-menu">
+				              <li class="nav-item"> <a class="nav-link" href="showAllDept.html">部门查询</a></li>
+				              <li class="nav-item"> <a class="nav-link" href="showAllPos.html">职位查询</a></li>
+							  <li class="nav-item"> <a class="nav-link" href="FindUser.html">员工查询</a></li>
+				            </ul>
+				          </div>
+				        </li>
+						 <li class="nav-item">
+						            <a class="nav-link" href="selectNotice.html">
+						              <span class="menu-title">公告查询</span>
+						              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+						            </a>
+						  </li>
+						  <li class="nav-item">
+						             <a class="nav-link" href="showAllFile.html">
+						               <span class="menu-title">下载中心</span>
+						               <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+						             </a>
+						   </li>
+				       </li>
+				        </ul>
+				      </nav>
+				<!-- partial -->
+				<div class="main-panel">
+					<div class="content-wrapper">
+						<div class="page-header">
+							<h3 class="page-title">
+								公告管理
+							</h3>
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="#">公告管理</a></li>
+									<li class="breadcrumb-item active" aria-current="page">公告查询</li>
+								</ol>
+							</nav>
+						</div>
+						<div class="row">
+							<div class="col-md-12 grid-margin stretch-card">
+								<div class="card">
+									<div class="card-body">
+
+										<form action="" method="post">
+
+											<div class="col-md-5 ml-auto">
+												<div class="form-group">
+													<div class="input-group">
+														<input type="text" class="form-control" id="select_key" placeholder="请输入关键字" aria-label="请输入关键字"
+														 aria-describedby="basic-addon2">
+														<div class="input-group-append">
+															<button type="button" class="btn btn-sm btn-outline-primary" id="search_notice">搜索</button>&nbsp;&nbsp;&nbsp;
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+
+										<table class="table table-striped" id="table_notice">
+											<thead style='text-align: center; '>
+												<tr>
+													<th style="width: 30%;" data-field="name">标题</th>
+													<th style="width: 17%;" data-field="username">发布者</th>
+													<th style="width: 15%;" data-field="creatTime">创建时间</th>
+													<th style="width: 28%;" data-field="option">操作</th>
+												</tr>
+											</thead>
+											<tbody id="tbodyId" style='text-align: center;'>
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- content-wrapper ends -->
+					<!-- partial:../../partials/_footer.html -->
+					<footer class="footer">
+						<div class="d-sm-flex justify-content-center justify-content-sm-between">
+							<span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2017 <a href="#" target="_blank">Bootstrap
+									Dash</a>. All rights reserved.</span>
+						</div>
+					</footer>
+					<!-- partial -->
+				</div>
+
+				<div class="modal fade" id="modifypassword" tabindex="-1" role="dialog" 　　aria-labelledby="modifypasswordLabel"
+				 aria-hidden="true">
+					　　<div class="modal-dialog">
+						<div class="modal-content" style="background-color: white;width:100%;margin-left: 0%; margin-right: 0%;">
+							<div class="modal-header">
+								<h3 class="modal-title" id="myModalLabel">
+									<i class="mdi mdi-account-settings-variant"></i>
+									修改密码
+								</h3>
+								<!-- <button type="button" class="btn btn-link" data-dismiss="modal">
+									<i class="mdi mdi-close"></i>
+								</button> -->
+							</div>
+							<div class="modal-body">
+								<div class="form-group">
+									<div class="form-group">
+										<label for="JI_JOB_NAME" class="col-sm-3 control-label">当前密码：</label>
+										<div class="col-sm-9">
+											<input value="" type="password" name="oldPassword" id="oldPassword" class="form-control" placeholder="请输入您的当前密码">
+										</div>
+									</div>
+									<label for="JI_JOB_NAME" class="col-sm-3 control-label">新的密码：</label>
+									<div class="col-sm-9">
+										<input value="" type="password" name="newPassword" id="newPassword" class="form-control" placeholder="请输入您的新密码">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="JI_JOB_NAME" class="col-sm-3 control-label">确认密码：</label>
+									<div class="col-sm-9">
+										<input value="" type="password" name="newPasswordCon" id="newPasswordCon" class="form-control" placeholder="请确认您的新密码">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-gradient-primary mr-2" id="subPassword">提交</button>
+									<button type="button" class="btn btn-light" id="Password_cancel" data-dismiss="modal">取消</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal fade" id="getMoreInfo" tabindex="-1" role="dialog" 　　aria-labelledby="getMoreInfoLabel"
+				 aria-hidden="true">
+					　　<div class="modal-dialog">
+						<div class="modal-content" style="background-color: white;width:100%;margin-left: 0%; margin-right: 0%;">
+							<div class="modal-header" style="flex-direction: row;">
+								<div>
+									<h4 class="text-left" id="infoTitle"></h4>
+								</div>
+								<div style="flex-direction: column;">
+									<p class="text-right" id="infoUsername" style="font-size: 12px;"></p>
+									<p class="text-right" id="infoCreatTime" style="font-size: 12px;"></p>
+								</div>
+							</div>
+							<div class="modal-body">
+								<p id="infoContent"> </p>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-link" data-dismiss="modal">
+										关闭
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			
+			</div>
+			<!-- main-panel ends -->
+		</div>
+		<div class="modal fade" id="modifypassword" tabindex="-1" role="dialog" 　　aria-labelledby="modifypasswordLabel"
+					 aria-hidden="true">
+						　　<div class="modal-dialog" style="width: 63.25rem; height: 50rem;">
+							<div class="modal-content" style="background-color: white;width:62.125rem;height:38.5rem; margin-left: -230px;">
+								<div class="modal-header" style="height: 6.25rem;">
+									<h2 class="modal-title" id="myModalLabel" style="line-height: 6.25rem;">
+										<i class="mdi mdi-account-settings-variant"></i>
+										修改信息
+									</h2>
+									<!-- <button type="button" class="btn btn-link" data-dismiss="modal">
+										<i class="mdi mdi-close"></i>
+									</button> -->
+								</div>
+								<div class="modal-body">
+								
+									
+		
+		<div class="row">
+			<div class="col-12 grid-margin">
+				<div class="card">
+					<div class="card-body">
+		
+						<form class="form-sample">
+		
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group row">
+										<label class="col-form-label">用户名</label>
+										<div class="col-sm-9">
+											<input type="text" readonly="readonly" class="form-control" id="username" name="username"   style="width:210px;height:38px;">
+										</div>
+									</div>
+								</div>
+		
+								<div class="col-md-2">
+									<div class="form-group row">
+										<label class="col-form-label">姓名</label>
+										<div class="col-sm-9">
+											<input type="text" class="form-control" id="new_name" name="new_name" placeholder="姓名" style="width:100px;height:38px;">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="form-group row">
+										<label class="col-form-label">性别</label>
+										<div class="col-sm-9">
+											<select class="form-control" id="new_sex" οnchange="getvalue(this)" style="width:80px;height:38px;">
+												<option value="1">女</option>
+												<option value="2">男</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group row">
+										<label class="col-form-label">身份证号</label>
+										<div class="col-sm-9">
+											<input type="text" class="form-control" id="new_idCardNo" name="new_idCardNo" placeholder="身份证号" style="width:210px;height:38px;">
+										</div>
+									</div>
+								</div>
+		
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group row">
+										<label class="col-form-label">密码</label>
+										<div class="col-sm-9">
+											<input type="password" class="form-control" id="password" name="password" style="width:225px;height:38px;">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group row">
+										<label class="col-form-label">手机号码</label>
+										<div class="col-sm-9">
+											<input type="text" class="form-control" id="new_phone" name="new_phone" placeholder="手机号码" style="width:185px;height:38px;">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group row">
+										<label class="col-form-label">学历</label>
+										<div class="col-sm-9">
+											<input type="text" class="form-control" id="new_education" name="new_education" placeholder="学历" style="width:240px;height:38px;">
+										</div>
+									</div>
+								</div>
+		
+							</div>
+		
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group row">
+										<label class="col-form-label">电子邮箱</label>
+										<div class="col-sm-9">
+											<input type="text" class="form-control" id="new_email" name="new_email" placeholder="电子邮箱" style="width:185px;height:38px;">
+										</div>
+									</div>
+								</div>
+		
+								<div class="col-md-4">
+									<div class="form-group row">
+										<label class="col-form-label">部门</label>
+										<div class="col-sm-9">
+											<select class="form-control" id="new_subordinate_dept" οnchange="getvalue(this)" style="width:225px;height:38px;">
+		
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group row">
+										<label class="col-form-label">职位</label>
+										<div class="col-sm-9">
+											<select class="form-control" id="new_subordinate_pos" οnchange="getvalue(this)" style="width:225px;height:38px;">
+		
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group row">
+										<label class="col-form-label">联系地址</label>
+										<div class="col-sm-9">
+											<input type="text" class="form-control" id="new_address" name="new_address" placeholder="联系地址" style="width:350px;height:38px;">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group row">
+										<label class="col-form-label">用户属性</label>
+										<div class="col-sm-9">
+											<input type="text"  readonly="readonly" class="form-control" id="groupId" name="groupId"  style="width:350px;height:38px;">
+										</div>
+									</div>
+								</div>
+		
+		
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		
+		</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-gradient-primary mr-2" id="user_update_sumbit">提交</button>
+										<button type="button" class="btn btn-light" id="Password_cancel" data-dismiss="modal">取消</button>
+									</div>
+									
+									
+								</div>
+							</div>
+						</div>
+					</div>
+		<!-- page-body-wrapper ends -->
+		
+		<!-- container-scroller -->
+
+		<!-- 显示公告信息 -->
+		<div class="box box-info" id="Notice_detail_table" style="display: none">
+				
+				<div class="row">
+		          <div class="col-md-12 grid-margin stretch-card">
+						<div class="card">
+							<div class="card-body">
+								
+								
+								<form class="forms-sample">
+									<div class="form-group">
+										<label for="notice_name">公告标题</label>
+										<input type="text" class="form-control" readonly="readonly" id="notice_name" name="notice_name">
+									</div>
+		                  
+									<div class="form-group">
+										<label for="notice_desc">内容</label>
+										<textarea class="form-control" readonly="readonly" id="notice_desc" rows="15"></textarea>
+									</div>
+		                  
+									<div class="col-md-4 ml-auto">
+										<button type="button" class="btn btn-gradient-primary btn-md" id="notice_details_close">关闭</button>
+									</div>
+								</form>
+						  
+						  
+							</div>
+						</div>
+		          </div>       
+		      </div>
+		
+			
+		
+		</div>
+
+
+
+		<!-- plugins:js -->
+		<script src="../../vendors/js/vendor.bundle.base.js"></script>
+		<script src="../../vendors/js/vendor.bundle.addons.js"></script>
+		<!-- endinject -->
+		<!-- Plugin js for this page-->
+		<!-- End plugin js for this page-->
+		<!-- inject:js -->
+		<script src="../../js/off-canvas.js"></script>
+		<script src="../../js/misc.js"></script>
+		<!-- endinject -->
+		<!-- Custom js for this page-->
+		<script src="../../js/dashboard.js"></script>
+		<!-- End custom js for this page-->
+		<script src="../../layer/layer.js"></script>
+		<!-- 全选 -->
+		<script type="text/javascript">
+			$(function() {
+				var username = localStorage.getItem("username");
+				var groupid = localStorage.getItem("groupId");
+				$("#username").attr("placeholder",username);
+				if(groupid == 2){
+					$("#groupId").attr("placeholder","员工");
+				}
+				if(groupid == 1){
+					$("#groupId").attr("placeholder","管理员");
+				}
+				var sex = localStorage.getItem("sex");
+				if(sex==1){
+					touxiang = "../../images/faces/face2.jpg";
+				}
+				else{
+					touxiang = "../../images/faces/face3.jpg"
+				}
+				$("#touxiang").attr("src",touxiang);
+				$("#touxiang1").attr("src",touxiang);
+				
+				getData();
+				$("#checkAll").click(function() {
+
+					var isChecked = this.checked;
+					$("input[class='box_']").each(function() {
+						this.checked = isChecked;
+					});
+
+
+				});
+				function getData() {
+					$('#name').text(localStorage.getItem("name"));
+					$('#name1').text(localStorage.getItem("name"));
+					if(localStorage.getItem("groupId")=="2"){
+					$('#occupation').text("管理员");
+					}else{
+					$('#occupation').text(localStorage.getItem("positionName"));
+					}
+				}
+				$("#logout").click(function() {
+					localStorage.removeItem("username");
+					localStorage.removeItem("name");
+					localStorage.removeItem("userid");
+					localStorage.removeItem("groupId");
+					localStorage.removeItem("positionName");
+					localStorage.removeItem("password");
+					localStorage.removeItem("sex");
+					
+				})
+				
+				//修改信息
+				$("#user_update_sumbit").click(function() {
+					var dataSend = {
+						username: username,
+						name: $("#new_name").val(),
+						sex: $("#new_sex").val(),
+						password: $("#password").val(),
+						idCardNo: $("#new_idCardNo").val(),
+						groupid: groupid,
+						phone: $("#new_phone").val(),
+						email: $("#new_email").val(),
+						department: $("#new_subordinate_dept").val(),
+						position: $("#new_subordinate_pos").val(),
+						education: $("#new_education").val(),
+						address: $("#new_address").val()
+				
+					};
+				
+					console.log(dataSend);
+					if($.trim(username) == "") {
+						layer.msg('数据请求失败,请稍后重试！', {
+							icon: 2,
+							time: 2000 //2秒关闭（如果不配置，默认是3秒）
+						});
+					} else if($.trim($("#password").val()) == "") {
+						layer.msg('数据请求失败,请稍后重试！', {
+							icon: 2,
+							time: 2000 //2秒关闭（如果不配置，默认是3秒）
+						});
+					} else {
+						$.ajax({
+							type: "POST",
+							url: '/user/update',
+							data: JSON.stringify(dataSend),
+							contentType: "application/json; charset=utf-8",
+							dataType: "json",
+							async: false,
+							success: function(data) {
+								if(data.error_code == 0) {
+									layer.alert('修改成功！', {
+										icon: 1,
+										closeBtn: 0
+									}, function(index) {
+										layer.closeAll();
+										window.location.reload();
+									});
+				
+								} else {
+									layer.alert('修改失败！', {
+										icon: 2,
+										closeBtn: 0
+									});
+								}
+							}
+						});
+					}
+				
+				});
+
+			});
+		</script>
+		<script type="text/javascript">
+			$(function() {
+				var globaldata;
+				
+				
+				$.ajax({
+					type: "POST",
+					url: 'http://localhost:8080/new_ssm/announce/showAll',
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					async: false,
+
+					success: function(data) {
+						console.log(data);
+						if (data.error_code == 0) {
+							globaldata = data.data;
+							console.log(data.data)
+							$("#table_notice tbody").empty();
+							var $tbody = $("#tbodyId");
+							var doc = data.data;
+							$.each(doc, function(i, e) {
+								var $tr = $("<tr>")
+									.append($("<td>").html(e["name"]))
+									.append($("<td>").html(e["username"]))
+									.append($("<td>").html(e["creatTime"]));
+								
+								var $button_3 = document.createElement("a");
+								$button_3.text = "查看";
+								$button_3.className = "btn btn-xs btn-inverse-warning ";
+								var $td = $("<td>").append($button_3);
+								$tr.append($td)
+								$tbody.append($tr);
+							});
+						} else {
+							layer.alert("数据请求失败！");
+						}
+					}
+				});
+				
+				//搜索
+				$("#search_notice").click(function() {
+					var keyword = $("#select_key").val();
+
+					var dataSend = {
+						select_key: keyword,
+					};
+
+					console.log(dataSend);
+					if ($.trim(keyword) == "") {
+						//alert("请输入查询关键字！");
+						layer.msg('请输入查询关键字！', {
+							  icon: 2,
+							  time: 2000 //2秒关闭（如果不配置，默认是3秒）
+							});
+					} else {
+						$.ajax({
+							type: "POST",
+							url: 'http://localhost:8080/new_ssm/announce/selectresult',
+							data: JSON.stringify(dataSend),
+							contentType: "application/json; charset=utf-8",
+							dataType: "json",
+							async: false,
+							success: function(data) {
+								console.log(data);
+								if (data.error_code == 0) {
+									globaldata = data.data;
+									$("#table_notice tbody").empty();
+									var $tbody = $("#tbodyId");
+									var doc = data.data;
+									$.each(doc, function(i, e) {
+										var $tr = $("<tr>")
+											.append($("<td>").html(e["name"]))
+											.append($("<td>").html(e["username"]))
+											.append($("<td>").html(e["creatTime"]));
+										
+										var $button_3 = document.createElement("a");
+								$button_3.text = "查看";
+								$button_3.className = "btn btn-xs btn-inverse-warning ";
+								var $td = $("<td>").append($button_3);
+										$tr.append($td)
+										$tbody.append($tr);
+									});
+								} else if (data.error_code == 1) {
+									//alert("数据不全！;")
+									layer.alert('未找到结果！', {
+										  icon: 2,
+										  time: 2000 //2秒关闭（如果不配置，默认是3秒）
+										});
+								}
+							},
+							error: function(data) {
+								//alert("请稍后再试！");
+								layer.alert('请稍后再试！', {
+									  icon: 2,
+									  time: 2000 //2秒关闭（如果不配置，默认是3秒）
+									});
+							},
+						});
+					}
+				}); 
+				//查看公告
+				$(".content-wrapper").on("click", ".btn-inverse-warning", function () {
+					
+					
+					var $tr = $(this).parents("tr");
+					
+					var name = $tr.find("td:eq(1)").html();
+					var content;
+					for(i=0;i<globaldata.length;i++){
+						if(globaldata[i].name==name){
+							content= globaldata[i].content
+						}
+					}
+					$("#notice_name").val(name);
+					$("#notice_desc").val(content);
+					
+				    layer.open({
+				        type: 1,
+				        title: "<i class='mdi mdi-bulletin-board'></i>公告详情",
+				        shadeClose: true,
+				        shade: 0.5,
+				        area: ['500px', '530px'],
+				        content: $("#Notice_detail_table")
+				    })
+				
+					$("#notice_details_close").click(function(){
+						layer.closeAll();
+					});
+				
+				});
+				
+				
+			});
+		</script>
+
+	</body>
+
+</html>

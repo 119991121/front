@@ -5,7 +5,7 @@
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>Purple Admin</title>
+		<title>职位查询</title>
 		<!-- plugins:css -->
 		<link rel="stylesheet" href="../../vendors/iconfonts/mdi/css/materialdesignicons.min.css">
 		<link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
@@ -14,6 +14,15 @@
 		<link rel="stylesheet" href="../../css/style.css">
 		<!-- endinject -->
 		<link rel="shortcut icon" href="../../images/favicon.png">
+		<style>
+			.modifypassword{
+				width: 100%;
+			}
+			.home img{
+				width:2.1875rem ;
+				height: 2.1875rem;
+			}
+		</style>
 		<style type="text/css">
 			/* Chart.js */
 			
@@ -67,7 +76,7 @@
 			   	<li class="nav-item nav-profile dropdown">
 			   		<a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
 			   			<div class="nav-profile-img">
-			   				<img src="../../images/faces/face1.jpg" alt="image">
+			   				<img id="touxiang" alt="image">
 			   				<span class="availability-status online"></span>
 			   			</div>
 			   			<div class="nav-profile-text">
@@ -86,13 +95,18 @@
 			   			</button>
 			   		</div>
 			   	</li>
+				<li class="nav-item d-none d-lg-block">
+					<a class="nav-link home" href="../index/index.html">
+						<img src="../../images/主页.png" />
+					</a>
+				</li>
 			   	<li class="nav-item d-none d-lg-block full-screen-link">
 			   		<a class="nav-link">
 			   			<i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
 			   		</a>
 			   	</li>
 			   	<li class="nav-item nav-logout d-none d-lg-block">
-			   		<a class="nav-link" href="../login/login.html">
+			   		<a class="nav-link" href="../login/login.html" id="logout">
 			   			<i class="mdi mdi-power"></i>
 			   		</a>
 			   	</li>
@@ -110,7 +124,7 @@
 				          <li class="nav-item nav-profile">
 				            <a href="#" class="nav-link">
 				              <div class="nav-profile-image">
-				                <img src="../../images/faces/face1.jpg" alt="profile">
+				                <img id="touxiang1" alt="profile">
 				                <span class="login-status online"></span> <!--change to offline or busy as needed-->              
 				              </div>
 				              <div class="nav-profile-text d-flex flex-column">
@@ -121,7 +135,7 @@
 				            </a>
 				          </li>
 				          <li class="nav-item">
-				            <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
+				            <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic1" aria-expanded="true" aria-controls="ui-basic1">
 				              <span class="menu-title">用户管理</span>
 				              <i class="menu-arrow"></i>
 				              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
@@ -134,33 +148,33 @@
 				            </div>
 				          </li>
 				        <li class="nav-item">
-				          <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
+				          <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic2" aria-expanded="true" aria-controls="ui-basic2">
 				            <span class="menu-title">部门管理</span>
 				            <i class="menu-arrow"></i>
 				            <i class="mdi mdi-crosshairs-gps menu-icon"></i>
 				          </a>
 				          <div class="collapse" id="ui-basic2" style="">
 				            <ul class="nav flex-column sub-menu">
-				              <li class="nav-item"> <a class="nav-link" href="../department/selectDeptResult.html">部门查询</a></li>
+				              <li class="nav-item"> <a class="nav-link" href="../department/showAllDept.html">部门查询</a></li>
 				              <li class="nav-item"> <a class="nav-link" href="../department/addDept.html">添加部门</a></li>
 				            </ul>
 				          </div>
 				        </li>
 						<li class="nav-item">
-						  <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic3" aria-expanded="false" aria-controls="ui-basic3">
+						  <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic3" aria-expanded="true" aria-controls="ui-basic3">
 						    <span class="menu-title">职位管理</span>
 						    <i class="menu-arrow"></i>
 						    <i class="mdi mdi-crosshairs-gps menu-icon"></i>
 						  </a>
 						  <div class="collapse" id="ui-basic3" style="">
 						    <ul class="nav flex-column sub-menu">
-						      <li class="nav-item"> <a class="nav-link" href="../selectPosResult.html">职位查询</a></li>
-						      <li class="nav-item"> <a class="nav-link" href="../selectPosResult/addPosition.html">添加职位</a></li>
+						      <li class="nav-item"> <a class="nav-link" href="showAllPos.html">职位查询</a></li>
+						      <li class="nav-item"> <a class="nav-link" href="addPosition.html">添加职位</a></li>
 						    </ul>
 						  </div>
 						</li>
 						<li class="nav-item">
-						  <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic4" aria-expanded="false" aria-controls="ui-basic4">
+						  <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic4" aria-expanded="true" aria-controls="ui-basic4">
 						    <span class="menu-title">公告管理</span>
 						    <i class="menu-arrow"></i>
 						    <i class="mdi mdi-crosshairs-gps menu-icon"></i>
@@ -173,7 +187,7 @@
 						  </div>
 						</li>
 				       <li class="nav-item">
-				         <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic5" aria-expanded="false" aria-controls="ui-basic5">
+				         <a class="nav-link collapsed" data-toggle="collapse" href="#ui-basic5" aria-expanded="true" aria-controls="ui-basic5">
 				           <span class="menu-title">下载中心</span>
 				           <i class="menu-arrow"></i>
 				           <i class="mdi mdi-crosshairs-gps menu-icon"></i>
@@ -207,7 +221,6 @@
 							<div class="col-md-12 grid-margin stretch-card">
 								<div class="card">
 									<div class="card-body">
-										<h4 class="card-title">职位信息</h4>
 
 										<form action="" method="post">
 
@@ -229,7 +242,7 @@
 											</div>
 										</form>
 
-										<table class="table table-striped">
+										<table class="table table-striped" style="table-layout: fixed;">
 											<thead style='text-align: center;'>
 												<tr>
 													<th style="width: 10%;">
@@ -238,8 +251,9 @@
                             <i class="input-helper"></i></label>
 													</th>
 													<th style="width: 20%;">职位名称</th>
-													<th style="width: 30%;">详细信息</th>
+													<th style="width: 20%;">详细信息</th>
 													<th style="width: 20%;">所属部门</th>
+													<th style="width: 10%;">职位人数</th>
 													<th style="width: 20%;">操作</th>
 												</tr>
 											</thead>
@@ -319,6 +333,16 @@
 		<script src="../../layer/layer.js"></script>
 		<script>
 			$(function() {
+				var sex = localStorage.getItem("sex");
+				if(sex==1){
+					touxiang = "../../images/faces/face2.jpg";
+				}
+				else{
+					touxiang = "../../images/faces/face3.jpg"
+				}
+				$("#touxiang").attr("src",touxiang);
+				$("#touxiang1").attr("src",touxiang);
+				getData();
 
 				var globaldata = [];
 
@@ -331,6 +355,8 @@
 					success: function(data) {
 						if(data.error_code == 0) {
 							globaldata = data.data
+							console.log(data.data)
+							console.log(globaldata)
 							var $tbody = $("#tbodyId");
 							var dl = data.data;
 							$.each(dl, function(i, e) {
@@ -341,10 +367,10 @@
 								var $tdbox = $("<td>").append($checkBox);
 								var $tr = $("<tr>")
 									.append($tdbox)
-									.append($("<td>").html(e["positionName"]))
-									.append($("<td>").html(e["positionMessage"]))
-									.append($("<td>").html(e["departmentName"]))
-
+									.append($("<td style='text-align: center;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;'>").html(e["positionName"]))
+									.append($("<td style='text-align: center;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;'>").html(e["positionMessage"]))
+									.append($("<td style='text-align: center;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;'>").html(e["departmentName"]))
+									.append($("<td>").html(e["usernumber"]))
 								var $button_1 = document.createElement("a");
 								$button_1.text = "修改";
 								//$button_1.className = "btn btn-xs btn-info";
@@ -363,6 +389,25 @@
 						}
 					}
 				});
+				$("#logout").click(function() {
+					localStorage.removeItem("username");
+					localStorage.removeItem("name");
+					localStorage.removeItem("userid");
+					localStorage.removeItem("groupId");
+					localStorage.removeItem("positionName");
+					localStorage.removeItem("password");
+					localStorage.removeItem("sex");
+					
+				})
+				function getData() {
+					$('#name').text(localStorage.getItem("name"));
+					$('#name1').text(localStorage.getItem("name"));
+					if(localStorage.getItem("groupId")=="1"){
+					$('#occupation').text("管理员");
+					}else{
+					$('#occupation').text(localStorage.getItem("positionName"));
+					}
+				}
 
 				$(".content-wrapper").on("click", ".btn-inverse-danger", function() {
 					var $tr = $(this).parents("tr");
@@ -556,6 +601,11 @@
 								icon: 2,
 								time: 2000 //2秒关闭（如果不配置，默认是3秒）
 							});
+						}else if ($.trim($("#new_pos_name").val()).length >5) {
+							layer.msg('职位名称限制5个字！', {
+							icon: 2,
+							time: 2000 //2秒关闭（如果不配置，默认是3秒）
+							}); 
 						} else if($.trim($("#new_pos_desc").val()) == "") {
 							layer.msg('详细描述不能为空！', {
 								icon: 2,
