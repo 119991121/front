@@ -21,7 +21,7 @@
 				from {
 					opacity: 0.99
 				}
-				to {
+				to {z
 					opacity: 1
 				}
 			}
@@ -210,9 +210,7 @@
 				<div class="main-panel">
 					<div class="content-wrapper">
 						<div class="page-header">
-							<h3 class="page-title">订餐中心
-              
-            </h3>
+							<h3 class="page-title">订餐中心</h3>
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item">
@@ -229,42 +227,35 @@
 										<p></p>
 										<form class="forms-sample">
 											<div class="form-group">
-												<table class="table" id="menu_table1">
+												<table class="table" id="menu_table1" style="table-layout: fixed;">
 													<thead>
 														<tr>
-															<th>午餐</th>
+															<th>
+																<h3>午餐</h3></th>
 														</tr>
 													</thead>
 													<tbody id="show_lunch_menu">
-													</tbody>									
+													</tbody>
 													<tr>
-														<td><input type="button" id="newlunch" value="增加午餐菜品"/></td>
-														<div id="AddLunchWrapper">
-														</div>
+														<td><input type="button" class="btn btn btn-outline-primary btn-sm" id="newlunch" value="增加午餐菜品" /></td>
 													</tr>
 												</table>
-												<table class="table" id="menu_table2">
+												<table class="table" id="menu_table2" style="table-layout: fixed;">
 													<thead>
 														<tr>
-															<th>晚餐</th>
+															<th>
+																<h3>晚餐</h3></th>
 														</tr>
 													</thead>
 													<tbody id="show_dinner_menu">
 													</tbody>
-													<thead>
-														<tr>
-															<td><input type="button" id="newdinner" value="增加晚餐菜品"/></td>
-														</tr>
-														<tr>
-															<div id="AddDinnerWrapper">
-															</div>
-														</tr>
-													</thead>
+													<tr>
+														<td><input type="button" class="btn btn btn-outline-primary btn-sm" id="newdinner" value="增加晚餐菜品" /></td>
+													</tr>
 												</table>
 											</div>
-
-											<button type="button" class="btn btn-gradient-primary mr-2" id="commit_menu">发布</button>
-											<button type="button" class="btn btn-gradient-primary mr-2" id="detail_menu">查看订餐信息</button>
+											<button type="button" class="btn btn-gradient-primary btn-fw" id="commit_menu">发布菜单</button>
+											<button type="button" class="btn btn-gradient-primary btn-fw" id="detail_menu">订餐详情</button>
 										</form>
 									</div>
 								</div>
@@ -286,9 +277,6 @@
 		</div>
 
 		<div class="box box-info" id="detail_order_table" style="display: none">
-			<div class="box-header with-border">
-				<h3 class="box-title">预约详情</h3>
-			</div>
 			<div class="row">
 				<div class="col-md-12 grid-margin stretch-card">
 					<div class="card">
@@ -300,7 +288,7 @@
 										</tbody>
 									</table>
 								</div>
-								<button type="button" class="btn btn-light" id="return_to_order">返回</button>
+								<button type="button" class="btn btn-gradient-primary btn-rounded btn-fw" style="float:right" id="return_to_order">返回</button>
 							</form>
 						</div>
 					</div>
@@ -328,60 +316,111 @@
 				var userId = localStorage.getItem("userid");
 				var lunchlist = [];
 				var dinnerlist = [];
-				var newlunchcount = 0;
+				var newlunchcount = 0; //维护新建项的数目-统一id
 				var newdinnercount = 0;
-				
+				var newlunchposition = 1; //维护新建项插入的位置
+				var newdinnerposition = 1;
+
 				//var rowWhere = 1;
 
-	document.getElementById('newlunch').onclick = function() {
-		var table = document.getElementById("menu_table1");
-		var rows = newlunchcount + 1;　　　　 //new部分控件
-		var input1 = document.createElement('input');
-		var label1 = document.createElement('label');　　　　　　 //这里是将新列插在指定的位置，0代表第一列
-		console.log(lunchlist.length)
-		var tr = table.insertRow(newlunchcount+lunchlist.length+1);
-		newlunchcount = newlunchcount + 1;
-		//var td1 = document.createElement('td');
-		var td1 = document.createElement('td');
-		var td2 = document.createElement('td');　　　　　　 //添加各个属性
-		label1.innerHTML = "菜品" + rows;
-		input1.id = "newlunch_" + rows;
-		input1.setAttribute("name", "xws.qs" + rows);
-		input1.setAttribute("autocomplete", "off");
-		input1.setAttribute("maxlength", "30");
-		input1.setAttribute("placeholder", "");
+				document.getElementById('newlunch').onclick = function() {
+					var table = document.getElementById("menu_table1");
+					var rows = newlunchposition;　　　　 //new部分控件
+					newlunchposition = newlunchposition + 1;
+					var input1 = document.createElement('input');
+					//var label1 = document.createElement('label');　　　　　　 //这里是将新列插在指定的位置，0代表第一列
+					var button1 = document.createElement('input');
+					var tr = table.insertRow(rows + lunchlist.length);
+					var td1 = document.createElement('td');
+					var td2 = document.createElement('td');　
+					var td3 = document.createElement('td');
+					var td4 = document.createElement('td');
+					var td5 = document.createElement('td');
+					var td6 = document.createElement('td');　　　　　　　 //添加各个属性
+					//label1.innerHTML = "新增菜品";
+					input1.id = "newlunch_" + newlunchcount;
+					newlunchcount = newlunchcount + 1;
+					input1.setAttribute("name", "xws.qs" + rows);
+					input1.setAttribute("autocomplete", "off");
+					input1.setAttribute("maxlength", "15");
+					input1.setAttribute("placeholder", "");
+					input1.setAttribute("size", "12px");
+					input1.setAttribute("style","border:0px");
+					button1.type = "button";
+					button1.id = "delete_new_lunch";
+					button1.value = "删除";
+					button1.setAttribute("class", "btn btn-gradient-light btn-sm");
 
-		td1.appendChild(label1);
-		td2.appendChild(input1);
-		//tr.appendChild(td1);
-		tr.appendChild(td1);
-		tr.appendChild(td2);
-	};
-	
-	document.getElementById('newdinner').onclick = function() {
-		var table = document.getElementById("menu_table2");
-		var rows = newdinnercount + 1;　　　　 //new部分控件
-		var input1 = document.createElement('input');
-		var label1 = document.createElement('label');　　　　　　 //这里是将新列插在指定的位置，0代表第一列
-		console.log(dinnerlist.length)
-		var tr = table.insertRow(newdinnercount+dinnerlist.length+1);
-		newdinnercount = newdinnercount + 1;
-		//var td1 = document.createElement('td');
-		var td1 = document.createElement('td');
-		var td2 = document.createElement('td');　　　　　　 //添加各个属性
-		label1.innerHTML = "菜品" + rows;
-		input1.id = "newdinner_" + rows;
-		input1.setAttribute("name", "xws.qs" + rows);
-		input1.setAttribute("autocomplete", "off");
-		input1.setAttribute("maxlength", "30");
-		input1.setAttribute("placeholder", "");
+					//td1.appendChild(label1);
+					td1.appendChild(input1);
+					td2.appendChild(button1);
+					//tr.appendChild(td1);
+					tr.appendChild(td1);
+					tr.appendChild(td2);
+					tr.appendChild(td3);
+					tr.appendChild(td4);
+					tr.appendChild(td5);
+					tr.appendChild(td6);
+					console.log(newlunchcount);
+					console.log(newlunchposition);
+				};
+				document.getElementById('newdinner').onclick = function() {
+					var table = document.getElementById("menu_table2");
+					var rows = newdinnerposition;　　　　 //new部分控件
+					newdinnerposition = newdinnerposition + 1;
+					var input1 = document.createElement('input');
+					//var label1 = document.createElement('label');　　　　　　 //这里是将新列插在指定的位置，0代表第一列
+					var button1 = document.createElement('input');
+					var tr = table.insertRow(rows + dinnerlist.length);
+					var td1 = document.createElement('td');
+					var td2 = document.createElement('td');　
+					var td3 = document.createElement('td');
+					var td4 = document.createElement('td');
+					var td5 = document.createElement('td');
+					var td6 = document.createElement('td');　　　　　　　 //添加各个属性
+					//label1.innerHTML = "新增菜品";
+					input1.id = "newdinner_" + newdinnercount;
+					newdinnercount = newdinnercount + 1;
+					input1.setAttribute("name", "xws.qs" + rows);
+					input1.setAttribute("autocomplete", "off");
+					input1.setAttribute("maxlength", "15");
+					input1.setAttribute("placeholder", "");
+					input1.setAttribute("size", "12px");
+					input1.setAttribute("style","border:0px");
+					button1.type = "button";
+					button1.id = "delete_new_dinner";
+					button1.value = "删除";
+					button1.setAttribute("class", "btn btn-gradient-light btn-sm");
 
-		td1.appendChild(label1);
-		td2.appendChild(input1);
-		//tr.appendChild(td1);
-		tr.appendChild(td1);
-		tr.appendChild(td2);
-	};
+					//td1.appendChild(label1);
+					td1.appendChild(input1);
+					td2.appendChild(button1);
+					//tr.appendChild(td1);
+					tr.appendChild(td1);
+					tr.appendChild(td2);
+					tr.appendChild(td3);
+					tr.appendChild(td4);
+					tr.appendChild(td5);
+					tr.appendChild(td6);
+					console.log(newdinnercount);
+					console.log(newdinnerposition);
+				};
+
+				$(document).on('click', '#delete_new_lunch', function() {
+					var $tr = $(this).parents("tr");
+					//var dish = $tr.find("td:eq(0)").html();
+					$(this).parents("tr").remove();
+					newlunchposition = newlunchposition - 1;
+					console.log(newlunchposition);
+				})
+
+				$(document).on('click', '#delete_new_dinner', function() {
+					var $tr = $(this).parents("tr");
+					//var dish = $tr.find("td:eq(0)").html();
+					$(this).parents("tr").remove();
+					newdinnerposition = newdinnerposition - 1;
+					console.log(newdinnerposition);
+				})
 
 				$.ajax({
 					type: "POST",
@@ -400,14 +439,22 @@
 							for(var i = 0; i < lunchlist.length; i++) {
 								var $tr = $("<tr>")
 									.append($("<td>").html(lunchlist[i]))
-									.append($("<button id='delete_lunch_item'>删除</button>"));
+									.append($("<td>").html("<button id='delete_lunch_item' class='btn btn-gradient-light btn-sm'>删除</button>"))
+									.append($("<td>"))
+									.append($("<td>"))
+									.append($("<td>"))
+									.append($("<td>"));
 								$tbody1.append($tr);
 							}
 							var $tbody2 = $("#show_dinner_menu");
 							for(var i = 0; i < dinnerlist.length; i++) {
 								var $tr = $("<tr>")
 									.append($("<td>").html(dinnerlist[i]))
-									.append($("<button id='delete_dinner_item'>删除</button>"));
+									.append($("<td>").html("<button id='delete_dinner_item' class='btn btn-gradient-light btn-sm'>删除</button>"))
+									.append($("<td>"))
+									.append($("<td>"))
+									.append($("<td>"))
+									.append($("<td>"));
 								$tbody2.append($tr);
 							}
 
@@ -421,7 +468,7 @@
 					}
 				});
 
-				$("#delete_lunch_item").click(function() {
+				$(document).on('click', '#delete_lunch_item', function() {
 					var $tr = $(this).parents("tr");
 					var dish = $tr.find("td:eq(0)").html();
 					var index = $.inArra(dish, lunchlist);
@@ -429,7 +476,7 @@
 					$(this).parents("tr").remove();
 				});
 
-				$("#delete_dinner_item").click(function() {
+				$(document).on('click', '#delete_dinner_item', function() {
 					var $tr = $(this).parents("tr");
 					var dish = $tr.find("td:eq(0)").html();
 					var index = $.inArra(dish, dinnerlist);
@@ -437,25 +484,21 @@
 					$(this).parents("tr").remove();
 				});
 
-				$("#add_lunch_item").click(function() {
-
-					
-				});
-				$("#add_dinner_item").click(function() {
-					$("#AddDinnerWrapper").append('<label></label><input type="text" id="newdinner_' + newdinnercount + '"/><br/><br/>');
-				});
-
 				$("#commit_menu").click(function() {
 					for(var i = 0; i < newlunchcount; i++) {
-						var newlunch = $("#newlunch_" + i).val();
-						if(!newlunch) {
-							lunchlist.push(newdish);
+						if($("#newlunch_" + i).length > 0) {
+							var newlunch = $("#newlunch_" + i).val();
+							if(!newlunch) {
+								lunchlist.push(newlunch);
+							}
 						}
 					}
 					for(var j = 0; j < newdinnercount; j++) {
-						var newdinner = $("newdinner_" + j).val();
-						if(!newdinner) {
-							lunchlist.push(newdinner);
+						if($("#newdinner_" + j).length > 0) {
+							var newdinner = $("#newdinner_" + j).val();
+							if(!newdinner) {
+								dinnerlist.push(newdinner);
+							}
 						}
 					}
 					var dataSend = {
@@ -509,32 +552,13 @@
 					var myDate = new Date();
 					var hour = myDate.getHours();
 					var minutes = myDate.getMinutes();
-					var time_code = 0;
-					if(hour < 11) {
-						time_code = 0;
-					} else if(hour = 11 && minutes < 30) {
-						time_code = 1;
-					} else if(hour = 11 && minutes >= 30) {
-						time_code = 2;
-					} else if(hour = 12 && minutes < 30) {
-						time_code = 3;
-					} else if(hour = 12 && minutes >= 30) {
-						time_code = 4;
-					} else if(hour = 17 && minutes >= 30) {
-						time_code = 5;
-					} else if(hour = 18 && minutes < 30) {
-						time_code = 6;
-					} else if(hour = 18 && minutes >= 30) {
-						time_code = 7;
-					} else {
-						time_code = 9;
-					}
+
 					layer.open({
 						type: 1,
 						title: '订餐详情信息',
 						shadeClose: true,
 						shade: 0.5,
-						area: ['800px', '600px'],
+						area: ['600px', '500px'],
 						content: $("#detail_order_table")
 					})
 
@@ -557,58 +581,82 @@
 								var time6 = data.data.time6;
 								var time7 = data.data.time7;
 
+								$tbody.append($("<tr>").html("<h4>11:00</h4>"));
 								var $tr0 = $("<tr>");
 								$.each(time0, function(i, e) {
-									$tr0.append($("<td>").html(e["name"]))
+									$tr0.append($("<td>").html("<label>菜品</label>"))
+										.append($("<td>").html(e["name"]))
+										.append($("<td>").html("<label>预约人数</label>"))
 										.append($("<td>").html(e["num"]));
 								});
 								$tbody.append($tr0);
 
+								$tbody.append($("<tr>").html("<h4>11:30</h4>"));
 								var $tr1 = $("<tr>");
 								$.each(time1, function(i, e) {
-									$tr1.append($("<td>").html(e["name"]))
+									$tr1.append($("<td>").html("<label>菜品</label>"))
+										.append($("<td>").html(e["name"]))
+										.append($("<td>").html("<label>预约人数</label>"))
 										.append($("<td>").html(e["num"]));
 								});
 								$tbody.append($tr1);
 
+								$tbody.append($("<tr>").html("<h4>12:00</h4>"));
 								var $tr2 = $("<tr>");
 								$.each(time2, function(i, e) {
-									$tr2.append($("<td>").html(e["name"]))
+									$tr2.append($("<td>").html("<label>菜品</label>"))
+										.append($("<td>").html(e["name"]))
+										.append($("<td>").html("<label>预约人数</label>"))
 										.append($("<td>").html(e["num"]));
 								});
 								$tbody.append($tr2);
 
+								$tbody.append($("<tr>").html("<h4>12:30</h4>"));
 								var $tr3 = $("<tr>");
 								$.each(time3, function(i, e) {
-									$tr3.append($("<td>").html(e["name"]))
+									$tr3.append($("<td>").html("<label>菜品</label>"))
+										.append($("<td>").html(e["name"]))
+										.append($("<td>").html("<label>预约人数</label>"))
 										.append($("<td>").html(e["num"]));
 								});
 								$tbody.append($tr3);
 
+								$tbody.append($("<tr>").html("<h4>17:30</h4>"));
 								var $tr4 = $("<tr>");
 								$.each(time4, function(i, e) {
-									$tr4.append($("<td>").html(e["name"]))
+									$tr4.append($("<td>").html("<label>菜品</label>"))
+										.append($("<td>").html(e["name"]))
+										.append($("<td>").html("<label>预约人数</label>"))
 										.append($("<td>").html(e["num"]));
 								});
 								$tbody.append($tr4);
 
+								$tbody.append($("<tr>").html("<h4>18:00</h4>"));
 								var $tr5 = $("<tr>");
 								$.each(time5, function(i, e) {
-									$tr5.append($("<td>").html(e["name"]))
+									$tr5.append($("<td>").html("<label>菜品</label>"))
+										.append($("<td>").html(e["name"]))
+										.append($("<td>").html("<label>预约人数</label>"))
 										.append($("<td>").html(e["num"]));
 								});
 								$tbody.append($tr5);
 
+								$tbody.append($("<tr>").html("<h4>18:30</h4>"));
 								var $tr6 = $("<tr>");
 								$.each(time6, function(i, e) {
-									$tr6.append($("<td>").html(e["name"]))
+									$tr6.append($("<td>").html("<label>菜品</label>"))
+										.append($("<td>").html(e["name"]))
+										.append($("<td>").html("<label>预约人数</label>"))
 										.append($("<td>").html(e["num"]));
 								});
 								$tbody.append($tr6);
 
+								$tbody.append($("<tr>").html("<h4>19:00</h4>"));
 								var $tr7 = $("<tr>");
 								$.each(time7, function(i, e) {
-									$tr7.append($("<td>").html(e["name"]))
+									$tr7.append($("<td>").html("<label>菜品</label>"))
+										.append($("<td>").html(e["name"]))
+										.append($("<td>").html("<label>预约人数</label>"))
 										.append($("<td>").html(e["num"]));
 								});
 								$tbody.append($tr7);

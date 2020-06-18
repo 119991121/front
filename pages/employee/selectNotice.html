@@ -18,15 +18,6 @@
 		<script src="../../jquery-3.4.1.min.js"></sc
 		<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 		<script src="https://cdn.bootcss.com/jquery/2.2.2/jquery.slim.js"></script>
-		<style>
-			.modifypassword{
-				width: 100%;
-			}
-				.home img{
-					width:2.1875rem ;
-					height: 2.1875rem;
-				}
-		</style>
 		<!-- <style>
 			#table_notice tr:nth-child(even){
 			/* background: #FFDAE2; */
@@ -37,7 +28,7 @@
 			}
 		</style> -->
 		<style>
-			.home{
+			.home img{
 				width:2.1875rem ;
 				height: 2.1875rem;
 			}
@@ -48,65 +39,52 @@
 		<div class="container-scroller">
 			<!-- partial:partials/_navbar.html -->
 			<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-					<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-						<a class="navbar-brand brand-logo" href="index.html"><img src="../../images/logo.svg" alt="logo" /></a>
-						<a class="navbar-brand brand-logo-mini" href="index.html"><img src="../../images/logo-mini.svg" alt="logo" /></a>
-					</div>
-					<div class="navbar-menu-wrapper d-flex align-items-stretch">
-						<!-- <div class="search-field d-none d-md-block">
-			  <form class="d-flex align-items-center h-100" action="#">
-			    <div class="input-group">
-			      <div class="input-group-prepend bg-transparent">
-			          <i class="input-group-text border-0 mdi mdi-magnify"></i>                
-			      </div>
-			      <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
-			    </div>
-			  </form>
-			</div> -->
-						<ul class="navbar-nav navbar-nav-right">
-							<li class="nav-item nav-profile dropdown">
-								<a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-									<div class="nav-profile-img">
-										<img id="touxiang" alt="image">
-										<span class="availability-status online"></span>
-									</div>
-									<div class="nav-profile-text">
-										<p class="mb-1 text-black" id="name"></p>
-									</div>
-								</a>
-								<div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-									<button type="button" class="dropdown-item " data-toggle="modal" data-target="#modifypassword">
-										<i class="mdi mdi-lock-outline mr-2 text-primary"></i>
-										修改信息
-									</button>
-									<div class="dropdown-divider"></div>
-									<button class="dropdown-item" href="../face/facereg.html" id="facereg">
-										<i class=" mdi mdi-image-filter-center-focus mr-2 text-primary"></i>
-										人脸注册
-									</button>
+				<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+					<a class="navbar-brand brand-logo" href="index.html"><img src="../../images/logo.svg" alt="logo" /></a>
+					<a class="navbar-brand brand-logo-mini" href="index.html"><img src="../../images/logo-mini.svg" alt="logo" /></a>
+				</div>
+				<div class="navbar-menu-wrapper d-flex align-items-stretch">
+					<ul class="navbar-nav navbar-nav-right">
+						<li class="nav-item nav-profile dropdown">
+							<a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+								<div class="nav-profile-img">
+									<img id="touxiang" alt="image">
+									<span class="availability-status online"></span>
 								</div>
-							</li>
-							<li class="nav-item d-none d-lg-block">
-								<a class="nav-link home" href="../index/index_user.html">
-									<img src="../../images/主页.png" />
+								<div class="nav-profile-text">
+									<p class="mb-1 text-black" id="name"></p>
+								</div>
+							</a>
+							<div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+								<button type="button" class="dropdown-item " data-toggle="modal" data-target="#modifypassword">
+									<i class="mdi mdi-lock-outline mr-2 text-primary"></i>
+									修改信息
+								</button>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="../face/facereg.html" >
+									<i class=" mdi mdi-image-filter-center-focus mr-2 text-primary"></i>
+									人脸注册
 								</a>
-							</li>
-							<li class="nav-item d-none d-lg-block full-screen-link">
-								<a class="nav-link">
-									<i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
-								</a>
-							</li>
-							<li class="nav-item nav-logout d-none d-lg-block">
-								<a class="nav-link" href="../login/login.html" id="logout">
-									<i class="mdi mdi-power"></i>
-								</a>
-							</li>
-						</ul>
-						<!-- <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-			  <span class="mdi mdi-menu"></span>
-			</button> -->
-					</div>
-				</nav>
+							</div>
+						</li>
+						<li class="nav-item d-none d-lg-block">
+							<a class="nav-link home" href="../index/index_user.html">
+								<img src="../../images/主页.png" />
+							</a>
+						</li>
+						<li class="nav-item d-none d-lg-block full-screen-link">
+							<a class="nav-link">
+								<i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+							</a>
+						</li>
+						<li class="nav-item nav-logout d-none d-lg-block">
+							<a class="nav-link" href="../login/login.html" id="logout">
+								<i class="mdi mdi-power"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
 			<!-- partial -->
 			<div class="container-fluid page-body-wrapper">
 				<!-- partial:partials/_sidebar.html -->
@@ -151,22 +129,18 @@
 						               <i class="mdi mdi-crosshairs-gps menu-icon"></i>
 						             </a>
 						   </li>
+				
 				       </li>
 				        </ul>
 				      </nav>
+				</nav>
 				<!-- partial -->
 				<div class="main-panel">
 					<div class="content-wrapper">
 						<div class="page-header">
 							<h3 class="page-title">
-								公告管理
+								公告查询
 							</h3>
-							<nav aria-label="breadcrumb">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="#">公告管理</a></li>
-									<li class="breadcrumb-item active" aria-current="page">公告查询</li>
-								</ol>
-							</nav>
 						</div>
 						<div class="row">
 							<div class="col-md-12 grid-margin stretch-card">
@@ -188,13 +162,13 @@
 											</div>
 										</form>
 
-										<table class="table table-striped" id="table_notice">
+										<table class="table table-striped" id="table_notice" style="table-layout: fixed;">
 											<thead style='text-align: center; '>
 												<tr>
-													<th style="width: 30%;" data-field="name">标题</th>
-													<th style="width: 17%;" data-field="username">发布者</th>
-													<th style="width: 15%;" data-field="creatTime">创建时间</th>
-													<th style="width: 28%;" data-field="option">操作</th>
+													<th style="width: 20%;" data-field="name">标题</th>
+													<th style="width: 20%;" data-field="username">发布者</th>
+													<th style="width: 20%;" data-field="creatTime">创建时间</th>
+													<th style="width: 30%;" data-field="option">操作</th>
 												</tr>
 											</thead>
 											<tbody id="tbodyId" style='text-align: center;'>
@@ -217,46 +191,7 @@
 					<!-- partial -->
 				</div>
 
-				<div class="modal fade" id="modifypassword" tabindex="-1" role="dialog" 　　aria-labelledby="modifypasswordLabel"
-				 aria-hidden="true">
-					　　<div class="modal-dialog">
-						<div class="modal-content" style="background-color: white;width:100%;margin-left: 0%; margin-right: 0%;">
-							<div class="modal-header">
-								<h3 class="modal-title" id="myModalLabel">
-									<i class="mdi mdi-account-settings-variant"></i>
-									修改密码
-								</h3>
-								<!-- <button type="button" class="btn btn-link" data-dismiss="modal">
-									<i class="mdi mdi-close"></i>
-								</button> -->
-							</div>
-							<div class="modal-body">
-								<div class="form-group">
-									<div class="form-group">
-										<label for="JI_JOB_NAME" class="col-sm-3 control-label">当前密码：</label>
-										<div class="col-sm-9">
-											<input value="" type="password" name="oldPassword" id="oldPassword" class="form-control" placeholder="请输入您的当前密码">
-										</div>
-									</div>
-									<label for="JI_JOB_NAME" class="col-sm-3 control-label">新的密码：</label>
-									<div class="col-sm-9">
-										<input value="" type="password" name="newPassword" id="newPassword" class="form-control" placeholder="请输入您的新密码">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="JI_JOB_NAME" class="col-sm-3 control-label">确认密码：</label>
-									<div class="col-sm-9">
-										<input value="" type="password" name="newPasswordCon" id="newPasswordCon" class="form-control" placeholder="请确认您的新密码">
-									</div>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-gradient-primary mr-2" id="subPassword">提交</button>
-									<button type="button" class="btn btn-light" id="Password_cancel" data-dismiss="modal">取消</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+			
 				<div class="modal fade" id="getMoreInfo" tabindex="-1" role="dialog" 　　aria-labelledby="getMoreInfoLabel"
 				 aria-hidden="true">
 					　　<div class="modal-dialog">
@@ -484,7 +419,6 @@
 		</div>
 
 
-
 		<!-- plugins:js -->
 		<script src="../../vendors/js/vendor.bundle.base.js"></script>
 		<script src="../../vendors/js/vendor.bundle.addons.js"></script>
@@ -502,15 +436,8 @@
 		<!-- 全选 -->
 		<script type="text/javascript">
 			$(function() {
-				var username = localStorage.getItem("username");
-				var groupid = localStorage.getItem("groupId");
-				$("#username").attr("placeholder",username);
-				if(groupid == 2){
-					$("#groupId").attr("placeholder","员工");
-				}
-				if(groupid == 1){
-					$("#groupId").attr("placeholder","管理员");
-				}
+				if(localStorage.getItem("groupId")==1)
+					location.href='../announcement/selectNotice.html'
 				var sex = localStorage.getItem("sex");
 				if(sex==1){
 					touxiang = "../../images/faces/face2.jpg";
@@ -522,19 +449,11 @@
 				$("#touxiang1").attr("src",touxiang);
 				
 				getData();
-				$("#checkAll").click(function() {
-
-					var isChecked = this.checked;
-					$("input[class='box_']").each(function() {
-						this.checked = isChecked;
-					});
-
-
-				});
+				
 				function getData() {
 					$('#name').text(localStorage.getItem("name"));
 					$('#name1').text(localStorage.getItem("name"));
-					if(localStorage.getItem("groupId")=="2"){
+					if(localStorage.getItem("groupId")=="1"){
 					$('#occupation').text("管理员");
 					}else{
 					$('#occupation').text(localStorage.getItem("positionName"));
@@ -550,8 +469,143 @@
 					localStorage.removeItem("sex");
 					
 				})
+
+			});
+		</script>
+		<script type="text/javascript">
+			$(function() {
+				var globaldata;
 				
-				//修改信息
+				
+				$.ajax({
+					type: "POST",
+					url: 'http://localhost:8080/new_ssm/announce/showAll',
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					async: false,
+
+					success: function(data) {
+						console.log(data);
+						if (data.error_code == 0) {
+							globaldata = data.data;
+							console.log(data.data)
+							$("#table_notice tbody").empty();
+							var $tbody = $("#tbodyId");
+							var doc = data.data;
+							$.each(doc, function(i, e) {
+								var $tr = $("<tr>")
+									.append($("<td style='text-align: center;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;'>").html(e["name"]))
+									.append($("<td style='text-align: center;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;'>").html(e["username"]))
+									.append($("<td>").html(e["creatTime"]));
+								
+								var $button_3 = document.createElement("a");
+								$button_3.text = "查看";
+								$button_3.className = "btn btn-xs btn-inverse-warning ";
+								var $td = $("<td>").append($button_3);
+								$tr.append($td)
+								$tbody.append($tr);
+							});
+						} else {
+							layer.alert("数据请求失败！");
+						}
+					}
+				});
+				
+				//搜索
+				$("#search_notice").click(function() {
+					var keyword = $("#select_key").val();
+
+					var dataSend = {
+						select_key: keyword,
+					};
+
+					console.log(dataSend);
+					if ($.trim(keyword) == "") {
+						//alert("请输入查询关键字！");
+						layer.msg('请输入查询关键字！', {
+							  icon: 2,
+							  time: 2000 //2秒关闭（如果不配置，默认是3秒）
+							});
+					} else {
+						$.ajax({
+							type: "POST",
+							url: 'http://localhost:8080/new_ssm/announce/selectresult',
+							data: JSON.stringify(dataSend),
+							contentType: "application/json; charset=utf-8",
+							dataType: "json",
+							async: false,
+							success: function(data) {
+								console.log(data);
+								if (data.error_code == 0) {
+									globaldata = data.data;
+									$("#table_notice tbody").empty();
+									var $tbody = $("#tbodyId");
+									var doc = data.data;
+									$.each(doc, function(i, e) {
+										var $tr = $("<tr>")
+											.append($("<td style='text-align: center;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;'>").html(e["name"]))
+											.append($("<td style='text-align: center;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;'>").html(e["username"]))
+											.append($("<td>").html(e["creatTime"]));
+									
+										var $button_3 = document.createElement("a");
+										$button_3.text = "查看";
+										$button_3.className = "btn btn-xs btn-light ";
+										var $td = $("<td>").append($button_3);
+										$tr.append($td)
+										$tbody.append($tr);
+									});
+								} else if (data.error_code == 1) {
+									//alert("数据不全！;")
+									layer.alert('未找到结果！', {
+										  icon: 2,
+										  time: 2000 //2秒关闭（如果不配置，默认是3秒）
+										});
+								}
+							},
+							error: function(data) {
+								//alert("请稍后再试！");
+								layer.alert('请稍后再试！', {
+									  icon: 2,
+									  time: 2000 //2秒关闭（如果不配置，默认是3秒）
+									});
+							},
+						});
+					}
+				}); 
+				
+				//查看公告
+				$(".content-wrapper").on("click", ".btn-inverse-warning", function () {
+					
+					
+					var $tr = $(this).parents("tr");
+					
+					var name = $tr.find("td:eq(0)").html();
+					var content;
+					for(i=0;i<globaldata.length;i++){
+						if(globaldata[i].name==name){
+							content= globaldata[i].content
+						}
+					}
+					$("#notice_name").val(name);
+					$("#notice_desc").val(content);
+					
+				    layer.open({
+				        type: 1,
+				        title: "<i class='mdi mdi-bulletin-board'></i>公告详情",
+				        shadeClose: true,
+				        shade: 0.5,
+				        area: ['500px', '530px'],
+				        content: $("#Notice_detail_table")
+				    })
+				
+					$("#notice_details_close").click(function(){
+						layer.closeAll();
+					});
+				
+				});
+				
+				
+					
 				$("#user_update_sumbit").click(function() {
 					var dataSend = {
 						username: username,
@@ -609,141 +663,8 @@
 					}
 				
 				});
-
-			});
-		</script>
-		<script type="text/javascript">
-			$(function() {
-				var globaldata;
 				
-				
-				$.ajax({
-					type: "POST",
-					url: 'http://localhost:8080/new_ssm/announce/showAll',
-					contentType: "application/json; charset=utf-8",
-					dataType: "json",
-					async: false,
-
-					success: function(data) {
-						console.log(data);
-						if (data.error_code == 0) {
-							globaldata = data.data;
-							console.log(data.data)
-							$("#table_notice tbody").empty();
-							var $tbody = $("#tbodyId");
-							var doc = data.data;
-							$.each(doc, function(i, e) {
-								var $tr = $("<tr>")
-									.append($("<td>").html(e["name"]))
-									.append($("<td>").html(e["username"]))
-									.append($("<td>").html(e["creatTime"]));
-								
-								var $button_3 = document.createElement("a");
-								$button_3.text = "查看";
-								$button_3.className = "btn btn-xs btn-inverse-warning ";
-								var $td = $("<td>").append($button_3);
-								$tr.append($td)
-								$tbody.append($tr);
-							});
-						} else {
-							layer.alert("数据请求失败！");
-						}
-					}
-				});
-				
-				//搜索
-				$("#search_notice").click(function() {
-					var keyword = $("#select_key").val();
-
-					var dataSend = {
-						select_key: keyword,
-					};
-
-					console.log(dataSend);
-					if ($.trim(keyword) == "") {
-						//alert("请输入查询关键字！");
-						layer.msg('请输入查询关键字！', {
-							  icon: 2,
-							  time: 2000 //2秒关闭（如果不配置，默认是3秒）
-							});
-					} else {
-						$.ajax({
-							type: "POST",
-							url: 'http://localhost:8080/new_ssm/announce/selectresult',
-							data: JSON.stringify(dataSend),
-							contentType: "application/json; charset=utf-8",
-							dataType: "json",
-							async: false,
-							success: function(data) {
-								console.log(data);
-								if (data.error_code == 0) {
-									globaldata = data.data;
-									$("#table_notice tbody").empty();
-									var $tbody = $("#tbodyId");
-									var doc = data.data;
-									$.each(doc, function(i, e) {
-										var $tr = $("<tr>")
-											.append($("<td>").html(e["name"]))
-											.append($("<td>").html(e["username"]))
-											.append($("<td>").html(e["creatTime"]));
-										
-										var $button_3 = document.createElement("a");
-								$button_3.text = "查看";
-								$button_3.className = "btn btn-xs btn-inverse-warning ";
-								var $td = $("<td>").append($button_3);
-										$tr.append($td)
-										$tbody.append($tr);
-									});
-								} else if (data.error_code == 1) {
-									//alert("数据不全！;")
-									layer.alert('未找到结果！', {
-										  icon: 2,
-										  time: 2000 //2秒关闭（如果不配置，默认是3秒）
-										});
-								}
-							},
-							error: function(data) {
-								//alert("请稍后再试！");
-								layer.alert('请稍后再试！', {
-									  icon: 2,
-									  time: 2000 //2秒关闭（如果不配置，默认是3秒）
-									});
-							},
-						});
-					}
-				}); 
-				//查看公告
-				$(".content-wrapper").on("click", ".btn-inverse-warning", function () {
-					
-					
-					var $tr = $(this).parents("tr");
-					
-					var name = $tr.find("td:eq(1)").html();
-					var content;
-					for(i=0;i<globaldata.length;i++){
-						if(globaldata[i].name==name){
-							content= globaldata[i].content
-						}
-					}
-					$("#notice_name").val(name);
-					$("#notice_desc").val(content);
-					
-				    layer.open({
-				        type: 1,
-				        title: "<i class='mdi mdi-bulletin-board'></i>公告详情",
-				        shadeClose: true,
-				        shade: 0.5,
-				        area: ['500px', '530px'],
-				        content: $("#Notice_detail_table")
-				    })
-				
-					$("#notice_details_close").click(function(){
-						layer.closeAll();
-					});
-				
-				});
-				
-				
+			
 			});
 		</script>
 
