@@ -109,6 +109,10 @@
 		
 		</dl>
 		<script type="text/javascript">
+			
+			if(sessionStorage.getItem("groupId")==null){
+					location.href = '../login/login.html'
+				}
 			//var 是定义变量
 			var video = document.getElementById("video"); //获取video标签
 			var context = canvas.getContext("2d");
@@ -144,7 +148,7 @@
 				console.log("这是拍照结果" + filebyte);
 				
 				
-				var username = localStorage.getItem("username");
+				var username = sessionStorage.getItem("username");
 				var dataSend={
 						file:filebyte,
 						username:username
@@ -169,7 +173,9 @@
 							}
 							else if(json.error_code== 0){
 								alert("注册成功！");
-								window.location.replace("../index/index.html");
+								if(sessionStorage.getItem("grouId")==1)
+									window.location.replace("../index/index.html")
+								else window.location.replace("../index/index_user.html")
 							}
 							
 			
@@ -177,7 +183,9 @@
 					});
 			}
 			function retntoindex() {
-				window.location.replace("../index/index.html");
+				if(sessionStorage.getItem("grouId")==1)
+									window.location.replace("../index/index.html")
+								else window.location.replace("../index/index_user.html")
 			}
 					
 		

@@ -220,6 +220,12 @@
 								</ul>
 							</div>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="../order/ordermanage.html">
+								<span class="menu-title">订餐管理</span>
+								<i class="mdi mdi-crosshairs-gps menu-icon"></i>
+							</a>
+						</li>
 					</ul>
 				</nav>
 
@@ -726,8 +732,11 @@
 
 		<script type="text/javascript">
 			$(function() {
-				if(localStorage.getItem("groupId") == 2)
-					location.href = '../employee/FindUser.html'
+				if(sessionStorage.getItem("groupId") == 2)
+					location.href = '../index/index_user.html'
+				else if(sessionStorage.getItem("groupId")==null){
+					location.href = '../login/login.html'
+				}
 				$.ajax({
 					type: "POST",
 					url: 'http://localhost:8080/new_ssm/dept/showAllDept', //请求controller方法   
@@ -793,7 +802,7 @@
 					}
 				});
 
-				var sex = localStorage.getItem("sex");
+				var sex = sessionStorage.getItem("sex");
 				if(sex == 1) {
 					touxiang = "../../images/faces/face2.jpg";
 				} else {
@@ -802,10 +811,10 @@
 				$("#touxiang").attr("src", touxiang);
 				$("#touxiang1").attr("src", touxiang);
 				getData();
-				if(!window.localStorage) {
-					alert("浏览器支持localstorage");
+				if(!window.sessionStorage) {
+					alert("浏览器支持sessionstorage");
 				} else {
-					var storage = window.localStorage;
+					var storage = window.sessionStorage;
 					var username = storage.getItem("username");
 				}
 
@@ -864,23 +873,23 @@
 				});
 
 				function getData() {
-					$('#name').text(localStorage.getItem("name"));
-					$('#name1').text(localStorage.getItem("name"));
-					if(localStorage.getItem("groupId") == "1") {
+					$('#name').text(sessionStorage.getItem("name"));
+					$('#name1').text(sessionStorage.getItem("name"));
+					if(sessionStorage.getItem("groupId") == "1") {
 						$('#occupation').text("管理员");
 					} else {
-						$('#occupation').text(localStorage.getItem("positionName"));
+						$('#occupation').text(sessionStorage.getItem("positionName"));
 					}
 				}
 
 				$("#logout").click(function() {
-					localStorage.removeItem("username");
-					localStorage.removeItem("name");
-					localStorage.removeItem("userid");
-					localStorage.removeItem("groupId");
-					localStorage.removeItem("positionName");
-					localStorage.removeItem("password");
-					localStorage.removeItem("sex");
+					sessionStorage.removeItem("username");
+					sessionStorage.removeItem("name");
+					sessionStorage.removeItem("userid");
+					sessionStorage.removeItem("groupId");
+					sessionStorage.removeItem("positionName");
+					sessionStorage.removeItem("password");
+					sessionStorage.removeItem("sex");
 
 				})
 
@@ -972,7 +981,19 @@
 
 				//查看
 				$(".content-wrapper").on("click", ".btn-inverse-warning", function() {
-
+					if(sessionStorage.getItem("groupId") == 2&&sessionStorage.getItem("username")!=username) {
+						 
+						layer.alert('没有操作权限！', {
+							icon: 2,
+							closeBtn: 0
+						}, function(index) {
+							layer.closeAll();
+							location.href = '../index/index_user.html'
+						});
+						
+					}else{
+						
+					
 					$("#subordinate_dept").empty();
 					$("#subordinate_pos").empty();
 					$.ajax({
@@ -1075,17 +1096,28 @@
 					$("#user_details_close").click(function() {
 						layer.closeAll();
 					});
-
+				}
 				});
 
 				// 修改用户信息
 				$(".content-wrapper").on("click", ".btn-inverse-primary", function() {
 					var $tr = $(this).parents("tr");
-
+					
 					var username = $tr.find("td:eq(1)").html();
-
+					
 					var user;
-
+					if(sessionStorage.getItem("groupId") == 2&&sessionStorage.getItem("username")!=username) {
+						 
+						layer.alert('没有操作权限！', {
+							icon: 2,
+							closeBtn: 0
+						}, function(index) {
+							layer.closeAll();
+							location.href = '../index/index_user.html'
+						});
+						
+					}else{
+					
 					for(i = 0; i < globaldata.length; i++) {
 						if(globaldata[i].username == username) {
 							user = globaldata[i]
@@ -1295,9 +1327,9 @@
 					$("#user_update_cancel").click(function() {
 						layer.closeAll();
 					});
-
+				}
 				});
-
+			
 			});
 		</script>
 		<!-- 删除 -->
@@ -1312,6 +1344,17 @@
 				});
 				//单个删除
 				$(".content-wrapper").on("click", ".btn-inverse-danger", function() {
+					if(sessionStorage.getItem("groupId") == 2) {
+						 
+						layer.alert('没有操作权限！', {
+							icon: 2,
+							closeBtn: 0
+						}, function(index) {
+							layer.closeAll();
+							location.href = '../index/index_user.html'
+						});
+						
+					}else{
 					var $tr = $(this).parents("tr");
 					var username = $tr.find("td:eq(1)").html();
 					var usernames = new Array();
@@ -1358,9 +1401,21 @@
 						layer.close(index);
 
 					});
+				}
 				});
 				//批量删除
 				$("#user_delete_all_btn").click(function() {
+					if(sessionStorage.getItem("groupId") == 2) {
+						 
+						layer.alert('没有操作权限！', {
+							icon: 2,
+							closeBtn: 0
+						}, function(index) {
+							layer.closeAll();
+							location.href = '../index/index_user.html'
+						});
+						
+					}else{
 					var del_unames = new Array();
 					$.each($(".check_item:checked"), function() {
 						del_unames.push($(this).parents("tr").find("td:eq(1)").text());
@@ -1415,7 +1470,7 @@
 							});
 						});
 					}
-
+				}
 				});
 
 			});
@@ -1424,7 +1479,8 @@
 		<script>
 			$("#facereg").click(function() {
 				var searchUrl = encodeURI("../face/facereg.html"); //使用encodeURI编码
-				location.href = searchUrl;
+				console.log(searchUrl)
+				//location.href = searchUrl;
 			});
 			$("#subPassword").click(function() {
 				var newPassword = $("#newPassword").val()
@@ -1461,6 +1517,8 @@
 						time: 2000 //2秒关闭（如果不配置，默认是3秒）
 					});
 				} else {
+					
+					username = sessionStorage.getItem("username")
 
 					var dataSend = {
 						username: username,
@@ -1491,9 +1549,9 @@
 									time: 2000 //2秒关闭（如果不配置，默认是3秒）
 								});
 							} else if(data.error_code == 0) {
-								window.location.replace("index.html");
+								window.location.replace("../index/index.html");
 								localStorage.setItem("remember_password", newPassword);
-								localStorage.setItem("password", newPassword);
+								sessionStorage.setItem("password", newPassword);
 								//alert("密码修改成功！");
 								layer.msg('密码修改成功！', {
 									icon: 1,

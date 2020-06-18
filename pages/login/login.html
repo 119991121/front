@@ -162,17 +162,16 @@
 										icon: 1,
 										time: 2000 //2秒关闭（如果不配置，默认是3秒）
 									});
-									localStorage.setItem("username", data.data.username);
-									localStorage.setItem("name", data.data.name);
-									localStorage.setItem("userid", data.data.user_id);
-									localStorage.setItem("groupId", data.data.groupId);
-									localStorage.setItem("positionName", data.data.positionName);
-									localStorage.setItem("password", data.data.password);
-									localStorage.setItem("sex", data.data.sex);
-									console.log(localStorage)
+									sessionStorage.setItem("username", data.data.username);
+									sessionStorage.setItem("name", data.data.name);
+									sessionStorage.setItem("userid", data.data.user_id);
+									sessionStorage.setItem("groupId", data.data.groupId);
+									sessionStorage.setItem("positionName", data.data.positionName);
+									sessionStorage.setItem("password", data.data.password);
+									sessionStorage.setItem("sex", data.data.sex);
 									var searchUrl1 = encodeURI("../index/index.html"); //使用encodeURI编码
 									var searchUrl2 = encodeURI("../index/index_user.html"); //使用encodeURI编码
-									if(localStorage.getItem("groupId") == "1")
+									if(sessionStorage.getItem("groupId") == "1")
 										location.href = searchUrl1
 									else location.href = searchUrl2
 								}
@@ -216,9 +215,9 @@
 			})
 
 			window.onload = function() {
-				var username = localStorage.getItem('remember_username');
-				var password = localStorage.getItem("remember_password");
-				var checked = localStorage.getItem("ischecked");
+				var username = sessionStorage.getItem('remember_username');
+				var password = sessionStorage.getItem("remember_password");
+				var checked = sessionStorage.getItem("ischecked");
 				if(checked) {
 					$("#rememberPwd").attr("checked", true);
 

@@ -168,16 +168,19 @@
 							alert("人脸信息未注册");
 						} else if(json.error_code == 4) {
 							alert("登录失败，请重新扫描");
+						} else if(json.error_code == 4) {
+							alert("用户不存在！");
 						} else if(json.error_code == 0) {
-							localStorage.setItem("username", json.data.username);
-							localStorage.setItem("name", json.data.name);
-							localStorage.setItem("userid", json.data.user_id);
-							localStorage.setItem("groupId", json.data.groupId);
-							localStorage.setItem("positionName", json.data.positionName);
-							localStorage.setItem("password", json.data.password);
+							sessionStorage.setItem("username", json.data.username);
+							sessionStorage.setItem("name", json.data.name);
+							sessionStorage.setItem("userid", json.data.user_id);
+							sessionStorage.setItem("groupId", json.data.groupId);
+							sessionStorage.setItem("positionName", json.data.positionName);
+							sessionStorage.setItem("password", json.data.password);
+							sessionStorage.setItem("sex", json.data.sex);
 							var searchUrl1 = encodeURI("../index/index.html"); //使用encodeURI编码
 							var searchUrl2 = encodeURI("../index/index_user.html"); //使用encodeURI编码
-							if(localStorage.getItem("groupId") == "1")
+							if(sessionStorage.getItem("groupId") == "1")
 								location.href = searchUrl1
 							else location.href = searchUrl2
 						}

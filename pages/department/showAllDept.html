@@ -217,6 +217,12 @@
 								</ul>
 							</div>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="../order/ordermanage.html">
+								<span class="menu-title">订餐管理</span>
+								<i class="mdi mdi-crosshairs-gps menu-icon"></i>
+							</a>
+						</li>
 					</ul>
 				</nav>
 				<!-- partial -->
@@ -420,9 +426,12 @@
 		<script src="../../layer/layer.js"></script>
 		<script>
 			$(function() {
-				if(localStorage.getItem("groupId") == 2)
-					location.href = '../employee/showAllDept.html'
-				var sex = localStorage.getItem("sex");
+				if(sessionStorage.getItem("groupId") == 2)
+					location.href = '../index/index_user.html'
+				else if(sessionStorage.getItem("groupId")==null){
+					location.href = '../login/login.html'
+				}
+				var sex = sessionStorage.getItem("sex");
 				if(sex == 1) {
 					touxiang = "../../images/faces/face2.jpg";
 				} else {
@@ -480,22 +489,22 @@
 				});
 
 				function getData() {
-					$('#name').text(localStorage.getItem("name"));
-					$('#name1').text(localStorage.getItem("name"));
-					if(localStorage.getItem("groupId") == "1") {
+					$('#name').text(sessionStorage.getItem("name"));
+					$('#name1').text(sessionStorage.getItem("name"));
+					if(sessionStorage.getItem("groupId") == "1") {
 						$('#occupation').text("管理员");
 					} else {
-						$('#occupation').text(localStorage.getItem("positionName"));
+						$('#occupation').text(sessionStorage.getItem("positionName"));
 					}
 				}
 				$("#logout").click(function() {
-					localStorage.removeItem("username");
-					localStorage.removeItem("name");
-					localStorage.removeItem("userid");
-					localStorage.removeItem("groupId");
-					localStorage.removeItem("positionName");
-					localStorage.removeItem("password");
-					localStorage.removeItem("sex");
+					sessionStorage.removeItem("username");
+					sessionStorage.removeItem("name");
+					sessionStorage.removeItem("userid");
+					sessionStorage.removeItem("groupId");
+					sessionStorage.removeItem("positionName");
+					sessionStorage.removeItem("password");
+					sessionStorage.removeItem("sex");
 
 				})
 
@@ -539,6 +548,8 @@
 							time: 2000 //2秒关闭（如果不配置，默认是3秒）
 						});
 					} else {
+						
+						username = sessionStorage.getItem("username")
 
 						var dataSend = {
 							username: username,
@@ -569,9 +580,9 @@
 										time: 2000 //2秒关闭（如果不配置，默认是3秒）
 									});
 								} else if(data.error_code == 0) {
-									window.location.replace("index.html");
+									window.location.replace("../index/index.html");
 									localStorage.setItem("remember_password", newPassword);
-									localStorage.setItem("password", newPassword);
+									sessionStorage.setItem("password", newPassword);
 									//alert("密码修改成功！");
 									layer.msg('密码修改成功！', {
 										icon: 1,
@@ -631,6 +642,17 @@
 			$(function() {
 
 				$(".content-wrapper").on("click", ".btn-inverse-danger", function() {
+					if(sessionStorage.getItem("groupId") == 2) {
+						 
+						layer.alert('没有操作权限！', {
+							icon: 2,
+							closeBtn: 0
+						}, function(index) {
+							layer.closeAll();
+							location.href = '../index/index_user.html'
+						});
+						
+					}else{
 					var $tr = $(this).parents("tr");
 					var dept_name = $tr.find("td:eq(1)").html();
 					var deptnames = new Array();
@@ -679,10 +701,24 @@
 						layer.close(index);
 
 					});
+					}
 				});
 
 				//批量删除
 				$(".content-wrapper").on("click", ".btn-outline-danger", function() {
+					if(sessionStorage.getItem("groupId") == 2) {
+						 
+						layer.alert('没有操作权限！', {
+							icon: 2,
+							closeBtn: 0
+						}, function(index) {
+							layer.closeAll();
+							location.href = '../index/index_user.html'
+						});
+						
+					}else{
+					
+					
 					var choiceselect = $("input[class='box_']:checked").length;
 					if(choiceselect == 0) {
 						layer.msg('请选择需要批量删除的部门！', {
@@ -744,10 +780,23 @@
 
 						});
 					}
+					}
 				});
 
 				// 修改部门信息
 				$(".content-wrapper").on("click", ".btn-inverse-primary", function() {
+					if(sessionStorage.getItem("groupId") == 2) {
+						 
+						layer.alert('没有操作权限！', {
+							icon: 2,
+							closeBtn: 0
+						}, function(index) {
+							layer.closeAll();
+							location.href = '../index/index_user.html'
+						});
+						
+					}else{
+					
 					var $tr = $(this).parents("tr");
 
 					var dept_name = $tr.find("td:eq(1)").html();
@@ -849,13 +898,14 @@
 						layer.closeAll();
 					});
 
+					}
 				});
 
 				//查询
 				$("#select_dept").click(function() {
 					var select_key = $("#select_key").val();
-					if(window.localStorage) {
-						localStorage.setItem("select_key", $('#select_key').val());
+					if(window.sessionStorage) {
+						sessionStorage.setItem("select_key", $('#select_key').val());
 					} else {
 						Cookie.write("select_key", $('#select_key').val());
 					}

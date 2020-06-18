@@ -218,6 +218,12 @@
 								</ul>
 							</div>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="../order/ordermanage.html">
+								<span class="menu-title">订餐管理</span>
+								<i class="mdi mdi-crosshairs-gps menu-icon"></i>
+							</a>
+						</li>
 					</ul>
 				</nav>
 				<!-- partial -->
@@ -330,9 +336,12 @@
 
 		<script>
 			$(function() {
-				if(localStorage.getItem("groupId") == 2)
+				if(sessionStorage.getItem("groupId") == 2)
 					location.href = '../index/index_user.html'
-				var sex = localStorage.getItem("sex");
+				else if(sessionStorage.getItem("groupId")==null){
+					location.href = '../login/login.html'
+				}
+				var sex = sessionStorage.getItem("sex");
 				if(sex == 1) {
 					touxiang = "../../images/faces/face2.jpg";
 				} else {
@@ -341,10 +350,13 @@
 				$("#touxiang").attr("src", touxiang);
 				$("#touxiang1").attr("src", touxiang);
 				//var user_id = getUrlParam.param("userid");
-				var username = localStorage.getItem("username");
+				var username = sessionStorage.getItem("username");
 				getData();
 
 				$("#announcement_add_sumbit").click(function() {
+					if(sessionStorage.getItem("groupId") == 2){
+						location.href = '../index/index_user.html';
+					}
 					var announce_name = $("#InputTitle").val();
 					var announce_content = $("#InputContent").val();
 
@@ -429,12 +441,12 @@
 				});
 
 				function getData() {
-					$('#name').text(localStorage.getItem("name"));
-					$('#name1').text(localStorage.getItem("name"));
-					if(localStorage.getItem("groupId") == "1") {
+					$('#name').text(sessionStorage.getItem("name"));
+					$('#name1').text(sessionStorage.getItem("name"));
+					if(sessionStorage.getItem("groupId") == "1") {
 						$('#occupation').text("管理员");
 					} else {
-						$('#occupation').text(localStorage.getItem("positionName"));
+						$('#occupation').text(sessionStorage.getItem("positionName"));
 					}
 				}
 				$("#subPassword").click(function() {
@@ -472,6 +484,8 @@
 							time: 2000 //2秒关闭（如果不配置，默认是3秒）
 						});
 					} else {
+						
+						username = sessionStorage.getItem("username")
 
 						var dataSend = {
 							username: username,
@@ -502,9 +516,9 @@
 										time: 2000 //2秒关闭（如果不配置，默认是3秒）
 									});
 								} else if(data.error_code == 0) {
-									window.location.replace("index.html");
+									window.location.replace("../index/index.html");
 									localStorage.setItem("remember_password", newPassword);
-									localStorage.setItem("password", newPassword);
+									sessionStorage.setItem("password", newPassword);
 									//alert("密码修改成功！");
 									layer.msg('密码修改成功！', {
 										icon: 1,
@@ -529,13 +543,13 @@
 					}
 				})
 				$("#logout").click(function() {
-					localStorage.removeItem("username");
-					localStorage.removeItem("name");
-					localStorage.removeItem("userid");
-					localStorage.removeItem("groupId");
-					localStorage.removeItem("positionName");
-					localStorage.removeItem("password");
-					localStorage.removeItem("sex");
+					sessionStorage.removeItem("username");
+					sessionStorage.removeItem("name");
+					sessionStorage.removeItem("userid");
+					sessionStorage.removeItem("groupId");
+					sessionStorage.removeItem("positionName");
+					sessionStorage.removeItem("password");
+					sessionStorage.removeItem("sex");
 
 				})
 				$("#facereg").click(function() {
