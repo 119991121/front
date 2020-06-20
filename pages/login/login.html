@@ -96,9 +96,14 @@
 		<script src="../../layer/layer.js"></script>
 		<script>
 			$(function() {
-
+				if(localStorage.getItem("remember_username")!=null && localStorage.getItem("remember_password")!=null){
+					document.getElementById("rememberPwd").checked=true
+					$("#password").val(localStorage.getItem("remember_password"))
+					$("#loginname").val(localStorage.getItem("remember_username"))
+				}else{
+					document.getElementById("rememberPwd").checked=false
+				}
 				$("#login-submit-btn").click(function() {
-					console.log("进来了");
 					var strName = $("#loginname").val();
 					var strPass = $("#password").val();
 					var strRem = $("#rememberPwd").is(":checked");
@@ -106,9 +111,6 @@
 						localStorage.setItem("remember_username", strName);
 						localStorage.setItem("remember_password", strPass);
 						localStorage.setItem("ischecked", strRem);
-					} else {
-						localStorage.removeItem("remember_password");
-						localStorage.removeItem("ischecked");
 					}
 					var username = $("#loginname").val();
 					var password = $("#password").val();
@@ -196,39 +198,21 @@
 						localStorage.setItem("remember_password", strPass);
 						localStorage.setItem("ischecked", strRem);
 					} else {
-						localStorage.removeItem("remember_password");
 						localStorage.removeItem("ischecked");
 					}
 
 				});
 				//
 				$("#inputagain").click(function() {
-					if($("#rememberPwd").is(":checked")) {
 						var storageName = localStorage.getItem('remember_username');
 						var storagePwd = localStorage.getItem("remember_password");
+
 						if($("#loginname").val() == storageName) {
 							$("#password").val(storagePwd);
 						}
-					}
 				})
 
 			})
-
-			window.onload = function() {
-				var username = sessionStorage.getItem('remember_username');
-				var password = sessionStorage.getItem("remember_password");
-				var checked = sessionStorage.getItem("ischecked");
-				if(checked) {
-					$("#rememberPwd").attr("checked", true);
-
-					if(username) {
-						$("#loginname").val(username);
-					}
-					if(password) {
-						$("#password").val(password);
-					}
-				}
-			}
 		</script>
 	</body>
 

@@ -55,8 +55,8 @@
 			<!-- partial:../partials/_navbar.html -->
 			<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 				<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-					<a class="navbar-brand brand-logo" href="index.html"><img src="../../images/logo.svg" alt="logo"></a>
-					<a class="navbar-brand brand-logo-mini" href="index.html"><img src="../../images/logo-mini.svg" alt="logo"></a>
+					<a class="navbar-brand brand-logo"><img src="../../images/logo.svg" alt="logo"></a>
+					<a class="navbar-brand brand-logo-mini"><img src="../../images/logo-mini.svg" alt="logo"></a>
 				</div>
 				<div class="navbar-menu-wrapper d-flex align-items-stretch">
 					<!-- <div class="search-field d-none d-md-block">
@@ -372,7 +372,7 @@
 		</div>
 
 		<div class="modal fade" id="modifypassword" tabindex="-1" role="dialog" 　　aria-labelledby="modifypasswordLabel" aria-hidden="true">
-		
+
 			<div class="modal-dialog">
 				<div class="modal-content" style="background-color: white;width:100%;margin-left: 0%; margin-right: 0%;">
 					<div class="modal-header">
@@ -428,7 +428,7 @@
 			$(function() {
 				if(sessionStorage.getItem("groupId") == 2)
 					location.href = '../index/index_user.html'
-				else if(sessionStorage.getItem("groupId")==null){
+				else if(sessionStorage.getItem("groupId") == null) {
 					location.href = '../login/login.html'
 				}
 				var sex = sessionStorage.getItem("sex");
@@ -548,7 +548,7 @@
 							time: 2000 //2秒关闭（如果不配置，默认是3秒）
 						});
 					} else {
-						
+
 						username = sessionStorage.getItem("username")
 
 						var dataSend = {
@@ -643,108 +643,30 @@
 
 				$(".content-wrapper").on("click", ".btn-inverse-danger", function() {
 					if(sessionStorage.getItem("groupId") == 2) {
-						 
+
 						layer.alert('没有操作权限！', {
 							icon: 2,
 							closeBtn: 0
 						}, function(index) {
 							layer.closeAll();
 							location.href = '../index/index_user.html'
-						});
-						
-					}else{
-					var $tr = $(this).parents("tr");
-					var dept_name = $tr.find("td:eq(1)").html();
-					var deptnames = new Array();
-					deptnames.push(dept_name);
-					var dataSend = {
-						dept_name: deptnames
-
-					};
-					console.log(dataSend);
-
-					layer.confirm('确定删除部门' + '"' + dept_name + '"?', {
-						icon: 3,
-						title: '提示'
-					}, function(index) {
-						$.ajax({
-							type: "POST",
-							url: 'http://localhost:8080/new_ssm/dept/deleteDept',
-							data: JSON.stringify(dataSend),
-							contentType: "application/json; charset=utf-8",
-							dataType: "json",
-							async: false,
-							success: function(data) {
-								if(data.error_code == 0) {
-									layer.alert('删除成功', {
-										icon: 1,
-										closeBtn: 0
-									}, function(index) {
-										layer.closeAll();
-										window.location.reload();
-									});
-
-								} else {
-									layer.alert('删除失败', {
-										icon: 2,
-										closeBtn: 0
-									});
-								}
-							},
-							error: function(data) {
-								layer.alert("稍后再试！", {
-									icon: 2,
-									closeBtn: 0
-								});
-							}
-						});
-						layer.close(index);
-
-					});
-					}
-				});
-
-				//批量删除
-				$(".content-wrapper").on("click", ".btn-outline-danger", function() {
-					if(sessionStorage.getItem("groupId") == 2) {
-						 
-						layer.alert('没有操作权限！', {
-							icon: 2,
-							closeBtn: 0
-						}, function(index) {
-							layer.closeAll();
-							location.href = '../index/index_user.html'
-						});
-						
-					}else{
-					
-					
-					var choiceselect = $("input[class='box_']:checked").length;
-					if(choiceselect == 0) {
-						layer.msg('请选择需要批量删除的部门！', {
-							icon: 2,
-							time: 2000 //2秒关闭（如果不配置，默认是3秒）
 						});
 
 					} else {
-						layer.confirm('确定删除吗?', {
+						var $tr = $(this).parents("tr");
+						var dept_name = $tr.find("td:eq(1)").html();
+						var deptnames = new Array();
+						deptnames.push(dept_name);
+						var dataSend = {
+							dept_name: deptnames
+
+						};
+						console.log(dataSend);
+
+						layer.confirm('确定删除部门' + '"' + dept_name + '"?', {
 							icon: 3,
 							title: '提示'
 						}, function(index) {
-							var checkboxs = $("input[class='box_']");
-							var deptnames = new Array();
-							checkboxs.each(function() {
-								if($(this).prop("checked")) {
-									var $tr = $(this).parents("tr");
-									var dept_name = $tr.find("td:eq(1)").html();
-									deptnames.push(dept_name);
-								}
-							})
-							var dataSend = {
-								dept_name: deptnames
-
-							};
-							console.log(dataSend);
 							$.ajax({
 								type: "POST",
 								url: 'http://localhost:8080/new_ssm/dept/deleteDept',
@@ -762,6 +684,11 @@
 											window.location.reload();
 										});
 
+									} else if(data.error_code == 3) {
+										layer.alert('该部门尚有员工！', {
+											icon: 2,
+											closeBtn: 0
+										});
 									} else {
 										layer.alert('删除失败', {
 											icon: 2,
@@ -780,13 +707,12 @@
 
 						});
 					}
-					}
 				});
 
-				// 修改部门信息
-				$(".content-wrapper").on("click", ".btn-inverse-primary", function() {
+				//批量删除
+				$(".content-wrapper").on("click", ".btn-outline-danger", function() {
 					if(sessionStorage.getItem("groupId") == 2) {
-						 
+
 						layer.alert('没有操作权限！', {
 							icon: 2,
 							closeBtn: 0
@@ -794,109 +720,192 @@
 							layer.closeAll();
 							location.href = '../index/index_user.html'
 						});
-						
-					}else{
-					
-					var $tr = $(this).parents("tr");
 
-					var dept_name = $tr.find("td:eq(1)").html();
-					var dept_desc = $tr.find("td:eq(2)").html();
-					$("#new_dept_name").val(dept_name);
-					$("#new_dept_desc").val(dept_desc);
+					} else {
 
-					layer.open({
-						type: 1,
-						title: '修改部门信息',
-						shadeClose: true,
-						shade: 0.5,
-						area: ['500px', '500px'],
-						content: $("#dept_modify_table")
-					})
-
-					$("#dept_update_sumbit").click(function() {
-						var dataSend = {
-
-							dept_name: dept_name,
-							new_dept_name: $("#new_dept_name").val(),
-							new_dept_desc: $("#new_dept_desc").val()
-						};
-
-						console.log(dataSend);
-						if($.trim($("#new_dept_name").val()) == "") {
-							layer.msg('部门名称不能为空！', {
+						var choiceselect = $("input[class='box_']:checked").length;
+						if(choiceselect == 0) {
+							layer.msg('请选择需要批量删除的部门！', {
 								icon: 2,
 								time: 2000 //2秒关闭（如果不配置，默认是3秒）
 							});
-						} else if($.trim($("#new_dept_name").val()).length > 5) {
-							layer.msg('部门名称限制5个字！', {
-								icon: 2,
-								time: 2000 //2秒关闭（如果不配置，默认是3秒）
-							});
-						} else if($.trim($("#new_dept_desc").val()) == "") {
-							layer.msg('部门描述不能为空！', {
-								icon: 2,
-								time: 2000 //2秒关闭（如果不配置，默认是3秒）
-							});
-						} else if($.trim($("#new_dept_desc").val()).length > 255) {
-							layer.msg('详细描述限制输入255个字符！', {
-								icon: 2,
-								time: 2000 //2秒关闭（如果不配置，默认是3秒）
-							});
+
 						} else {
-							$.ajax({
-								type: "POST",
-								url: 'http://localhost:8080/new_ssm/dept/updateDept',
-								data: JSON.stringify(dataSend),
-								contentType: "application/json; charset=utf-8",
-								dataType: "json",
-								async: false,
-								success: function(data) {
-									if(data.error_code == 0) {
-										layer.alert('修改成功！', {
-											icon: 1,
-											closeBtn: 0
-										}, function(index) {
-											layer.closeAll();
-											window.location.reload();
-										});
+							layer.confirm('确定删除吗?', {
+								icon: 3,
+								title: '提示'
+							}, function(index) {
+								var checkboxs = $("input[class='box_']");
+								var deptnames = new Array();
+								checkboxs.each(function() {
+									if($(this).prop("checked")) {
+										var $tr = $(this).parents("tr");
+										var dept_name = $tr.find("td:eq(1)").html();
+										deptnames.push(dept_name);
+									}
+								})
+								var dataSend = {
+									dept_name: deptnames
 
-									} else if(data.error_code == 3) {
-										layer.alert('信息不全！', {
-											icon: 2,
-											closeBtn: 0
-										});
-									} else if(data.error_code == 4) {
-										layer.alert('部门不存在！', {
-											icon: 2,
-											closeBtn: 0
-										});
-									} else if(data.error_code == 2) {
-										layer.alert('部门名称已存在！', {
-											icon: 2,
-											closeBtn: 0
-										});
-									} else {
-										layer.alert('修改失败！', {
+								};
+								console.log(dataSend);
+								$.ajax({
+									type: "POST",
+									url: 'http://localhost:8080/new_ssm/dept/deleteDept',
+									data: JSON.stringify(dataSend),
+									contentType: "application/json; charset=utf-8",
+									dataType: "json",
+									async: false,
+									success: function(data) {
+										if(data.error_code == 0) {
+											layer.alert('删除成功', {
+												icon: 1,
+												closeBtn: 0
+											}, function(index) {
+												layer.closeAll();
+												window.location.reload();
+											});
+
+										} else if(data.error_code == 3) {
+											layer.alert('该部门尚有员工！', {
+												icon: 2,
+												closeBtn: 0
+											});
+										} else {
+											layer.alert('删除失败', {
+												icon: 2,
+												closeBtn: 0
+											});
+										}
+									},
+									error: function(data) {
+										layer.alert("稍后再试！", {
 											icon: 2,
 											closeBtn: 0
 										});
 									}
-								},
+								});
+								layer.close(index);
 
-								error: function(data) {
-									layer.alert('稍后再试！', {
-										icon: 2,
-										closeBtn: 0
-									});
-								}
 							});
 						}
+					}
+				});
 
-					});
+				// 修改部门信息
+				$(".content-wrapper").on("click", ".btn-inverse-primary", function() {
+					if(sessionStorage.getItem("groupId") == 2) {
 
-					$("#dept_update_cancel").click(function() {
-						layer.closeAll();
-					});
+						layer.alert('没有操作权限！', {
+							icon: 2,
+							closeBtn: 0
+						}, function(index) {
+							layer.closeAll();
+							location.href = '../index/index_user.html'
+						});
+
+					} else {
+
+						var $tr = $(this).parents("tr");
+
+						var dept_name = $tr.find("td:eq(1)").html();
+						var dept_desc = $tr.find("td:eq(2)").html();
+						$("#new_dept_name").val(dept_name);
+						$("#new_dept_desc").val(dept_desc);
+
+						layer.open({
+							type: 1,
+							title: '修改部门信息',
+							shadeClose: true,
+							shade: 0.5,
+							area: ['500px', '500px'],
+							content: $("#dept_modify_table")
+						})
+
+						$("#dept_update_sumbit").click(function() {
+							var dataSend = {
+
+								dept_name: dept_name,
+								new_dept_name: $("#new_dept_name").val(),
+								new_dept_desc: $("#new_dept_desc").val()
+							};
+
+							console.log(dataSend);
+							if($.trim($("#new_dept_name").val()) == "") {
+								layer.msg('部门名称不能为空！', {
+									icon: 2,
+									time: 2000 //2秒关闭（如果不配置，默认是3秒）
+								});
+							} else if($.trim($("#new_dept_name").val()).length > 5) {
+								layer.msg('部门名称限制5个字！', {
+									icon: 2,
+									time: 2000 //2秒关闭（如果不配置，默认是3秒）
+								});
+							} else if($.trim($("#new_dept_desc").val()) == "") {
+								layer.msg('部门描述不能为空！', {
+									icon: 2,
+									time: 2000 //2秒关闭（如果不配置，默认是3秒）
+								});
+							} else if($.trim($("#new_dept_desc").val()).length > 255) {
+								layer.msg('详细描述限制输入255个字符！', {
+									icon: 2,
+									time: 2000 //2秒关闭（如果不配置，默认是3秒）
+								});
+							} else {
+								$.ajax({
+									type: "POST",
+									url: 'http://localhost:8080/new_ssm/dept/updateDept',
+									data: JSON.stringify(dataSend),
+									contentType: "application/json; charset=utf-8",
+									dataType: "json",
+									async: false,
+									success: function(data) {
+										if(data.error_code == 0) {
+											layer.alert('修改成功！', {
+												icon: 1,
+												closeBtn: 0
+											}, function(index) {
+												layer.closeAll();
+												window.location.reload();
+											});
+
+										} else if(data.error_code == 3) {
+											layer.alert('信息不全！', {
+												icon: 2,
+												closeBtn: 0
+											});
+										} else if(data.error_code == 4) {
+											layer.alert('部门不存在！', {
+												icon: 2,
+												closeBtn: 0
+											});
+										} else if(data.error_code == 2) {
+											layer.alert('部门名称已存在！', {
+												icon: 2,
+												closeBtn: 0
+											});
+										} else {
+											layer.alert('修改失败！', {
+												icon: 2,
+												closeBtn: 0
+											});
+										}
+									},
+
+									error: function(data) {
+										layer.alert('稍后再试！', {
+											icon: 2,
+											closeBtn: 0
+										});
+									}
+								});
+							}
+
+						});
+
+						$("#dept_update_cancel").click(function() {
+							layer.closeAll();
+						});
 
 					}
 				});

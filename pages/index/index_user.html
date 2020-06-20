@@ -46,8 +46,8 @@
 			<!-- partial:partials/_navbar.html -->
 			<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 				<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-					<a class="navbar-brand brand-logo" href="index.html"><img src="../../images/logo.svg" alt="logo"></a>
-					<a class="navbar-brand brand-logo-mini" href="index.html"><img src="../../images/logo-mini.svg" alt="logo"></a>
+					<a class="navbar-brand brand-logo" ><img src="../../images/logo.svg" alt="logo"></a>
+					<a class="navbar-brand brand-logo-mini"><img src="../../images/logo-mini.svg" alt="logo"></a>
 				</div>
 				<div class="navbar-menu-wrapper d-flex align-items-stretch">
 					<!-- <div class="search-field d-none d-md-block">
@@ -72,7 +72,7 @@
 								</div>
 							</a>
 							<div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown" data-toggle="modal" data-target="#modifypassword">
-								<button type="button" class="dropdown-item " onclick="myFunction()">
+								<button type="button" class="dropdown-item " id="modify">
 		   				<i class="mdi mdi-lock-outline mr-2 text-primary"></i>
 		   				修改信息
 		   			</button>
@@ -255,14 +255,14 @@
 						</div>
 						<!-- 修改用户信息表格 -->
 						<div class="box box-info" id="user_modify_table" style="display: none">
-
+						
 							<div class="row">
 								<div class="col-12 grid-margin">
 									<div class="card">
 										<div class="card-body">
-
+						
 											<form class="form-sample">
-
+						
 												<div class="row">
 													<div class="col-md-4">
 														<div class="form-group row">
@@ -272,7 +272,7 @@
 															</div>
 														</div>
 													</div>
-
+						
 													<div class="col-md-2">
 														<div class="form-group row">
 															<label class="col-form-label">姓名</label>
@@ -300,14 +300,14 @@
 															</div>
 														</div>
 													</div>
-
+						
 												</div>
 												<div class="row">
 													<div class="col-md-4">
 														<div class="form-group row">
 															<label class="col-form-label">密码</label>
 															<div class="col-sm-9">
-																<input type="password" readonly="readonly" class="form-control" id="new_password" name="new_password" style="width:225px;height:38px;">
+																<input type="password" class="form-control" id="new_password" name="new_password" style="width:225px;height:38px;">
 															</div>
 														</div>
 													</div>
@@ -327,9 +327,9 @@
 															</div>
 														</div>
 													</div>
-
+						
 												</div>
-
+						
 												<div class="row">
 													<div class="col-md-4">
 														<div class="form-group row">
@@ -339,13 +339,13 @@
 															</div>
 														</div>
 													</div>
-
+						
 													<div class="col-md-4">
 														<div class="form-group row">
 															<label class="col-form-label">部门</label>
 															<div class="col-sm-9">
 																<select class="form-control" id="new_subordinate_dept" οnchange="getvalue(this)" style="width:225px;height:38px;">
-
+						
 																</select>
 															</div>
 														</div>
@@ -355,7 +355,7 @@
 															<label class="col-form-label">职位</label>
 															<div class="col-sm-9">
 																<select class="form-control" id="new_subordinate_pos" οnchange="getvalue(this)" style="width:225px;height:38px;">
-
+						
 																</select>
 															</div>
 														</div>
@@ -370,29 +370,29 @@
 															</div>
 														</div>
 													</div>
-
+						
 													<div class="col-md-6">
 														<div class="form-group row">
 															<label class="col-sm-3 col-form-label">用户属性</label>
 															<div class="col-sm-3">
 																<div class="form-check">
 																	<label class="form-check-label">
-					             <input type="radio" class="form-check-input" name="new_groupId" id="new_groupId1" value="1">
-					             管理员
-					           <i class="input-helper"></i></label>
+						             <input type="radio" class="form-check-input" name="new_groupId" id="new_groupId1" value="1">
+						             管理员
+						           <i class="input-helper"></i></label>
 																</div>
 															</div>
 															<div class="col-sm-4">
 																<div class="form-check">
 																	<label class="form-check-label">
-					             <input type="radio" class="form-check-input" name="new_groupId" id="new_groupId2" value="2">
-					             普通用户
-					           <i class="input-helper"></i></label>
+						             <input type="radio" class="form-check-input" name="new_groupId" id="new_groupId2" value="2">
+						             职员
+						           <i class="input-helper"></i></label>
 																</div>
 															</div>
 														</div>
 													</div>
-
+						
 												</div>
 												<div class="col-md-8 ml-auto">
 													<button type="button" class="btn btn-gradient-primary mr-2" id="user_update_sumbit">提交</button>
@@ -402,10 +402,10 @@
 										</div>
 									</div>
 								</div>
-
+						
 							</div>
 						</div>
-
+						
 						<footer class="footer">
 							<div class="d-sm-flex justify-content-center justify-content-sm-between">
 								<span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2017 <a href="" target="_blank">BootstrapDash</a>.
@@ -420,37 +420,35 @@
 			<!-- container-scroller -->
 
 			<!-- 下载文件表格 -->
-			<div class="box box-info" id="file_download_table" style="display: none">
-				<div class="box-header with-border">
-					<h3 class="box-title">下载文件</h3>
-				</div>
-
-				<div class="row">
-					<div class="col-md-12 grid-margin stretch-card">
-						<div class="card">
-							<div class="card-body">
-
-								<form class="forms-sample">
-									<div class="form-group">
-										<label for="localpath">路径</label>
-										<input type="text" class="form-control" id="localpath" name="localpath" placeholder="路径">
-									</div>
-
-									<button type="button" class="btn btn-gradient-primary mr-2" id="file_download_sumbit">提交</button>
-									<button type="button" class="btn btn-light" id="file_download_cancel">取消</button>
-								</form>
-
+							<div class="box box-info" id="file_download_table" style="display: none">
+							<div class="box-header with-border">
 							</div>
-						</div>
-					</div>
-				</div>
 
-			</div>
+							<div class="row">
+								<div class="col-md-12 grid-margin stretch-card">
+									<div class="card">
+										<div class="card-body">
+
+											<form class="forms-sample">
+												<div class="form-group">
+													<label for="localpath">默认下载路径为“e:”</label>
+													<label for="localpath">可输入修改</label>
+													<input type="text" class="form-control" id="localpath" name="localpath" placeholder="e:盘">
+												</div>
+
+												<button type="button" class="btn btn-gradient-primary mr-2" id="file_download_sumbit">提交</button>
+												<button type="button" class="btn btn-light" id="file_download_cancel">取消</button>
+											</form>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
 			<!-- 预约用餐表格 -->
 			<div class="box box-info" id="order_add_table" style="display: none">
-				<div class="box-header with-border">
-					<h3 class="box-title">订餐</h3>
-				</div>
+				
 
 				<div class="row">
 					<div class="col-md-12 grid-margin stretch-card">
@@ -538,38 +536,71 @@
 			<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
 			<script type="text/javascript" src="../../js/selectMultip.js"></script>
 
+			<!-- 修改用户信息 -->
 			<script>
-					function myFunction(){
-						console.log()
-						var username = sessionStorage.getItem("username");
-						var password = sessionStorage.getItem("password");
-
-						var dataSend = {
-							username: username,
-							password: password
-						}
-
-						var user;
-						$.ajax({
-							data: JSON.stringify(dataSend),
-							type: "POST",
-							url: 'http://localhost:8080/new_ssm/user/login', //请求controller方法   
-							contentType: "application/json; charset=utf-8",
-							dataType: "json",
-							async: false, //同步请求，注意此字段    
-							success: function(data) {
-								if(data.error_code == 0) {
-									user = data.data;
-								}
+				
+				$(function() {
+				 	$("#modify").click(function() {
+					var username = sessionStorage.getItem("username");
+					var password = sessionStorage.getItem("password");
+			
+					var dataSend = {
+						username: username,
+						password: password
+					}
+			
+					var user;
+					$.ajax({
+						data: JSON.stringify(dataSend),
+						type: "POST",
+						url: 'http://localhost:8080/new_ssm/user/login', //请求controller方法   
+						contentType: "application/json; charset=utf-8",
+						dataType: "json",
+						async: false, //同步请求，注意此字段    
+						success: function(data) {
+							if(data.error_code == 0) {
+								user = data.data;
 							}
-						});
-
-						$("#new_subordinate_dept").empty();
-						var option = $("<option>").val("").text("--请选择部门名称--");
-						$("#new_subordinate_dept").append(option);
+						}
+					});
+			
+					$("#new_subordinate_dept").empty();
+					var option = $("<option>").val("").text("--请选择部门名称--");
+					$("#new_subordinate_dept").append(option);
+					$.ajax({
+						type: "POST",
+						url: 'http://localhost:8080/new_ssm/dept/showAllDept', //请求controller方法   
+						contentType: "application/json; charset=utf-8",
+						dataType: "json",
+						async: false, //同步请求，注意此字段    
+						success: function(data) {
+							if(data.error_code == 0) {
+								var dl = data.data;
+								$.each(dl, function(i, e) {
+									$("#new_subordinate_dept").append("<option value='" + e["departmentName"] + "'>" + e["departmentName"] + "</option>");
+			
+								});
+							}
+						},
+						error: function(data) {
+							layer.alert("稍后再试！");
+						}
+					});
+					if(user.departmentName != "") {
+			
+						$("#new_subordinate_pos").empty();
+			
+						var option = $("<option>").val("").text("--请选择职位名称--");
+						$("#new_subordinate_pos").append(option);
+						var dataSend = {
+							select_key: "",
+							departmentName: user.departmentName
+						};
+						console.log(dataSend);
 						$.ajax({
 							type: "POST",
-							url: 'http://localhost:8080/new_ssm/dept/showAllDept', //请求controller方法   
+							url: 'http://localhost:8080/new_ssm/pos/selectPosResult', //请求controller方法   
+							data: JSON.stringify(dataSend),
 							contentType: "application/json; charset=utf-8",
 							dataType: "json",
 							async: false, //同步请求，注意此字段    
@@ -577,199 +608,171 @@
 								if(data.error_code == 0) {
 									var dl = data.data;
 									$.each(dl, function(i, e) {
-										$("#new_subordinate_dept").append("<option value='" + e["departmentName"] + "'>" + e["departmentName"] + "</option>");
-
+										$("#new_subordinate_pos").append("<option value='" + e["positionName"] + "'>" + e["positionName"] + "</option>");
+			
 									});
-								} else {
-
-									layer.alert("暂无部门信息！");
 								}
 							},
 							error: function(data) {
 								layer.alert("稍后再试！");
 							}
 						});
-						if(user.departmentName != "") {
-
+					}
+						$("#new_username").val(user.username);
+			
+						$("#new_name").val(user.name);
+			
+						$("#new_sex").val(user.sex);
+			
+						$("#new_password").val(user.password);
+			
+						$("#new_idCardNo").val(user.idCardNo);
+			
+						if(user.groupId == 1) {
+							$("#new_groupId1").prop("checked", true);
+							$("#new_groupId2").attr("disabled", "disabled");
+						} else {
+							$("#new_groupId2").prop("checked", true);
+							$("#new_groupId1").attr("disabled", "disabled");
+						}
+						$("#new_phone").val(user.phone);
+			
+						$("#new_email").val(user.email);
+			
+						$("#new_subordinate_dept").val(user.departmentName);
+						$('#new_subordinate_dept').attr("disabled", "disabled");
+						$("#new_subordinate_pos").val(user.positionName);
+						$('#new_subordinate_pos').attr("disabled", "disabled");
+						$("#new_education").val(user.education);
+			
+						$("#new_address").val(user.address);
+			
+						layer.open({
+							type: 1,
+							title: "<i class='mdi mdi-account-settings-variant'></i>修改用户信息",
+							shadeClose: true,
+							shade: 0.5,
+							area: ['1000px', '500px'],
+							content: $("#user_modify_table")
+						})
+			
+						$("#new_subordinate_dept").change(function() {
+			
 							$("#new_subordinate_pos").empty();
-
+			
 							var option = $("<option>").val("").text("--请选择职位名称--");
 							$("#new_subordinate_pos").append(option);
 							var dataSend = {
 								select_key: "",
-								departmentName: user.departmentName
+								departmentName: $("#new_subordinate_dept").val()
 							};
 							console.log(dataSend);
-							$.ajax({
-								type: "POST",
-								url: 'http://localhost:8080/new_ssm/pos/selectPosResult', //请求controller方法   
-								data: JSON.stringify(dataSend),
-								contentType: "application/json; charset=utf-8",
-								dataType: "json",
-								async: false, //同步请求，注意此字段    
-								success: function(data) {
-									if(data.error_code == 0) {
-										var dl = data.data;
-										$.each(dl, function(i, e) {
-											$("#new_subordinate_pos").append("<option value='" + e["positionName"] + "'>" + e["positionName"] + "</option>");
-
-										});
-									} else {
-
-										layer.alert("暂无职位信息！");
-									}
-								},
-								error: function(data) {
-									layer.alert("暂无职位信息！");
-								}
-							});
-
-							$("#new_username").val(user.username);
-
-							$("#new_name").val(user.name);
-
-							$("#new_sex").val(user.sex);
-
-							$("#new_password").val(user.password);
-
-							$("#new_idCardNo").val(user.idCardNo);
-
-							if(user.groupId == 1) {
-								$("#new_groupId1").prop("checked", true);
-
+							if($.trim($("#new_subordinate_dept").val()) == "") {
+			
 							} else {
-								$("#new_groupId2").prop("checked", true);
-
-							}
-							$("#new_phone").val(user.phone);
-
-							$("#new_email").val(user.email);
-
-							$("#new_subordinate_dept").val(user.departmentName);
-
-							$("#new_subordinate_pos").val(user.positionName);
-
-							$("#new_education").val(user.education);
-
-							$("#new_address").val(user.address);
-
-							layer.open({
-								type: 1,
-								title: "<i class='mdi mdi-account-settings-variant'></i>修改用户信息",
-								shadeClose: true,
-								shade: 0.5,
-								area: ['1000px', '500px'],
-								content: $("#user_modify_table")
-							})
-
-							$("#new_subordinate_dept").change(function() {
-
-								$("#new_subordinate_pos").empty();
-
-								var option = $("<option>").val("").text("--请选择职位名称--");
-								$("#new_subordinate_pos").append(option);
-								var dataSend = {
-									select_key: "",
-									departmentName: $("#new_subordinate_dept").val()
-								};
-								console.log(dataSend);
-								if($.trim($("#new_subordinate_dept").val()) == "") {
-
-								} else {
-									$.ajax({
-										type: "POST",
-										url: 'http://localhost:8080/new_ssm/pos/selectPosResult', //请求controller方法   
-										data: JSON.stringify(dataSend),
-										contentType: "application/json; charset=utf-8",
-										dataType: "json",
-										async: false, //同步请求，注意此字段    
-										success: function(data) {
-											if(data.error_code == 0) {
-												var dl = data.data;
-												$.each(dl, function(i, e) {
-													$("#new_subordinate_pos").append("<option value='" + e["positionName"] + "'>" + e["positionName"] + "</option>");
-
-												});
-											} else {
-
-												layer.alert("暂无职位信息！");
-											}
-										},
-										error: function(data) {
-											layer.alert("暂无职位信息！")
-										}
-									});
-								}
-							});
-
-							$("#user_update_sumbit").click(function() {
-								var dataSend = {
-									username: username,
-									name: $("#new_name").val(),
-									sex: $("#new_sex").val(),
-									password: $("#new_password").val(),
-									idCardNo: $("#new_idCardNo").val(),
-									groupid: $('input[name="new_groupId"]:checked').val(),
-									phone: $("#new_phone").val(),
-									email: $("#new_email").val(),
-									departmentName: $("#new_subordinate_dept").val(),
-									positionName: $("#new_subordinate_pos").val(),
-									education: $("#new_education").val(),
-									address: $("#new_address").val()
-
-								};
-
-								console.log(dataSend);
 								$.ajax({
 									type: "POST",
-									url: 'http://localhost:8080/new_ssm/user/update',
+									url: 'http://localhost:8080/new_ssm/pos/selectPosResult', //请求controller方法   
 									data: JSON.stringify(dataSend),
 									contentType: "application/json; charset=utf-8",
 									dataType: "json",
-									async: false,
+									async: false, //同步请求，注意此字段    
 									success: function(data) {
 										if(data.error_code == 0) {
-											layer.alert('修改成功！', {
-												icon: 1,
-												closeBtn: 0
-											}, function(index) {
-												layer.closeAll();
-												window.location.reload();
-											});
-
-										} else if(data.error_code == 1) {
-											layer.alert('信息不全！', {
-												icon: 2,
-												closeBtn: 0
-											});
-										} else if(data.error_code == 2) {
-											layer.alert('用户不存在！', {
-												icon: 2,
-												closeBtn: 0
-											});
-										} else if(data.error_code == 3) {
-											layer.alert('修改失败！', {
-												icon: 2,
-												closeBtn: 0
+											var dl = data.data;
+											$.each(dl, function(i, e) {
+												$("#new_subordinate_pos").append("<option value='" + e["positionName"] + "'>" + e["positionName"] + "</option>");
+			
 											});
 										}
 									},
 									error: function(data) {
-										layer.alert('稍后再试！', {
+										layer.alert("稍后再试！")
+									}
+								});
+							}
+						});
+						
+				
+						$("#user_update_sumbit").click(function() {
+							var dataSend = {
+								username: username,
+								name: $("#new_name").val(),
+								sex: $("#new_sex").val(),
+								password: $("#new_password").val(),
+								idCardNo: $("#new_idCardNo").val(),
+								groupid: $('input[name="new_groupId"]:checked').val(),
+								phone: $("#new_phone").val(),
+								email: $("#new_email").val(),
+								departmentName: $("#new_subordinate_dept").val(),
+								positionName: $("#new_subordinate_pos").val(),
+								education: $("#new_education").val(),
+								address: $("#new_address").val()
+			
+							};
+			
+							console.log(dataSend);
+							$.ajax({
+								type: "POST",
+								url: 'http://localhost:8080/new_ssm/user/update',
+								data: JSON.stringify(dataSend),
+								contentType: "application/json; charset=utf-8",
+								dataType: "json",
+								async: false,
+								success: function(data) {
+									if(data.error_code == 0) {
+											sessionStorage.setItem("username", data.data.username);
+											sessionStorage.setItem("name", data.data.name);
+											sessionStorage.setItem("userid", data.data.user_id);
+											sessionStorage.setItem("groupId", data.data.groupId);
+											sessionStorage.setItem("positionName", data.data.positionName);
+											sessionStorage.setItem("password", data.data.password);
+											sessionStorage.setItem("sex", data.data.sex);
+											if(localStorage.getItem("remember_username")==data.data.username){
+												localStorage.setItem("remember_password",data.data.password)
+											}
+										layer.alert('修改成功！', {
+											icon: 1,
+											closeBtn: 0
+										}, function(index) {
+											layer.closeAll();
+											window.location.reload();
+										});
+			
+									} else if(data.error_code == 1) {
+										layer.alert('信息不全！', {
+											icon: 2,
+											closeBtn: 0
+										});
+									} else if(data.error_code == 2) {
+										layer.alert('用户不存在！', {
+											icon: 2,
+											closeBtn: 0
+										});
+									} else if(data.error_code == 3) {
+										layer.alert('修改失败！', {
 											icon: 2,
 											closeBtn: 0
 										});
 									}
-								});
-
+								},
+								error: function(data) {
+									layer.alert('稍后再试！', {
+										icon: 2,
+										closeBtn: 0
+									});
+								}
 							});
-							$("#user_update_cancel").click(function() {
-								layer.closeAll();
-							});
-						}
-
-					}
+			
+						});
+						$("#user_update_cancel").click(function() {
+							layer.closeAll();
+						});
+					
+					})
+				})
 			</script>
+			
 			<script>
 				var sex = sessionStorage.getItem("sex");
 				if(sex == 1) {
@@ -845,7 +848,10 @@
 									$tbody.append($tr);
 								});
 							} else {
-								layer.alert("公告信息请求失败！");
+								var $tbody = $("#shownotice");
+								var $td1 = $("<td style='width: 60%'>").append("暂无公告！");
+								var $tr = $("<tr>").append($td1)
+								$tbody.append($tr);
 							}
 						}
 					});
@@ -882,7 +888,10 @@
 									$tbody.append($tr);
 								});
 							} else {
-								layer.alert("文件信息请求失败！");
+								var $tbody = $("#showfile");
+								var $td1 = $("<td style='width: 60%'>").append("暂无文件！");
+								var $tr = $("<tr>").append($td1)
+								$tbody.append($tr);
 							}
 						}
 					});
@@ -1066,6 +1075,7 @@
 							}
 						}
 					});
+					//下载文件
 					$(".content-wrapper").on("click", ".btn-inverse-warning", function() {
 						var $tr = $(this).parents("tr");
 						var name = $tr.find("td:eq(0)").html();
@@ -1076,11 +1086,58 @@
 								herf = globaldata2[i].herf
 							}
 						}
-						layer.confirm('确定下载文件' + '"' + name + '"?', {
-							icon: 3,
-							title: '提示'
-						}, function(index) {
-							location.href = 'https://filebed-1259719447.cos.ap-chengdu.myqcloud.com/' + herf
+						
+						$("#localpath").val("e:")
+
+						layer.open({
+							type: 1,
+							title: '下载文件',
+							shadeClose: true,
+							shade: 0.5,
+							area: ['500px', '300px'],
+							content: $("#file_download_table")
+						})
+
+						$("#file_download_sumbit").click(function() {
+							var dataSend = {
+								localpath: $("#localpath").val(),
+								herf: herf
+							};
+							if($.trim($("#localpath").val()) == "") {
+								layer.msg('请选择路径！', {
+									icon: 2,
+									time: 2000 //2秒关闭（如果不配置，默认是3秒）
+								});
+							} else {
+								$.ajax({
+									type: "POST",
+									url: 'http://localhost:8080/new_ssm/file/downLoad',
+									data: JSON.stringify(dataSend),
+									contentType: "application/json; charset=utf-8",
+									dataType: "json",
+									async: false,
+									success: function(data) {
+										if(data.error_code == 0) {
+											layer.alert('下载成功！', {
+												icon: 1,
+												closeBtn: 0
+											}, function(index) {
+												layer.closeAll();
+												window.location.reload();
+											});
+
+										} else {
+											layer.alert('下载失败！', {
+												icon: 2,
+												closeBtn: 0
+											});
+										}
+									}
+								});
+							}
+						});
+						$("#file_download_cancel").click(function() {
+							layer.closeAll();
 						});
 					});
 
@@ -1100,7 +1157,7 @@
 						console.log(ext)
 						if(['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf', 'txt'].indexOf(ext) != -1 || ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf', 'txt'].indexOf(ext.toLowerCase()) != -1)
 							window.open('http://dcsapi.com/?k=48002957336746393702934&url=' + 'https://filebed-1259719447.cos.ap-chengdu.myqcloud.com/' + herf)
-						else if(['jpg', 'png', 'jpeg', 'gif', 'bmp', 'svg'].indexOf(ext) != -1 || ['jpg', 'png', 'jpeg', 'gif', 'bmp', 'svg'].indexOf(ext.toLowerCase()) != -1)
+						else if(['jpg', 'png', 'jpeg', 'gif','bmp'].indexOf(ext) != -1 || ['jpg', 'png', 'jpeg', 'gif','bmp'].indexOf(ext.toLowerCase()) != -1)
 							window.open('https://filebed-1259719447.cos.ap-chengdu.myqcloud.com/' + herf)
 						else layer.alert('当前文件类型不支持预览！', {
 							icon: 2,

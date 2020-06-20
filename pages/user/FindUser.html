@@ -58,8 +58,8 @@
 			<!-- partial:../../partials/_navbar.html -->
 			<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 				<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-					<a class="navbar-brand brand-logo" href="index.html"><img src="../../images/logo.svg" alt="logo"></a>
-					<a class="navbar-brand brand-logo-mini" href="index.html"><img src="../../images/logo-mini.svg" alt="logo"></a>
+					<a class="navbar-brand brand-logo"><img src="../../images/logo.svg" alt="logo"></a>
+					<a class="navbar-brand brand-logo-mini"><img src="../../images/logo-mini.svg" alt="logo"></a>
 				</div>
 				<div class="navbar-menu-wrapper d-flex align-items-stretch">
 					<!-- <div class="search-field d-none d-md-block">
@@ -493,7 +493,7 @@
 												<div class="form-check">
 													<label class="form-check-label">
 					             <input type="radio" class="form-check-input" name="new_groupId" id="new_groupId2" value="2">
-					             普通用户
+					             职员
 					           <i class="input-helper"></i></label>
 												</div>
 											</div>
@@ -655,7 +655,7 @@
 												<div class="form-check">
 													<label class="form-check-label">
 					            <input type="radio" class="form-check-input" name="groupId" id="groupId2" value="2">
-					            普通用户
+					            职员
 					          <i class="input-helper"></i></label>
 												</div>
 											</div>
@@ -750,9 +750,6 @@
 								$("#InputDepartment").append("<option value='" + e["departmentName"] + "'>" + e["departmentName"] + "</option>");
 
 							});
-						} else {
-
-							layer.alert("暂无部门信息！");
 						}
 					},
 					
@@ -789,9 +786,6 @@
 										$("#InputPosition").append("<option value='" + e["positionName"] + "'>" + e["positionName"] + "</option>");
 
 									});
-								} else {
-
-									layer.alert("暂无职位信息！");
 								}
 							},
 					
@@ -844,7 +838,7 @@
 									$tr.append($("<td>管理员</td>"))
 								} else {
 
-									$tr.append($("<td>普通用户</td>"))
+									$tr.append($("<td>职员</td>"))
 								}
 
 								$tr.append($("<td>").html(e["email"]))
@@ -863,8 +857,6 @@
 								$tr.append($td);
 								$tbody.append($tr);
 							});
-						} else {
-							layer.alert("暂无用户数据！");
 						}
 					},
 					error: function(data) {
@@ -941,7 +933,7 @@
 											$tr.append($("<td>管理员</td>"))
 										} else {
 
-											$tr.append($("<td>普通用户</td>"))
+											$tr.append($("<td>职员</td>"))
 										}
 
 										$tr.append($("<td>").html(e["email"]))
@@ -1009,9 +1001,6 @@
 									$("#subordinate_dept").append("<option value='" + e["departmentName"] + "'>" + e["departmentName"] + "</option>");
 									console.log(e["departmentName"])
 								});
-							} else {
-
-								layer.alert("暂无部门信息！");
 							}
 						},
 						error: function(data) {
@@ -1031,9 +1020,6 @@
 									$("#subordinate_pos").append("<option value='" + e["positionName"] + "'>" + e["positionName"] + "</option>");
 
 								});
-							} else {
-
-								layer.alert("暂无职位信息！");
 							}
 						},
 						error: function(data) {
@@ -1139,9 +1125,6 @@
 									$("#new_subordinate_dept").append("<option value='" + e["departmentName"] + "'>" + e["departmentName"] + "</option>");
 
 								});
-							} else {
-
-								layer.alert("暂无部门信息！");
 							}
 						},
 						error: function(data) {
@@ -1173,13 +1156,10 @@
 										$("#new_subordinate_pos").append("<option value='" + e["positionName"] + "'>" + e["positionName"] + "</option>");
 
 									});
-								} else {
-
-									layer.alert("暂无职位信息！");
-								}
+								} 
 							},
 							error: function(data) {
-								layer.alert("暂无职位信息！");
+								layer.alert("稍后再试！");
 							}
 						});
 
@@ -1251,13 +1231,10 @@
 											$("#new_subordinate_pos").append("<option value='" + e["positionName"] + "'>" + e["positionName"] + "</option>");
 
 										});
-									} else {
-
-										layer.alert("暂无职位信息！");
 									}
 								},
 								error: function(data) {
-									layer.alert("暂无职位信息！")
+									layer.alert("稍后再试！")
 								}
 							});
 						}

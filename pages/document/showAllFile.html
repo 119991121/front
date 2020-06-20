@@ -55,8 +55,8 @@
 			<!-- partial:../partials/_navbar.html -->
 			<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 				<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-					<a class="navbar-brand brand-logo" href="index.html"><img src="../../images/logo.svg" alt="logo"></a>
-					<a class="navbar-brand brand-logo-mini" href="index.html"><img src="../../images/logo-mini.svg" alt="logo"></a>
+					<a class="navbar-brand brand-logo"><img src="../../images/logo.svg" alt="logo"></a>
+					<a class="navbar-brand brand-logo-mini"><img src="../../images/logo-mini.svg" alt="logo"></a>
 				</div>
 				<div class="navbar-menu-wrapper d-flex align-items-stretch">
 					<!-- <div class="search-field d-none d-md-block">
@@ -271,11 +271,11 @@
                               <input type="checkbox" id="checkAll" align="center" name="checkbox"/>
                             <i class="input-helper"></i></label>
 													</th>
-													<th style="width: 10%;">标题</th>
+													<th style="width: 15%;">标题</th>
 													<th style="width: 15%;">创建时间</th>
 													<th style="width: 10%;">创建人</th>
-													<th style="width: 20%;">描述</th>
-													<th style="width: 25%;">操作</th>
+													<th style="width: 15%;">描述</th>
+													<th style="width: 30%;">操作</th>
 													<th style="width: 10%;">下载</th>
 												</tr>
 											</thead>
@@ -393,7 +393,7 @@
 		</div>
 
 		<div class="modal fade" id="modifypassword" tabindex="-1" role="dialog" 　　aria-labelledby="modifypasswordLabel" aria-hidden="true">
-		
+
 			<div class="modal-dialog">
 				<div class="modal-content" style="background-color: white;width:100%;margin-left: 0%; margin-right: 0%;">
 					<div class="modal-header">
@@ -432,6 +432,34 @@
 				</div>
 			</div>
 		</div>
+		
+		<!-- 下载文件表格 -->
+							<div class="box box-info" id="file_download_table" style="display: none">
+							<div class="box-header with-border">
+							</div>
+
+							<div class="row">
+								<div class="col-md-12 grid-margin stretch-card">
+									<div class="card">
+										<div class="card-body">
+
+											<form class="forms-sample">
+												<div class="form-group">
+													<label for="localpath">默认下载路径为“e:”</label>
+													<label for="localpath">可输入修改</label>
+													<input type="text" class="form-control" id="localpath" name="localpath" placeholder="e:盘">
+												</div>
+
+												<button type="button" class="btn btn-gradient-primary mr-2" id="file_download_sumbit">提交</button>
+												<button type="button" class="btn btn-light" id="file_download_cancel">取消</button>
+											</form>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
 
 		<!-- plugins:js -->
 		<script src="../../vendors/js/vendor.bundle.base.js"></script>
@@ -449,7 +477,7 @@
 			$(function() {
 				if(sessionStorage.getItem("groupId") == 2)
 					location.href = '../index/index_user.html'
-				else if(sessionStorage.getItem("groupId")==null){
+				else if(sessionStorage.getItem("groupId") == null) {
 					location.href = '../login/login.html'
 				}
 				var sex = sessionStorage.getItem("sex");
@@ -502,9 +530,9 @@
 								$button_4.text = "预览";
 								$button_4.className = "btn btn-xs btn-inverse-info";
 								var $button_5 = document.createElement("a");
-								$button_5.text = "查看";
+								$button_5.text = "详情";
 								$button_5.className = "btn btn-xs btn-inverse-warning";
-								var $td1 = $("<td>").append($button_1).append($button_2).append($button_4).append($button_5);
+								var $td1 = $("<td>").append($button_1).append($button_2).append($button_5).append($button_4);
 								var $button_3 = document.createElement("a");
 								$button_3.text = "下载";
 								$button_3.className = "btn btn-xs btn-inverse-success";
@@ -577,7 +605,7 @@
 										$button_4.text = "预览";
 										$button_4.className = "btn btn-xs btn-inverse-info";
 										var $button_5 = document.createElement("a");
-										$button_5.text = "查看";
+										$button_5.text = "详情";
 										$button_5.className = "btn btn-xs btn-inverse-warning";
 										var $td1 = $("<td>").append($button_1).append($button_2).append($button_4).append($button_5);
 										var $button_3 = document.createElement("a");
@@ -623,16 +651,8 @@
 
 				})
 
+				//下载文件
 				$(".content-wrapper").on("click", ".btn-inverse-success", function() {
-					if(sessionStorage.getItem("groupId") == 2){
-					layer.alert('没有操作权限！',{
-						icon:2,
-						closeBtn:0,
-						},function(index){
-							layer.closeAll();
-							location.href = '../index/index_user.html'
-					});
-					}
 					var $tr = $(this).parents("tr");
 					var name = $tr.find("td:eq(1)").html();
 					var herf;
@@ -642,16 +662,63 @@
 							herf = globaldata[i].herf
 						}
 					}
-					layer.confirm('确定下载文件' + '"' + name + '"?', {
-						icon: 3,
-						title: '提示'
-					}, function(index) {
-						location.href = 'https://filebed-1259719447.cos.ap-chengdu.myqcloud.com/' + herf
+					
+					$("#localpath").val("e:")
+
+					layer.open({
+						type: 1,
+						title: '下载文件',
+						shadeClose: true,
+						shade: 0.5,
+						area: ['500px', '300px'],
+						content: $("#file_download_table")
+					})
+
+					$("#file_download_sumbit").click(function() {
+						var dataSend = {
+							localpath: $("#localpath").val(),
+							herf: herf
+						};
+						if($.trim($("#localpath").val()) == "") {
+							layer.msg('请选择路径！', {
+								icon: 2,
+								time: 2000 //2秒关闭（如果不配置，默认是3秒）
+							});
+						} else {
+							$.ajax({
+								type: "POST",
+								url: 'http://localhost:8080/new_ssm/file/downLoad',
+								data: JSON.stringify(dataSend),
+								contentType: "application/json; charset=utf-8",
+								dataType: "json",
+								async: false,
+								success: function(data) {
+									if(data.error_code == 0) {
+										layer.alert('下载成功！', {
+											icon: 1,
+											closeBtn: 0
+										}, function(index) {
+											layer.closeAll();
+											window.location.reload();
+										});
+
+									} else {
+										layer.alert('下载失败！', {
+											icon: 2,
+											closeBtn: 0
+										});
+									}
+								}
+							});
+						}
+					});
+					$("#file_download_cancel").click(function() {
+						layer.closeAll();
 					});
 				});
 
 				$(".content-wrapper").on("click", ".btn-inverse-info", function() {
-					
+
 					var $tr = $(this).parents("tr");
 					var name = $tr.find("td:eq(1)").html();
 					var herf;
@@ -666,7 +733,7 @@
 					console.log(ext)
 					if(['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf', 'txt'].indexOf(ext) != -1 || ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf', 'txt'].indexOf(ext.toLowerCase()) != -1)
 						window.open('http://dcsapi.com/?k=48002957336746393702934&url=' + 'https://filebed-1259719447.cos.ap-chengdu.myqcloud.com/' + herf)
-					else if(['jpg', 'png', 'jpeg', 'gif', 'bmp', 'svg'].indexOf(ext) != -1 || ['jpg', 'png', 'jpeg', 'gif', 'bmp', 'svg'].indexOf(ext.toLowerCase()) != -1)
+					else if(['jpg', 'png', 'jpeg', 'gif','bmp'].indexOf(ext) != -1 || ['jpg', 'png', 'jpeg', 'gif','bmp'].indexOf(ext.toLowerCase()) != -1)
 						window.open('https://filebed-1259719447.cos.ap-chengdu.myqcloud.com/' + herf)
 					else layer.alert('当前文件类型不支持预览！', {
 						icon: 2,
@@ -742,14 +809,14 @@
 			$(function() {
 
 				$(".content-wrapper").on("click", ".btn-inverse-danger", function() {
-					if(sessionStorage.getItem("groupId") == 2){
-					layer.alert('没有操作权限！',{
-						icon:2,
-						closeBtn:0,
-						},function(index){
+					if(sessionStorage.getItem("groupId") == 2) {
+						layer.alert('没有操作权限！', {
+							icon: 2,
+							closeBtn: 0,
+						}, function(index) {
 							layer.closeAll();
 							location.href = '../index/index_user.html'
-					});
+						});
 					}
 					var $tr = $(this).parents("tr");
 					var filename = $tr.find("td:eq(1)").html();
@@ -807,14 +874,14 @@
 
 				//批量删除
 				$(".content-wrapper").on("click", ".btn-outline-danger", function() {
-					if(sessionStorage.getItem("groupId") == 2){
-					layer.alert('没有操作权限！',{
-						icon:2,
-						closeBtn:0,
-						},function(index){
+					if(sessionStorage.getItem("groupId") == 2) {
+						layer.alert('没有操作权限！', {
+							icon: 2,
+							closeBtn: 0,
+						}, function(index) {
 							layer.closeAll();
 							location.href = '../index/index_user.html'
-					});
+						});
 					}
 					var choiceselect = $("input[class='box_']:checked").length;
 					if(choiceselect == 0) {
@@ -890,14 +957,14 @@
 				var userID = sessionStorage.getItem("userid")
 				// 修改文件信息
 				$(".content-wrapper").on("click", ".btn-inverse-primary", function() {
-					if(sessionStorage.getItem("groupId") == 2){
-					layer.alert('没有操作权限！',{
-						icon:2,
-						closeBtn:0,
-						},function(index){
+					if(sessionStorage.getItem("groupId") == 2) {
+						layer.alert('没有操作权限！', {
+							icon: 2,
+							closeBtn: 0,
+						}, function(index) {
 							layer.closeAll();
 							location.href = '../index/index_user.html'
-					});
+						});
 					}
 					console.log(userID)
 					var $tr = $(this).parents("tr");
@@ -1039,7 +1106,7 @@
 						time: 2000 //2秒关闭（如果不配置，默认是3秒）
 					});
 				} else {
-					
+
 					username = sessionStorage.getItem("username")
 
 					var dataSend = {
